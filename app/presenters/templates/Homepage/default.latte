@@ -1,12 +1,13 @@
 {* This is the welcome page, you can delete it *}
 
 {block content}
-	<a n:href="pedidos">Realizar un pedido</a></p>
+	<a n:href="Homepage:pedidos">Realizar un pedido</a></p>
 	<div class="container">
-		<h1 n:block="tittle">Mierda de Nette</h1>
+		<h1 n:block="tittle">Bueno ya voy mejor</h1>
+			{control bebidasForm}
 			{foreach $bebidas as $bebida}
 				<h2>{$bebida->nombre}</h2>
-					<h2><a n:href="Pedidos:pedidos $bebida->b_id">{$bebida->b_id}</a></h2>
+					<h2><a n:href="Pedidos:pedir $bebida->b_id">{$bebida->b_id}</a></h2>
 				{/foreach}
 	</div>
 
