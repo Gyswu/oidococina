@@ -16,19 +16,33 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 
       $this->database = $database;
   }
-  public function renderbebidas(): void
+  public function renderDefault(): void
   {
 
-      $this->template->bebidas = $this->database->table('bebidas')
-        ->order('b_id ASC')
-        ->limit(10);
-  }
-  public function renderplatos(): void
-  {
+
+    $this->template->bebidas = $this->database->table('bebidas')
+      ->order('b_id ASC')
+      ->limit(10);
 
       $this->template->platos = $this->database->table('platos')
-        ->order('p_id ASC')
-        ->limit(10);
+          ->order('p_id ASC')
+          ->limit(10);
+
+      $this->template->pedidos_activos = $this->database->table('pedidos_activos')
+          ->order('id_pedido ASC')
+          ->limit(10);
+
+      $this->template->complementos = $this->database->table('complementos')
+            ->order('c_id ASC')
+            ->limit(10);
+  }
+  public function renderpedidos(): void
+  {
+  $this->template->bebidax = $this->database->table('bebidas')
+    ->order('b_id ASC')
+    ->limit(10);
+
+
   }
 
 }
