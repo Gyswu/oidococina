@@ -9,17 +9,14 @@ use Nette;
 
 final class PedidosPresenter extends Nette\Application\UI\Presenter
 {
-  private $database;
 
-  public function __construct(Nette\Database\Context $database){
+  public function renderPedidos(int $bebida_b_id): void
+  {
+      $bebida = $this->database->table('bebidas')->get($bebida_b_id);
+      if (!$bebida) {
+          $this->error('Post not found');
+      }
 
-      $this->database = $database;
+      $this->template->bebida = $bebida;
   }
-
-  public function renderPedidos(): void{
-    $this->template->bebidas = $this->database->table('bebidas')
-      ->order('b_id ASC')
-      ->limit(10);
-  }
-
 }
