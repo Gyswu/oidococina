@@ -1,0 +1,21 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+	Hola Hola
+	<h1 n:block="tittle">Mierda de Nette</h1>
+
+		{foreach $bebidas as $bebida}
+			<div class="bebida">
+				<div class="date">
+
+					{$bebida->nombre}
+
+				</div>
+
+				<h2>{$bebida->precio}</h2>
+
+				<h3>{$bebida->azucar}</h3>
+
+			</div>
+		{/foreach}
+{/block}
