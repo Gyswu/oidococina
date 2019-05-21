@@ -1,0 +1,64 @@
+{block content}
+<div class="container">
+  <div class="row">
+    <div class="col col-lx-4">
+        <h2>Listado de platos</h2>
+    </div>
+      <div class="col col-lx-8">
+        <table>
+          <tr>
+            <td>ID Plato</td>
+            <td>Precio</td>
+            <td>Ingredientes</td>
+            <td>Gluten</td>
+            <td>Lacteos</td>
+            <td>Tipo</td>
+          </tr>
+        {foreach $platos as $plato}
+          <tr>
+              <td>
+      				     {$plato->p_id}
+              </td>
+              <td>
+                    {$plato->nombre}
+              </td>
+              <td>
+                     {$plato->ingredientes}
+              </td>
+              <td>
+                      {$plato->gluten}
+              </td>
+              <td>
+                      {$plato->lacteos}
+              </td>
+              <td>
+                      {$plato->Tipo}
+              </td>
+              <td>
+  				          <a href="">Más sobre el plato {$plato->p_id}</a>
+               </td>
+               </tr>
+  				{/foreach}
+        </table>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col col-lx-4">
+      <h2>Añadir plato</h2>
+       </div>
+       <div class="col col-lx-8">
+      {control masMesasForm}
+      </div>
+  </div>
+  <div class="row">
+    <div class="col col-lx-4">
+      <h2>Eliminar plato</h2>
+    </div>
+
+    <div class="col col-lx-8">
+      {control menosMesasForm}
+    </div>
+
+  </div>
+
+  {/block}
