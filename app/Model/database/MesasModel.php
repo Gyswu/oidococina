@@ -10,9 +10,10 @@ class MesasModel extends BaseModel
     public function getAll() {
 
 
-        dd($this->getDb()->table($table));
-
-        return 'all';
+        $all=$this->getDb()->table('Mesas')
+        ->order('id ASC')
+        ->fetchAll();
+        return $all;
     }
 
 }

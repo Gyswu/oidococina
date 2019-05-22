@@ -21,5 +21,7 @@ services:
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
 	router: App\Router\RouterFactory::createRouter
+	-	App\Model\Database\ProductosModel
+	-	App\Model\Database\PlatosModel
 	- App\Model\Database\MesasModel
 	- App\Model\Database\BaseModel

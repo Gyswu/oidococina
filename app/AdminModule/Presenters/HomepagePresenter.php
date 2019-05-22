@@ -8,13 +8,14 @@ use Nette\Application\UI\Form;
 
 
 final class HomepagePresenter extends BaseAdminPresenter
+
 {
 
 
     public function renderDefault(){
 
 
-        dd($this->getMesasModel()->getAll());
+        //d($this->getMesasModel()->getAll());
 
 
     }
@@ -22,8 +23,8 @@ final class HomepagePresenter extends BaseAdminPresenter
   //APARTADO DE MESAS
   public function renderMesas(): void
   {
-    $this->template->mesas = $this->database->table('Mesas')
-      ->order('id ASC');
+    $this->template->mesas = $this->getMesasModel()->getAll();
+
   }
 
   public function createComponentMasMesasForm(){
@@ -78,22 +79,21 @@ final class HomepagePresenter extends BaseAdminPresenter
   // APARTADO DE PLATOS
   public function renderPlatos() :void{
 
-      $this->template->platos = $this->database->table('Platos')
-        ->order('id ASC');
+      $this->template->platos = $this->getPlatosModel()->getAll();
 
   }
   public function createComponentMasPlatosForm(){
 
     $form = new Form;
 
-    $form->addText('id', 'IENTIFICADOR del plato ')
-      ->addRule(Form::INTEGER, 'Debe ser un numero entero.');
     $form->addText('nombre', 'Nombre del plato')
       ->setRequired();
     $form->addText('precio', 'Precio del plato')
       ->setRequired()
-      ->addRule(Form::FLOAT, 'Debe ser un numero');
-    $form->addSubmit('send', 'Añadir');
+      ->addRule(Form::FLOAT, 'Debe ser un numero')
+      ->setHtmlAttribute("step", '.01');
+    $form->addSubmit('send', 'Añadir')
+    ->setHtmlAttribute("class", 'btn btn-success');
 
     $form->onSuccess[] = [$this, 'commentFormMasPlatos'];
     return $form;
@@ -103,7 +103,7 @@ final class HomepagePresenter extends BaseAdminPresenter
   {
 
     $this->database->table('Platos')->insert([
-      'id' => $values->id,
+
       'nombre' => $values->nombre,
       'precio' => $values->precio
     ]);
@@ -120,6 +120,8 @@ final class HomepagePresenter extends BaseAdminPresenter
     $form->addText('id', 'IDENTIFICADOR del plato a eliminar')
     ->addRule(Form::INTEGER, 'Debe ser un numero entero')
     ->setRequired();
+    $form->addSubmit('send', 'Eliminar')
+    ->setHtmlAttribute("class", 'btn btn-danger');
 
     $form->onSuccess[] = [$this, 'commentFormMenosPlatos'];
     return $form;
@@ -130,5 +132,11 @@ final class HomepagePresenter extends BaseAdminPresenter
     $this->database->table('Platos')->where('id', $values->id)->delete();
     $this->flashMessage('El plato ha sido eliminado de la base de datos', 'success');
     $this->redirect('this');
+  }
+  // APARTADO DE PRODUCTOS
+  public function renderProductos() :void{
+
+      $this->template->platos = $this->getProductosModel()->getAll();
+
   }
 }
