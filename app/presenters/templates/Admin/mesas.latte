@@ -6,13 +6,17 @@
     </div>
       <div class="col col-lx-8">
         <table>
+          <tr>
+            <td>IDENTIFICADOR</td>
+            <td>Nombre de la mesa</td>
+          </tr>
         {foreach $mesas as $mesa}
           <tr>
               <td>
-      				      Mesa {$mesa->num_mesa}
+      				      Mesa {$mesa->id}
               </td>
               <td>
-  				          <a href="">Más sobre la mesa {$mesa->num_mesa}</a>
+  				         {$mesa->nombre}
                </td>
                </tr>
   				{/foreach}

@@ -1,3 +1,8 @@
+Nette
+---
+Por defecto Nette utiliza PHP 5.6 pero funciona mejor con PHP +7.1 para disponer de varias funciones, consultar composer.json para ver la version de PHP o cambiarla.
+
+
 Mesas
 ---
 Solo contiene el número de mesa y algunos datos más sobre la mesa, como el estado de la misma, el número de comensales, etc
@@ -10,10 +15,10 @@ Relacional para listar todos los pedidos que ha tenido una mesa
 Pedidos
 ---
 Aquí se recoge cada orden que se tiene que preparar para una mesa. Básicamente sería cada línea que hay en el ticket final.
-En esta estructura, un pedido se considera un item, es decir, 
-un plato/combinación como por ejemplo, esto serían platos ya configurados: 
+En esta estructura, un pedido se considera un item, es decir,
+un plato/combinación como por ejemplo, esto serían platos ya configurados:
 - Hamburguesa de pollo, "sin pepinillos + ketchup" (entre "" son variaciones extra)
-- Ron + cocacola 
+- Ron + cocacola
 - Agua mineral
 
 Como cada producto tiene su unidad, los platos (combinaciones porque son tanto comida como bebida precofiguradas)
@@ -54,7 +59,7 @@ PlatosProductos
 ---
 En esta tabla relacional se explica la cantidad de productos que hay que ponerle a este plato.
 Esto te sirve por ejemplo para calcular el precio de coste sabiendo lo que vale 1 ud del producto.
-También para poder crear las combinaciones que van dentro de un plato. 
+También para poder crear las combinaciones que van dentro de un plato.
 
 Productos
 ---

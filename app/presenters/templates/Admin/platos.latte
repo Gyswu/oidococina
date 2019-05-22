@@ -7,35 +7,27 @@
       <div class="col col-lx-8">
         <table>
           <tr>
-            <td>ID Plato</td>
+            <td>IDENTIFICADOR </td>
+            <td>Nombre</td>
+            <td>Disponibilidad</td>
             <td>Precio</td>
-            <td>Ingredientes</td>
-            <td>Gluten</td>
-            <td>Lacteos</td>
-            <td>Tipo</td>
           </tr>
         {foreach $platos as $plato}
           <tr>
               <td>
-      				     {$plato->p_id}
+      				     {$plato->id}
               </td>
               <td>
                     {$plato->nombre}
               </td>
               <td>
-                     {$plato->ingredientes}
+                     {$plato->disponible}
               </td>
               <td>
-                      {$plato->gluten}
+                      {$plato->precio}€
               </td>
               <td>
-                      {$plato->lacteos}
-              </td>
-              <td>
-                      {$plato->Tipo}
-              </td>
-              <td>
-  				          <a href="">Más sobre el plato {$plato->p_id}</a>
+  				          <a href="">Más sobre el plato {$plato->id}</a>
                </td>
                </tr>
   				{/foreach}
@@ -47,7 +39,7 @@
       <h2>Añadir plato</h2>
        </div>
        <div class="col col-lx-8">
-      {control masMesasForm}
+      {control masPlatosForm}
       </div>
   </div>
   <div class="row">
@@ -56,7 +48,6 @@
     </div>
 
     <div class="col col-lx-8">
-      {control menosMesasForm}
     </div>
 
   </div>

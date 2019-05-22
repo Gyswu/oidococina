@@ -1,0 +1,18 @@
+{block content}
+  <div class="container">
+        <div class="row">
+          <table>
+            <tr>
+              <td>ID Mesa</td>
+              <td>Nombre Mesa</td>
+            </tr>
+            {foreach $mesas as $mesa}
+              <tr>
+                <td>{$mesa->id}</td>
+                <td>{$mesa->nombre}</td>
+              </tr>
+            {/foreach}
+          </table>
+        </div>
+  </div>
+{/block}
