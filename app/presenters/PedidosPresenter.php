@@ -9,12 +9,6 @@ use Nette;
 class PedidosPresenter extends Nette\Application\UI\Presenter
 {
 
-  private $database;
-
-  public function __construct(Nette\Database\Context $database){
-
-      $this->database = $database;
-  }
 
   public function renderPedir(int $b_id): void
   {
