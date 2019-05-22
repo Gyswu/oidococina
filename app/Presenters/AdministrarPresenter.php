@@ -8,7 +8,7 @@ use Nette;
 use Nette\Application\UI\Form;
 
 
-final class AdminPresenter extends BasePresenter
+final class AdministrarPresenter extends BasePresenter
 {
 
 
