@@ -1,71 +1,80 @@
-Nette Sandbox
-=============
-
-This is a simple pre-packaged and pre-configured application using the [Nette](https://nette.org)
-that you can use as the starting point for your new applications.
-
-[Nette](https://nette.org) is a popular tool for PHP web development.
-It is designed to be the most usable and friendliest as possible. It focuses
-on security and performance and is definitely one of the safest PHP frameworks.
-
-If you like Nette, **[please make a donation now](https://nette.org/donate)**. Thank you!
+Nette
+---
+Por defecto Nette utiliza PHP 5.6 pero funciona mejor con PHP +7.1 para disponer de varias funciones, consultar composer.json para ver la version de PHP o cambiarla.
 
 
-Installation
-------------
+Mesas
+---
+Solo contiene el número de mesa y algunos datos más sobre la mesa, como el estado de la misma, el número de comensales, etc
 
-The best way to install Web Project is using Composer. If you don't have Composer yet,
-download it following [the instructions](https://doc.nette.org/composer). Then use command:
-
-	composer create-project nette/sandbox path/to/install
-	cd path/to/install
-
-
-Make directories `temp/` and `log/` writable.
+MesaPedidos
+---
+Relacional para listar todos los pedidos que ha tenido una mesa
 
 
-Web Server Setup
-----------------
+Pedidos
+---
+Aquí se recoge cada orden que se tiene que preparar para una mesa. Básicamente sería cada línea que hay en el ticket final.
+En esta estructura, un pedido se considera un item, es decir,
+un plato/combinación como por ejemplo, esto serían platos ya configurados:
+- Hamburguesa de pollo, "sin pepinillos + ketchup" (entre "" son variaciones extra)
+- Ron + cocacola
+- Agua mineral
 
-The simplest way to get started is to start the built-in PHP server in the root directory of your project:
+Como cada producto tiene su unidad, los platos (combinaciones porque son tanto comida como bebida precofiguradas)
 
-	php -S localhost:8000 -t www
+Si se tiene que poder pedir algo que no existe, habría que mirar de implementar
+una tabla que fuese capaz de guardar platos personalizados fuera de la tabla platos para no enguarrarla.
 
-Then visit `http://localhost:8000` in your browser to see the welcome page.
+PedidosVariaciones
+---
+En esta tabla se indican las variaciones del pedido, es decir los productos + o - que
+tiene que llevar dicho pedido compuesto de un plato/combinación y sus variaciones
+Por ejemplo
+- Pepinillos = 0 (sin pepinillos)
+- Huevo = 2 (+ 2 unidades de huevo)
 
-For Apache or Nginx, setup a virtual host to point to the `www/` directory of the project and you
-should be ready to go.
+Platos
+---
+Son combinaciones de productos predeterminadas que representan un producto que se puede pedir en la carta
 
-It is CRITICAL that whole `app/`, `log/` and `temp/` directories are not accessible directly
-via a web browser. See [security warning](https://nette.org/security-warning).
+Pueden ser bebidas, cócteles, platos, postres, etc (el nombre no es muy acertado)
+Ej:
+- café solo  (consta de 10gr café)
+- café con leche (consta de 10gr café + 10ml leche)
+- Hamburguesa con patatas (consta de 1ud hamburguesa de pollo 1ud pan de ham, 250gr patatas, 10gr lechuga, 10 gr pepinillos)
 
+La categoría aquí indica qué tipo de plato/combinación es, por ejemplo:
+- Bebidas
+- Cócteles
+- Primeros
+- Segundos
+- Postres
+- Varios
+- etc
 
-Requirements
-------------
+Con las categorías luego podrías crear secciones en la interfaz para agrupar los platos
 
-- Sandbox for Nette 3.0 requires PHP 7.1
+PlatosProductos
+---
+En esta tabla relacional se explica la cantidad de productos que hay que ponerle a este plato.
+Esto te sirve por ejemplo para calcular el precio de coste sabiendo lo que vale 1 ud del producto.
+También para poder crear las combinaciones que van dentro de un plato.
 
-To check whether server configuration meets the minimum requirements for
-Nette Framework browse to the directory `/checker` in your project root (i.e. `http://localhost:8000/checker`).
+Productos
+---
+Aquí van los productos disponibles para añadir a platos o vender por separado siempre que se haga
+en un pedido.
 
+La idea es que esta tabla también sirve de stock ya que solo hay un almacén. Simplemente hay
+que indicar el tipo de unidad en la que se mide este producto y la cantidad que queda para
+ir restándola con lo que necesite cada plato.
 
-Adminer
--------
+Por ej
+- huevo por unidad
+- Wishkey si mides la dosis por ml, que es lo suyo
+- Hamburguesas por unidad
+- Patatas por gr
 
-[Adminer](https://www.adminer.org/) is full-featured database management tool written in PHP and it is part of this Sandbox.
-To use it, browse to the subdirectory `/adminer` in your project root (i.e. `http://localhost:8000/adminer`).
-
-
-Notice: Composer PHP version
-----------------------------
-
-This project forces PHP 5.6 (eventually 7.1) as your PHP version for Composer packages. If you have newer
-version on production server you should change it in `composer.json`:
-
-```json
-"config": {
-	"platform": {
-		"php": "7.2"
-	}
-}
-```
+Si se hace bien se supone que todas estas cosas se pesan y se llevan bien medidas (como en mcdonals), no se
+supone que se echen cantidades random.
