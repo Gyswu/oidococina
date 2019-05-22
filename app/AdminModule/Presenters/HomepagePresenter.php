@@ -1,5 +1,6 @@
 <?php
 
+
 declare(strict_types=1);
 
 namespace App\AdminModule\Presenters;
@@ -12,50 +13,116 @@ final class HomepagePresenter extends BaseAdminPresenter
 {
 
 
-    public function renderDefault(): void
-    {
+  //APARTADO DE MESAS
+  public function renderMesas(): void
+  {
+    $this->template->mesas = $this->database->table('Mesas')
+      ->order('id ASC');
+  }
 
-    }
+  public function createComponentMasMesasForm(){
 
-    public function renderPedidos(): void
-    {
-        $this->template->bebidas = $this->database->table('bebidas')
-            ->order('b_id ASC')
-            ->limit(10);
-    }
+    $form = new Form;
 
-    public function createComponentBebidasForm()
-    {
-        $form = new Form;
-        $form->addText('nombre', 'Nombre de la bebida:')
-            ->setRequired();
+    $form->addText('id', 'ID de la mesa: ')
+      ->addRule(Form::INTEGER, 'Debe ser un numero entero.');
+    $form->addText('nombre', 'Nombre de la mesa')
+      ->setRequired();
+    $form->addSubmit('send', 'Añadir');
 
-        $form->addinteger('precio', 'Precio: ')
-            ->setRequired()
-            ->addRule($form::RANGE, 'El precio ha de ser mayor de 0', [0, 10000]);
+    $form->onSuccess[] = [$this, 'commentFormMasMesas'];
+    return $form;
 
-        $form->addCheckbox('azucar', 'Tiene azucar? ');
-        $form->addCheckbox('alcohol', 'Tiene alcohol? ');
+  }
 
-        $form->addSubmit('send', 'Add');
+  public function commentFormMasMesas(Form $form, \stdClass $values): void
+  {
 
-        $form->onSuccess[] = [$this, 'commentFormBebidasEnviado'];
-        return $form;
+    $this->database->table('Mesas')->insert([
+      'id' => $values->id,
+      'nombre' => $values->nombre
+    ]);
 
+    $this->flashMessage('La mesa ha sido añadida a la base de datos', 'success');
+    $this->redirect('this');
 
-    }
+  }
+  public function createComponentMenosMesasForm(){
 
-    public function commentFormBebidasEnviado(Form $form, \stdClass $values): void
-    {
+    $form = new Form;
 
-        $this->database->table('bebidas')->insert([
-            'nombre' => $values->nombre,
-            'precio' => $values->precio,
-            'azucar' => $values->azucar,
-            'alcohol' => $values->alcohol,
-        ]);
+    $form->addinteger('id', 'ID de mesa: ')
+      ->setRequired();
+    $form->addSubmit('send', 'Eliminar');
 
-        $this->flashMessage('La bebida ya ha sido añadida a la base de datos', 'success');
-        $this->redirect('this');
-    }
+    $form->onSuccess[] = [$this, 'commentFormMenosMesas'];
+    return $form;
+
+  }
+  public function commentFormMenosMesas(Form $form, \stdClass $values): void
+  {
+
+    $this->database->table('Mesas')->where('id', $values->id)->delete();
+
+    $this->flashMessage('La mesa ha sido eliminada a la base de datos', 'success');
+    $this->redirect('this');
+
+  }
+
+  // APARTADO DE PLATOS
+  public function renderPlatos() :void{
+
+      $this->template->platos = $this->database->table('Platos')
+        ->order('id ASC');
+
+  }
+  public function createComponentMasPlatosForm(){
+
+    $form = new Form;
+
+    $form->addText('id', 'IENTIFICADOR del plato ')
+      ->addRule(Form::INTEGER, 'Debe ser un numero entero.');
+    $form->addText('nombre', 'Nombre del plato')
+      ->setRequired();
+    $form->addText('precio', 'Precio del plato')
+      ->setRequired()
+      ->addRule(Form::FLOAT, 'Debe ser un numero');
+    $form->addSubmit('send', 'Añadir');
+
+    $form->onSuccess[] = [$this, 'commentFormMasPlatos'];
+    return $form;
+
+  }
+  public function commentFormMasPlatos(Form $form, \stdClass $values): void
+  {
+
+    $this->database->table('Platos')->insert([
+      'id' => $values->id,
+      'nombre' => $values->nombre,
+      'precio' => $values->precio
+    ]);
+
+    $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
+    $this->redirect('this');
+
+  }
+
+  public function createComponentMenosPlatosForm(){
+
+    $form = new Form;
+
+    $form->addText('id', 'IDENTIFICADOR del plato a eliminar')
+    ->addRule(Form::INTEGER, 'Debe ser un numero entero')
+    ->setRequired();
+
+    $form->onSuccess[] = [$this, 'commentFormMenosPlatos'];
+    return $form;
+  }
+
+  public function commentFormMenosPlatos(Form $form, \stdClass $values): void
+  {
+    $this->database->table('Platos')->where('id', $values->id)->delete();
+    $this->flashMessage('El plato ha sido eliminado de la base de datos', 'success');
+    $this->redirect('this');
+  }
 }

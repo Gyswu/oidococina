@@ -9,8 +9,8 @@ class BaseAdminPresenter extends \App\Presenters\BasePresenter
 
     public function startup() {
         parent::startup();
-        if($this->redirectLogin && (!$this->user->loggedIn || !$this->user->isInRole('admin')) ){
-            $this->redirect('Sign:default');
-        }
+//        if($this->redirectLogin && (!$this->user->loggedIn || !$this->user->isInRole('admin')) ){
+//            $this->redirect('Sign:default');
+//        }
     }
 }
