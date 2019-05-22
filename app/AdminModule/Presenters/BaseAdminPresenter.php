@@ -2,8 +2,13 @@
 
 namespace App\AdminModule\Presenters;
 
+use App\Model\Database\MesasModel;
+
 class BaseAdminPresenter extends \App\Presenters\BasePresenter
 {
+
+    /** @var MesasModel */
+    private $mesasModel;
 
     protected $redirectLogin = true;
 
@@ -13,4 +18,19 @@ class BaseAdminPresenter extends \App\Presenters\BasePresenter
 //            $this->redirect('Sign:default');
 //        }
     }
+
+
+    public function injectModels( MesasModel $mesasModel){
+     $this->mesasModel = $mesasModel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMesasModel()
+    {
+        return $this->mesasModel;
+    }
+
+
 }
