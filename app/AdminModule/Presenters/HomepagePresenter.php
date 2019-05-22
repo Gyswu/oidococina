@@ -14,7 +14,7 @@ final class HomepagePresenter extends BaseAdminPresenter
     public function renderDefault(){
 
 
-        dd($this->getMesasModel()->getAll());
+//        dd($this->getMesasModel()->getAll());
 
 
     }
