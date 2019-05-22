@@ -8,15 +8,8 @@ use Nette;
 use Nette\Application\UI\Form;
 
 
-final class AdminPresenter extends Nette\Application\UI\Presenter
+final class AdminPresenter extends BasePresenter
 {
-
-  private $database;
-
-  public function __construct(Nette\Database\Context $database){
-
-      $this->database = $database;
-  }
 
 
   //APARTADO DE MESAS
