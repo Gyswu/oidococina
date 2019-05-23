@@ -2,6 +2,7 @@
 
 
 namespace App\Model\Database;
+use Nette\Application\UI\Form;
 
 
 class PlatosModel extends BaseModel
@@ -14,6 +15,18 @@ class PlatosModel extends BaseModel
         ->order('id ASC')
         ->fetchAll();
         return $all;
+    }
+
+    public function newPlato(Form $form) :void
+    {
+      $values = $form->getValues();
+
+      $this->getDb()->table('Platos')->insert([
+        'nombre' => $values->nombre,
+        'precio' => $values->precio
+      ]);
+
+
     }
 
 }

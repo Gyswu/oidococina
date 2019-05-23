@@ -92,21 +92,19 @@ final class HomepagePresenter extends BaseAdminPresenter
       ->setRequired()
       ->addRule(Form::FLOAT, 'Debe ser un numero')
       ->setHtmlAttribute("step", '.01');
+
     $form->addSubmit('send', 'Añadir')
     ->setHtmlAttribute("class", 'btn btn-success');
 
     $form->onSuccess[] = [$this, 'commentFormMasPlatos'];
+
     return $form;
 
   }
-  public function commentFormMasPlatos(Form $form, \stdClass $values): void
+
+  public function commentFormMasPlatos(Form $form): void
   {
-
-    $this->database->table('Platos')->insert([
-
-      'nombre' => $values->nombre,
-      'precio' => $values->precio
-    ]);
+    $this->getPlatosModel()->newPlato($form);
 
     $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
     $this->redirect('this');
