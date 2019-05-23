@@ -105,8 +105,17 @@ final class HomepagePresenter extends BaseAdminPresenter
   public function commentFormMasPlatos(Form $form): void
   {
     $this->getPlatosModel()->newPlato($form);
+      
+      //TODO: revisa este código
+      $plato = $this->getPlatosModel();
+      $plato->nombre = $form->nombre;
+      $plato->precio = $form->precio;
+      $platoNuevo = $plato->saveNew();
+      d($platoNuevo);  
+      //TODO: añade aquí algo así como if(isset($platoNuevo->Auto_increment)){flash success}else{flass fail}
+      //no sé exactamente cómo se saca el auto increment, pero del dump deberías verlo
 
-    $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
+    $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');//esto no es cierto, ya que puede dar error y no lo estás revisando si ha sido guardado, deberías mostrar mensaje de error si no se ha guardado
     $this->redirect('this');
 
   }
