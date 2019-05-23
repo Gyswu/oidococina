@@ -7,6 +7,9 @@ use Nette\Application\UI\Form;
 
 class PlatosModel extends BaseModel
 {
+    /*Estas son las columnas de la base de datos, si las pones aquí luego el IDE te ayuda*/
+    public $name;
+    public $precio;
 
     public function getAll() {
 
@@ -25,8 +28,15 @@ class PlatosModel extends BaseModel
         'nombre' => $values->nombre,
         'precio' => $values->precio
       ]);
-
-
+        
+    }
+    
+    public function saveNew(){
+        //haciendo return puedes acceder al last id y demás hostias nada mas insertarlo
+        return $this->getDb()->query('INSERT INTO Platos ?', [ // here can be omitted question mark
+            'nombre' => $this->nombre,
+            'precio' => $this->precio,
+        ]);
     }
 
 }
