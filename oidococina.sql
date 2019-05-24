@@ -11,7 +11,7 @@
  Target Server Version : 100137
  File Encoding         : 65001
 
- Date: 22/05/2019 08:40:14
+ Date: 24/05/2019 19:40:22
 */
 
 SET NAMES utf8mb4;
@@ -76,11 +76,18 @@ CREATE TABLE `Pedidos`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `Platos`;
 CREATE TABLE `Platos`  (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `precio` float(6, 2) NULL DEFAULT NULL,
   `disponible` int(1) NULL DEFAULT 1,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `nombre`(`nombre`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of Platos
+-- ----------------------------
+INSERT INTO `Platos` VALUES (1, 'Judías con chorizo', 22.00, NULL);
 
 -- ----------------------------
 -- Table structure for PlatosProductos
@@ -94,8 +101,8 @@ CREATE TABLE `PlatosProductos`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `producto`(`producto`) USING BTREE,
   INDEX `plato`(`plato`) USING BTREE,
-  CONSTRAINT `PlatosProductos_ibfk_1` FOREIGN KEY (`producto`) REFERENCES `Productos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `PlatosProductos_ibfk_2` FOREIGN KEY (`plato`) REFERENCES `Platos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `PlatosProductos_ibfk_1` FOREIGN KEY (`producto`) REFERENCES `Productos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `PlatosProductos_ibfk_2` FOREIGN KEY (`plato`) REFERENCES `Platos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------

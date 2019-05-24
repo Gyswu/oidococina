@@ -6,6 +6,7 @@ namespace App\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
+use Tomaj\Form\Renderer\BootstrapVerticalRenderer;
 
 
 final class FormFactory
@@ -15,6 +16,7 @@ final class FormFactory
 	public function create(): Form
 	{
 		$form = new Form;
+        $form->setRenderer(new BootstrapVerticalRenderer());
 		return $form;
 	}
 }

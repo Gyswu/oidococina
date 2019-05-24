@@ -8,31 +8,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-
-<title>{ifset title}{include title|stripHtml} | {/ifset}Oidocosina</title>
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
-	<link rel="stylesheet" href="{$basePath}/css/style.css">
-	{block head}{/block}
+    <meta charset="utf-8">
+    <title>{ifset title}{include title|stripHtml} | {/ifset}Oidocosina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{$basePath}/css/style.css">
+    {block head}{/block}
 </head>
 
 <body>
 {block sidebar}
 {/block}
-	<div class=container>
-		<div n:foreach="$flashes as $flash" n:class="alert, 'alert-' . $flash->type">{$flash->message}</div>
+<div class=container>
+    <div n:foreach="$flashes as $flash" n:class="alert, 'alert-' . $flash->type">{$flash->message}</div>
 
-		{include content}
-	</div>
+    {include content}
+</div>
 
-	{block scripts}
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-	<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	<script src="{$basePath}/js/main.js"></script>
-	{/block}
+{block scripts}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="{$basePath}/js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".del").click(function () {
+                confirm('¿Seguro que lo quieres borrar?')
+            });
+        });
+    </script>
+{/block}
 </body>
 </html>

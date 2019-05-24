@@ -1,0 +1,54 @@
+{block content}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-6">
+            <h2>Añadir plato</h2>
+            {control masPlatosForm}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Listado de platos</h2>
+
+            <table class="table">
+                {if $platos}
+                <thead class="thead-dark">
+                <tr>
+                    {foreach reset($platos) as $columna => $valor}
+                        <th>{$columna}</th>
+                    {/foreach}
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    {foreach $platos as $plato}
+                        <tr>
+                            <td>
+                                {$plato->id}
+                            </td>
+                            <td>
+                                {$plato->nombre}
+                            </td>
+                            <td>
+                                {$plato->precio}€
+                            </td>
+                            <td>
+                                {$plato->disponible}
+                            </td>
+                            <td align="center">
+                                <a n:href="Platos:editar $plato->id" class="btn btn-xs btn-primary">Editar</a>
+                                <a n:href="Platos:borrar $plato->id" class="btn btn-xs btn-danger del">Borrar</a>
+                            </td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr>
+                        <td> No hay ningún plato disponible</td>
+                    </tr>
+                {/if}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {/block}
