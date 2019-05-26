@@ -59,29 +59,6 @@ class PlatosPresenter extends BaseAdminPresenter
 
     }
 
-    public function createComponentMenosPlatosForm()
-    {
-
-        $form = (new FormFactory())->create();
-
-        $form->addText('id', 'IDENTIFICADOR del plato a eliminar')
-            ->addRule(Form::INTEGER, 'Debe ser un numero entero')
-            ->setRequired();
-        $form->addSubmit('send', 'Eliminar')
-            ->setHtmlAttribute("class", 'btn btn-danger');
-
-        $form->onSuccess[] = [$this, 'onSuccessMenosPlatos'];
-        return $form;
-    }
-
-    public function onSuccessMenosPlatos(Form $form, \stdClass $values): void
-    {
-        $this->database->table('Platos')->where('id', $values->id)->delete();
-        $this->flashMessage('El plato ha sido eliminado de la base de datos', 'success');
-        $this->redirect('this');
-    }
-
-
     public function actionEditar($id)
     {
         $this->template->item = $this->getPlatosModel()->findById($id);

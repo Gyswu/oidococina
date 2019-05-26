@@ -1,0 +1,48 @@
+{block content}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-6">
+            <h2>Añadir mesa</h2>
+            {control masMesasForm}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Listado de mesas</h2>
+
+            <table class="table">
+                {if $mesas}
+                <thead class="thead-dark">
+                <tr>
+                    {foreach reset($mesas) as $columna => $valor}
+                        <th>{$columna}</th>
+                    {/foreach}
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    {foreach $mesas as $mesa}
+                        <tr>
+                            <td>
+                                {$mesa->id}
+                            </td>
+                            <td>
+                                {$mesa->nombre}
+                            </td>
+                            <td align="center">
+                                <a n:href="Mesas:editar $mesa->id" class="btn btn-xs btn-primary">Editar</a>
+                                <a n:href="Mesas:borrar $mesa->id" class="btn btn-xs btn-danger del">Borrar</a>
+                            </td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr>
+                        <td> No hay ninguna mesa existente</td>
+                    </tr>
+                {/if}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {/block}

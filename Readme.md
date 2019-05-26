@@ -1,6 +1,7 @@
 Nette
 ---
 Por defecto Nette utiliza PHP 5.6 pero funciona mejor con PHP +7.1 para disponer de varias funciones, consultar composer.json para ver la version de PHP o cambiarla.
+- Hay que apuntar a la carpeta "ruta"/proyecto/www
 
 
 Mesas
