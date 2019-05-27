@@ -26,3 +26,4 @@ services:
 	- App\Model\Database\MesasModel
 	- App\Model\Database\BaseModel
 	-	App\Model\Database\PedidosModel
+	- App\Model\Database\PlatosProductosModel

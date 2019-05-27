@@ -6,6 +6,7 @@ namespace App\AdminModule\Presenters;
 use App\Forms\FormFactory;
 use App\Forms\PlatosFormFactory;
 use App\Model\Database\Entities\Plato;
+use App\Model\Database\Entities\PlatoProducto;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
 use Nette\Database\Table\ActiveRow;
@@ -35,7 +36,7 @@ class PlatosPresenter extends BaseAdminPresenter
             ->setHtmlAttribute("class", 'btn btn-success');
 
         $form->onSuccess[] = [$this, 'onSuccessMasPlatos'];//convención con la variable onSuccess y el nombre del formulario
-
+        //$form->addSelect('producto','Producto',$this->getPlatosModel()->findAllPairs("id","nombre"));
         return $form;
 
     }
@@ -61,7 +62,9 @@ class PlatosPresenter extends BaseAdminPresenter
 
     public function actionEditar($id)
     {
-        $this->template->item = $this->getPlatosModel()->findById($id);
+        $plato = $this->getPlatosModel()->findById($id);
+        $this->template->item = $plato;
+        $this->template->productos = $this->getPlatosModel()->getProductos($plato->toArray());
     }
 
     public function createComponentEditarPlatoForm()
@@ -101,6 +104,54 @@ class PlatosPresenter extends BaseAdminPresenter
             $this->flashMessage("Plato eliminado", "success");
         } catch (\Exception $e) {
             $this->flashMessage("Error al eliminar plato, ¿Es una id válida?: " . $e->getMessage(), 'danger');
+        }
+
+        $this->redirect('default');
+    }
+
+    public function createComponentMasPlatosProductosForm() {
+        $form = (new FormFactory())->create();
+        $form->addSelect('producto','Producto',$this->getProductosModel()->findAllPairs("id","nombre"));
+        $form->addText('cantidad','Cantidad')
+          ->addRule(FORM::INTEGER, 'Debe ser un numero entero')
+          ->setRequired();
+        $form->addSubmit('send', 'Añadir')
+          ->setHtmlAttribute("class", 'btn btn-success');
+
+        $form->onSuccess[] = [$this, 'onSuccessMasPlatosProductos'];
+        return $form;
+    }
+    public function onSuccessMasPlatosProductos(Form $form, \stdClass $values): void
+    {
+        $plato = $this->template->item;
+
+        $platoproducto = new PlatoProducto();
+        $platoproducto->plato = $plato->id;
+        $platoproducto->producto = $values->producto;
+        $platoproducto->cantidad = $values->cantidad;
+
+        $newPlatoProducto = (array)$platoproducto;
+
+        try {
+            $platoproductoNuevo = $this->getPlatosModel()->newPlatoProducto($newPlatoProducto);
+            $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'danger');
+        }
+
+        $this->redirect('this');
+
+    }
+    public function actionBorrarProducto($id)
+    {
+        try {
+            if (!$producto = $this->getPlatosProductos()->findById($id)) {
+                throw new \Exception("plato no encontrado");
+            };
+            $producto->delete();
+            $this->flashMessage("Producto eliminado", "success");
+        } catch (\Exception $e) {
+            $this->flashMessage("Error al eliminar producto, ¿Es una id válida?: " . $e->getMessage(), 'danger');
         }
 
         $this->redirect('default');

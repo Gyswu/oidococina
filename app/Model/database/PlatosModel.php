@@ -25,8 +25,6 @@ class PlatosModel extends BaseModel
 
 
 
-
-
     public function getAll()
     {
         $all = $this->getDb()->table('Platos')
@@ -37,7 +35,9 @@ class PlatosModel extends BaseModel
 
     public function newPlato(Plato $plato)
     {
-        return $this->getDb()->table($this->getTableName())->insert((array)$plato);
+        $newPlato = (array)$plato;
+        unset($newPlato["id"]);
+        return $this->getDb()->table($this->getTableName())->insert($newPlato);
     }
 
     public function saveNew()
@@ -47,6 +47,16 @@ class PlatosModel extends BaseModel
             'nombre' => $this->nombre,
             'precio' => $this->precio,
         ]);
+    }
+    public function getProductos(array $plato)
+    {
+      //dd($plato);
+      return $this->getDb()->query("SELECT p.* FROM Productos p
+      join PlatosProductos pp ON p.id = pp.producto AND
+      pp.plato = ?",$plato["id"]);
+    }
+    public function newPlatoProducto(array $newPlatoProducto){
+      return $this->getDb()->table('PlatosProductos')->insert($newPlatoProducto);
     }
 
 }
