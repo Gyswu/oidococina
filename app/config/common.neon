@@ -25,3 +25,4 @@ services:
 	-	App\Model\Database\PlatosModel
 	- App\Model\Database\MesasModel
 	- App\Model\Database\BaseModel
+	-	App\Model\Database\PedidosModel

@@ -5,6 +5,7 @@ namespace App\AdminModule\Presenters;
 use App\Model\Database\MesasModel;
 use App\Model\Database\PlatosModel;
 use App\Model\Database\ProductosModel;
+use App\Model\Database\PedidosModel;
 
 class BaseAdminPresenter extends \App\Presenters\BasePresenter
 {
@@ -15,6 +16,8 @@ class BaseAdminPresenter extends \App\Presenters\BasePresenter
     private $platosModel;
     /** @var ProductosModel */
     private $productosModel;
+    /** @var PedidosModel */
+    private $pedidosModel;
 
     protected $redirectLogin = true;
 
@@ -27,11 +30,12 @@ class BaseAdminPresenter extends \App\Presenters\BasePresenter
 
 
     public function injectModels(
-      MesasModel $mesasModel, PlatosModel $platosModel, ProductosModel $productosModel
+      MesasModel $mesasModel, PlatosModel $platosModel, ProductosModel $productosModel, PedidosModel $pedidosModel
     ){
      $this->mesasModel = $mesasModel;
      $this->platosModel = $platosModel;
      $this->productosModel = $productosModel;
+     $this->pedidosModel = $pedidosModel;
     }
 
     /**
@@ -50,6 +54,10 @@ class BaseAdminPresenter extends \App\Presenters\BasePresenter
     public function getProductosModel()
     {
       return $this->productosModel;
+    }
+    public function getPedidosModel()
+    {
+      return $this->pedidosModel;
     }
 
 
