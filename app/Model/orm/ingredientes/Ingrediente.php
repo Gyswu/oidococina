@@ -9,7 +9,7 @@ use Nextras\Orm\Relationships\ManyHasMany;
  * Ingrediente
  *
  * @property int                 $id             {primary}
- * @property string              $cantidad
+ * @property int                 $cantidad
  * @property ManyHasMany|Plato[] $platos         {m:m Plato::$ingredientes}
  * @property Producto            $producto       {1:1 Producto, isMain=true, oneSided=true}
  */

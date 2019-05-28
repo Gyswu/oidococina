@@ -1,0 +1,64 @@
+{block content}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-6">
+            <h2>Añadir productos</h2>
+            {control masProductosForm}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Listado de productos</h2>
+
+            <table class="table">
+                {if $productos}
+                <thead class="thead-dark">
+                <tr>
+                    {foreach reset($productos) as $columna => $valor}
+                        <th>{$columna}</th>
+                    {/foreach}
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    {foreach $productos as $producto}
+                        <tr>
+                            <td>
+                                {$producto->id}
+                            </td>
+                            <td>
+                                {$producto->nombre}
+                            </td>
+                            <td>
+                                {$producto->categoria}
+                            </td>
+                            <td>
+                                {$producto->cantidad}
+                            </td>
+                            <td>
+                              {switch $producto->unidad}
+                                {case num}
+                                  Unidades
+                                {case gr}
+                                  Gramos
+                                {case ml}
+                                  Mililitros
+                              {/switch}
+                            </td>
+                            <td align="center">
+                                <a n:href="Productos:editar $producto->id" class="btn btn-xs btn-primary">Editar</a>
+                                <a n:href="Productos:borrar $producto->id" class="btn btn-xs btn-danger del">Borrar</a>
+                            </td>
+                        </tr>
+                    {/foreach}
+                {else}
+                    <tr>
+                        <td> No hay ningun producto existente</td>
+                    </tr>
+                {/if}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {/block}

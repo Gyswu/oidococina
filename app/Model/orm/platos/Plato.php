@@ -21,3 +21,6 @@ class Plato extends Entity {
 //        return $this->allComments->get()->findBy(['deletedAt' => NULL]);
 //    }
 }
+
+// get devuelve uno
+// Find devuelve varias

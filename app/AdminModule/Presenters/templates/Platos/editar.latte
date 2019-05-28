@@ -6,6 +6,57 @@
                 {control editarPlatoForm}
             </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <a n:href="Platos:default" class="btn btn-primary">Volver</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+
+            <table class="table">
+              {if $productos}
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {foreach $productos as $producto}
+                    <tr>
+                      <td>{$producto->nombre}</td>
+                      <td>{$producto->cantidad}
+                          {switch $producto->unidad}
+                              {case num}
+                              Unidades
+                              {case gr}
+                              Gramos
+                              {case ml}
+                              Mililitros
+                          {/switch}</td>
+                      <td><a n:href="Platos:borrarProducto $producto->id" class="btn btn-xs btn-danger del">Borrar</a></td>
+                    </tr>
+                  {/foreach}
+                {else}
+                  <tr>
+                    <td>Este plato no tiene productos asignados</td>
+                  </tr>
+                {/if}
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+              {control masPlatosProductosForm}
+          </div>
+        </div>
     </div>
 
 {/block}
+
+
+
+Mesas(ocupada)->Listado de platos(añadir)(Añadir con variacion)/estado productos mesa(estado)

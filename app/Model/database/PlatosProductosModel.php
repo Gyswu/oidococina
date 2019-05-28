@@ -4,13 +4,13 @@
 namespace App\Model\Database;
 
 
-use App\Model\Database\Entities\Producto;
+use App\Model\Database\Entities\PlatoProducto;
 
-class ProductosModel extends BaseModel
+class PlatosProductosModel extends BaseModel
 {
 
     /**
-     * @return Producto
+     * @return PlatoProducto
      */
     public function getEntity()
     {
@@ -20,26 +20,24 @@ class ProductosModel extends BaseModel
     public function getAll() {
 
 
-        $all=$this->getDb()->table('Productos')
+        $all=$this->getDb()->table('PlatosProductos')
         ->order('id ASC')
         ->fetchAll();
         return $all;
     }
 
-    public function newProducto(Producto $producto)
+    public function newProducto(PlatoProducto $platoproducto)
     {
-        return $this->getDb()->table($this->getTableName())->insert((array)$producto);
+        return $this->getDb()->table($this->getTableName())->insert((array)$platoproducto);
     }
 
     public function saveNew()
     {
         //haciendo return puedes acceder al last id y demás hostias nada mas insertarlo
         return $this->getDb()->query('INSERT INTO Productos ?', [ // here can be omitted question mark
-            'nombre' => $this->nombre,
-            'precio' => $this->precio,
-            'categoria' => $this->categoria,
-            'cantidad' => $this->cantidad,
-            'unidad' => $this->unidad,
+            'plato' => $this->plato,
+            'producto'=> $this->producto,
+            'cantidad'=> $this->cantidad,
         ]);
     }
 

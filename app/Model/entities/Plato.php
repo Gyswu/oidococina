@@ -4,6 +4,7 @@ namespace App\Model\Database\Entities;
 
 class Plato
 {
+    public $id;
 
     public $nombre;
 

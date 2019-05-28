@@ -107,7 +107,7 @@ class BaseModel
      * @param $limit
      * @return array
      */
-    public function findAllPairs($key, $value, $where, $order, $limit)
+    public function findAllPairs($key, $value, $where=null, $order=null, $limit=null)
     {
         return $this->find($where, $order, $limit)->fetchPairs($key, $value);
     }
