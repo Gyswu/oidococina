@@ -132,7 +132,7 @@ class PlatosPresenter extends BaseAdminPresenter
 
             $plato->ingredientes->add($ingredienteCreado);
 
-            $this->orm->ingredientes->persistAndFlush($this->platoEditado);
+            $this->orm->persistAndFlush($plato);
             $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'danger');

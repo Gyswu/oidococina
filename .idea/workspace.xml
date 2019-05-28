@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0872e976-3663-4a73-a751-97f563c782c8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Model/orm/mesas/Mesa.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Model/orm/mesas/MesasMapper.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Model/orm/mesas/MesasRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AdminModule/Presenters/BaseAdminPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AdminModule/Presenters/BaseAdminPresenter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AdminModule/Presenters/MesasPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AdminModule/Presenters/MesasPresenter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AdminModule/Presenters/templates/Platos/default.latte" beforeDir="false" afterPath="$PROJECT_DIR$/app/AdminModule/Presenters/templates/Platos/default.latte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AdminModule/Presenters/templates/Platos/editar.latte" beforeDir="false" afterPath="$PROJECT_DIR$/app/AdminModule/Presenters/templates/Platos/editar.latte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Forms/MesasFormFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Forms/MesasFormFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Forms/PlatosFormFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Forms/PlatosFormFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/database/BaseModel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/database/MesasModel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/database/PedidosModel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/database/PlatosModel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/database/PlatosProductosModel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/database/ProductosModel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/entities/Mesa.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/entities/MesaPedido.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/entities/Pedido.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/entities/PedidosVariacion.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/entities/Plato.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/entities/PlatoProducto.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/entities/Producto.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/orm/Orm.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/orm/Orm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/orm/platos/Plato.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/orm/platos/Plato.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Model/orm/productos/Producto.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Model/orm/productos/Producto.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Presenters/HomepagePresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Presenters/HomepagePresenter.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/markdown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/markdown.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -110,64 +81,10 @@
         <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="525">
-              <caret line="134" column="74" selection-start-line="134" selection-start-column="74" selection-end-line="134" selection-end-column="74" />
+              <caret line="134" column="48" selection-start-line="134" selection-start-column="48" selection-end-line="134" selection-end-column="48" />
               <folding>
                 <element signature="e#47#73#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/orm/ingredientes/Ingrediente.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/orm/ingredientes/IngredientesRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="36" lean-forward="true" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/orm/ingredientes/IngredientesMapper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/orm/productos/Producto.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/orm/productos/ProductosMapper.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Model/orm/productos/ProductosRepository.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -434,12 +351,12 @@
       <workItem from="1558544606343" duration="2033000" />
       <workItem from="1559054838900" duration="184000" />
       <workItem from="1559055071160" duration="1043000" />
-      <workItem from="1559066895062" duration="17352000" />
+      <workItem from="1559066895062" duration="17700000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26000000" />
+    <option name="totallyTimeSpent" value="26348000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1032" extended-state="0" />
@@ -759,17 +676,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/orm/productos/Producto.php">
+    <entry file="file://$PROJECT_DIR$/app/Model/orm/platos/Plato.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/orm/productos/ProductosMapper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        <state relative-caret-position="210">
+          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -780,10 +690,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/orm/ingredientes/IngredientesRepository.php">
+    <entry file="file://$PROJECT_DIR$/app/Model/orm/productos/ProductosMapper.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="36" lean-forward="true" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
+        <state relative-caret-position="90">
+          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/orm/productos/Producto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="16" column="6" selection-start-line="16" selection-start-column="6" selection-end-line="16" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -791,6 +708,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Model/orm/ingredientes/IngredientesRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -811,17 +735,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Model/orm/platos/Plato.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="6" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
-          <caret line="134" column="74" selection-start-line="134" selection-start-column="74" selection-end-line="134" selection-end-column="74" />
+          <caret line="134" column="48" selection-start-line="134" selection-start-column="48" selection-end-line="134" selection-end-column="48" />
           <folding>
             <element signature="e#47#73#0#PHP" expanded="true" />
           </folding>
