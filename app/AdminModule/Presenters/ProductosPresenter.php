@@ -5,17 +5,19 @@ namespace App\AdminModule\Presenters;
 
 use App\Forms\FormFactory;
 use App\Forms\ProductosFormFactory;
-use App\Model\Database\Entities\Producto;
 use Nette\Application\UI\Form;
+use App\Model\Orm\Producto;
 use Nette\ComponentModel\IComponent;
 use Nette\Database\Table\ActiveRow;
 
 class ProductosPresenter extends BaseAdminPresenter
 {
+    /** @var $productoEditado Producto */
+    private $productoEditado;
 
     public function renderDefault(): void
     {
-        $this->template->productos = $this->getProductosModel()->findAll();
+        $this->template->productos = $this->orm->productos->findAll();
     }
 
 
@@ -49,15 +51,14 @@ class ProductosPresenter extends BaseAdminPresenter
     public function onSuccessMasProductos(Form $form, \stdClass $values): void
     {
 
-        $producto = new Producto();
-        $producto->nombre = $values->nombre;
-        $producto->categoria = $values->categoria;
-        $producto->cantidad = $values->cantidad;
-        $producto->unidad = $values->unidad;
-
-
         try {
-            $productoNuevo = $this->getProductosModel()->newProducto($producto);
+            $producto = new Producto();
+            $producto->nombre = $values->nombre;
+            $producto->categoria = $values->categoria;
+            $producto->stock = $values->cantidad;
+            $producto->unidad = $values->unidad;
+
+            $this->orm->persistAndFlush($producto);
             $this->flashMessage('El producto ha sido añadido a la base de datos', 'success');
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'danger');
@@ -69,12 +70,17 @@ class ProductosPresenter extends BaseAdminPresenter
 
     public function actionEditar($id)
     {
-        $this->template->item = $this->getProductosModel()->findById($id);
+        $producto = $this->orm->platos->getById($id);
+        $this->productoEditado = $producto;
+
+        $this->template->item = $producto;
+
     }
 
     public function createComponentEditarProductosForm()
     {
-        $producto = $this->template->item;
+        $producto = $this->productoEditado;
+
         $form = (new ProductosFormFactory())->createEdit($producto->toArray());
 
         $form->onSuccess[] = [$this, 'onSuccessEditarProducto'];
@@ -86,9 +92,15 @@ class ProductosPresenter extends BaseAdminPresenter
     {
 
         try {
-            $producto = $this->template->item;
-            $producto->update((array)$values);
-            $this->flashMessage("Produco editado correctamente", "success");
+            $producto = $this->productoEditado;
+            $producto->nombre = $values->nombre;
+            $producto->categoria = $values->categoria;
+            $producto->stock = $values->cantidad;
+            $producto->unidad = $values->unidad;
+
+            $this->orm->persistAndFlush($producto);
+
+            $this->flashMessage("Producto editado correctamente", "success");
         } catch (\Exception $e) {
             $this->flashMessage("Error al editar", 'danger');
         }
@@ -99,10 +111,9 @@ class ProductosPresenter extends BaseAdminPresenter
     public function actionBorrar($id)
     {
         try {
-            if (!$producto = $this->getProductosModel()->findById($id)) {
+            if (!$producto = $this->orm->productos->findById($id)) {
                 throw new \Exception("producto no encontrado");
             };
-            $producto->delete();
             $this->flashMessage("Producto eliminado", "success");
         } catch (\Exception $e) {
             $this->flashMessage("Error al eliminar el producto, ¿Es una id válida?: " . $e->getMessage(), 'danger');

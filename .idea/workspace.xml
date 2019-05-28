@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0872e976-3663-4a73-a751-97f563c782c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AdminModule/Presenters/ProductosPresenter.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AdminModule/Presenters/ProductosPresenter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AdminModule/Presenters/templates/Productos/default.latte" beforeDir="false" afterPath="$PROJECT_DIR$/app/AdminModule/Presenters/templates/Productos/default.latte" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,11 +78,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="134" column="48" selection-start-line="134" selection-start-column="48" selection-end-line="134" selection-end-column="48" />
+            <state relative-caret-position="-735">
+              <caret line="71" column="61" lean-forward="true" selection-start-line="70" selection-start-column="8" selection-end-line="71" selection-end-column="61" />
+              <folding>
+                <element signature="e#47#73#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/ProductosPresenter.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="645">
+              <caret line="115" column="14" selection-start-line="115" selection-start-column="14" selection-end-line="115" selection-end-column="14" />
               <folding>
                 <element signature="e#47#73#0#PHP" expanded="true" />
               </folding>
@@ -90,10 +103,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/templates/Productos/default.latte">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="525">
+              <caret line="35" column="49" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Forms/ProductosFormFactory.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Presenters/HomepagePresenter.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="52" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="52" />
+            <state>
+              <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
               <folding>
                 <element signature="e#59#89#0#PHP" expanded="true" />
               </folding>
@@ -159,6 +190,8 @@
         <option value="$PROJECT_DIR$/app/Presenters/HomepagePresenter.php" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php" />
+        <option value="$PROJECT_DIR$/app/AdminModule/Presenters/templates/Productos/default.latte" />
+        <option value="$PROJECT_DIR$/app/AdminModule/Presenters/ProductosPresenter.php" />
       </list>
     </option>
   </component>
@@ -260,6 +293,21 @@
               <item name="proyecto" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="AdminModule" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Presenters" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="templates" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Productos" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="proyecto" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Forms" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="proyecto" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="$PROJECT_DIR$" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="app" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="Model" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
@@ -351,12 +399,12 @@
       <workItem from="1558544606343" duration="2033000" />
       <workItem from="1559054838900" duration="184000" />
       <workItem from="1559055071160" duration="1043000" />
-      <workItem from="1559066895062" duration="17700000" />
+      <workItem from="1559066895062" duration="18862000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26348000" />
+    <option name="totallyTimeSpent" value="27510000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1032" extended-state="0" />
@@ -378,7 +426,7 @@
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Messages" order="11" />
       <window_info anchor="bottom" id="Database Console" order="12" weight="0.32884398" />
-      <window_info anchor="right" id="Database" order="0" weight="0.32977587" />
+      <window_info anchor="right" id="Database" order="0" visible="true" weight="0.32977587" />
       <window_info anchor="right" id="Commander" order="1" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
@@ -392,20 +440,6 @@
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="true" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Presenters/templates/components/form.latte">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/templates/@layout.latte">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Presenters/templates/Sign/in.latte">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -422,7 +456,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/templates/Productos/default.latte" />
     <entry file="file://$PROJECT_DIR$/app/Model/database/MesasModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -727,18 +760,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Presenters/HomepagePresenter.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="52" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="52" />
+        <state>
+          <caret column="5" lean-forward="true" selection-start-column="5" selection-end-column="5" />
           <folding>
             <element signature="e#59#89#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php">
+    <entry file="file://$PROJECT_DIR$/app/Forms/ProductosFormFactory.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/templates/Productos/default.latte">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
-          <caret line="134" column="48" selection-start-line="134" selection-start-column="48" selection-end-line="134" selection-end-column="48" />
+          <caret line="35" column="49" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/PlatosPresenter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-735">
+          <caret line="71" column="61" lean-forward="true" selection-start-line="70" selection-start-column="8" selection-end-line="71" selection-end-column="61" />
+          <folding>
+            <element signature="e#47#73#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AdminModule/Presenters/ProductosPresenter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="115" column="14" selection-start-line="115" selection-start-column="14" selection-end-line="115" selection-end-column="14" />
           <folding>
             <element signature="e#47#73#0#PHP" expanded="true" />
           </folding>
