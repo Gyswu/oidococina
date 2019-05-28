@@ -5,8 +5,8 @@ namespace App\AdminModule\Presenters;
 
 use App\Forms\FormFactory;
 use App\Forms\PlatosFormFactory;
-use App\Model\Database\Entities\Plato;
-use App\Model\Database\Entities\PlatoProducto;
+use App\Model\Orm\Plato;
+use App\Model\Orm\Ingrediente;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
 use Nette\Database\Table\ActiveRow;
@@ -14,9 +14,12 @@ use Nette\Database\Table\ActiveRow;
 class PlatosPresenter extends BaseAdminPresenter
 {
 
+    /** @var $platoEditado Plato */
+    private $platoEditado;
+
     public function renderDefault(): void
     {
-        $this->template->platos = $this->getPlatosModel()->findAll();
+        $this->template->platos = $this->orm->platos->findAll();
     }
 
 
@@ -35,8 +38,7 @@ class PlatosPresenter extends BaseAdminPresenter
         $form->addSubmit('send', 'Añadir')
             ->setHtmlAttribute("class", 'btn btn-success');
 
-        $form->onSuccess[] = [$this, 'onSuccessMasPlatos'];//convención con la variable onSuccess y el nombre del formulario
-        //$form->addSelect('producto','Producto',$this->getPlatosModel()->findAllPairs("id","nombre"));
+        $form->onSuccess[] = [$this, 'onSuccessMasPlatos'];
         return $form;
 
     }
@@ -45,12 +47,13 @@ class PlatosPresenter extends BaseAdminPresenter
     public function onSuccessMasPlatos(Form $form, \stdClass $values): void
     {
 
-        $plato = new Plato();
-        $plato->nombre = $values->nombre;
-        $plato->precio = $values->precio;
 
         try {
-            $platoNuevo = $this->getPlatosModel()->newPlato($plato);
+            $plato = new Plato();
+            $plato->nombre = $values->nombre;
+            $plato->precio = $values->precio;
+//            $platoNuevo = $this->getPlatosModel()->newPlato($plato);
+            $this->orm->persistAndFlush($plato);
             $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
         } catch (\Exception $e) {
             $this->flashMessage($e->getMessage(), 'danger');
@@ -62,15 +65,17 @@ class PlatosPresenter extends BaseAdminPresenter
 
     public function actionEditar($id)
     {
-        $plato = $this->getPlatosModel()->findById($id);
+        $plato = $this->orm->platos->getById($id);
+        $this->platoEditado = $plato;
+        //
         $this->template->item = $plato;
-        $this->template->productos = $this->getPlatosModel()->getProductos($plato->toArray());
+        $this->template->ingredientes = $plato->ingredientes; //$this->getPlatosModel()->getProductos($plato->toArray());
     }
 
     public function createComponentEditarPlatoForm()
     {
-        $plato = $this->template->item;
-        $form = (new PlatosFormFactory())->createEdit($plato->toArray());
+
+        $form = (new PlatosFormFactory())->createEdit($this->platoEditado);
 
         $form->onSuccess[] = [$this, 'onSuccessEditarPlato'];//convención con la variable onSuccess y el nombre del formulario
 
@@ -81,8 +86,11 @@ class PlatosPresenter extends BaseAdminPresenter
     {
 
         try {
-            $plato = $this->template->item;
-            $plato->update((array)$values);
+            $plato = $this->platoEditado;
+            $plato->nombre = $values->nombre;
+
+
+            $this->orm->persistAndFlush($plato);
             $this->flashMessage("Producto editado correctamente", "success");
         } catch (\Exception $e) {
             $this->flashMessage("Error al editar", 'danger');
@@ -91,9 +99,48 @@ class PlatosPresenter extends BaseAdminPresenter
         $this->redirect("this");
     }
 
-    /**
-     * Para borrar un plato solo hace falta la id, encontrarlo, y si todo va bien borrarlo
-     */
+    public function createComponentMasPlatosProductosForm() {
+        $plato = $this->platoEditado->id;
+        $form = (new FormFactory())->create();
+        $form->addSelect('ingrediente','Ingrediente',$this->orm->productos->findAll()->fetchPairs('id', 'nombre'));
+        $form->addText('cantidad','Cantidad')
+          ->addRule(FORM::INTEGER, 'Debe ser un numero entero')
+          ->setRequired();
+        $form->addSubmit('send', 'Añadir')
+          ->setHtmlAttribute("class", 'btn btn-success');
+
+        $form->onSuccess[] = [$this, 'onSuccessMasPlatosProductos'];
+        return $form;
+    }
+
+    public function onSuccessMasPlatosProductos(Form $form, \stdClass $values): void
+    {
+
+        try {
+
+            $producto = $this->orm->productos->getById($values->ingrediente);
+
+            $ingrediente = new Ingrediente();
+            $ingrediente->cantidad = $values->cantidad;
+
+            $ingrediente->producto = $producto;
+
+            $ingredienteCreado = $this->orm->persist($ingrediente);
+
+            $plato = new Plato();
+            $plato = $this->platoEditado;
+
+            $plato->ingredientes->add($ingredienteCreado);
+
+            $this->orm->ingredientes->persistAndFlush($this->platoEditado);
+            $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
+        } catch (\Exception $e) {
+            $this->flashMessage($e->getMessage(), 'danger');
+        }
+
+        $this->redirect('this');
+
+    }
     public function actionBorrar($id)
     {
         try {
@@ -107,40 +154,6 @@ class PlatosPresenter extends BaseAdminPresenter
         }
 
         $this->redirect('default');
-    }
-
-    public function createComponentMasPlatosProductosForm() {
-        $form = (new FormFactory())->create();
-        $form->addSelect('producto','Producto',$this->getProductosModel()->findAllPairs("id","nombre"));
-        $form->addText('cantidad','Cantidad')
-          ->addRule(FORM::INTEGER, 'Debe ser un numero entero')
-          ->setRequired();
-        $form->addSubmit('send', 'Añadir')
-          ->setHtmlAttribute("class", 'btn btn-success');
-
-        $form->onSuccess[] = [$this, 'onSuccessMasPlatosProductos'];
-        return $form;
-    }
-    public function onSuccessMasPlatosProductos(Form $form, \stdClass $values): void
-    {
-        $plato = $this->template->item;
-
-        $platoproducto = new PlatoProducto();
-        $platoproducto->plato = $plato->id;
-        $platoproducto->producto = $values->producto;
-        $platoproducto->cantidad = $values->cantidad;
-
-        $newPlatoProducto = (array)$platoproducto;
-
-        try {
-            $platoproductoNuevo = $this->getPlatosModel()->newPlatoProducto($newPlatoProducto);
-            $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
-        } catch (\Exception $e) {
-            $this->flashMessage($e->getMessage(), 'danger');
-        }
-
-        $this->redirect('this');
-
     }
     public function actionBorrarProducto($id)
     {
@@ -156,5 +169,6 @@ class PlatosPresenter extends BaseAdminPresenter
 
         $this->redirect('default');
     }
+
 
 }

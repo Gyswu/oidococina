@@ -11,7 +11,7 @@ use Nextras\Orm\Relationships\ManyHasMany;
  * @property int         $id                {primary}
  * @property string      $nombre
  * @property string      $categoria
- * @property string      $cantidad
+ * @property string      $stock
  * @property string      $unidad
  */
 class Producto extends Entity {

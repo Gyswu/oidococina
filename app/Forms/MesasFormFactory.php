@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Forms;
 
+use App\Model\Orm\Mesa;
 use Nette;
 use Nette\Application\UI\Form;
 
@@ -25,10 +26,10 @@ final class MesasFormFactory
         return $form;
     }
 
-    public function createEdit(array $mesa){
+    public function createEdit(Mesa $mesa){
 
         $form = $this->create();
-        $form->setDefaults($mesa);
+        $form->setDefaults($mesa->toArray());
 
         return $form;
 

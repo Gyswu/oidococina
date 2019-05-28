@@ -11,16 +11,6 @@ use App\Model\Database\PlatosProductosModel;
 class BaseAdminPresenter extends \App\Presenters\BasePresenter
 {
 
-    /** @var MesasModel */
-    private $mesasModel;
-    /** @var PlatosModel */
-    private $platosModel;
-    /** @var ProductosModel */
-    private $productosModel;
-    /** @var PedidosModel */
-    private $pedidosModel;
-    /** @var PlatosProductosModel */
-    private $platosProductosModel;
 
     protected $redirectLogin = true;
 
@@ -40,31 +30,7 @@ class BaseAdminPresenter extends \App\Presenters\BasePresenter
 //     $this->productosModel = $productosModel;
 //    }
 
-    /**
-     * @return mixed
-     */
-    public function getMesasModel()
-    {
-        return $this->mesasModel;
-    }
 
-    public function getPlatosModel()
-    {
-        return $this->platosModel;
-    }
-
-    public function getProductosModel()
-    {
-      return $this->productosModel;
-    }
-    public function getPedidosModel()
-    {
-      return $this->pedidosModel;
-    }
-    public function getPlatosProductos()
-    {
-      return $this->platosProductosModel;
-    }
 
 
 }

@@ -15,7 +15,7 @@
           <div class="col">
 
             <table class="table">
-              {if $productos}
+              {if $ingredientes}
                 <thead class="thead-dark">
                   <tr>
                     <th>Nombre</th>
@@ -24,11 +24,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {foreach $productos as $producto}
+                  {foreach $ingredientes as $ingrediente}
                     <tr>
-                      <td>{$producto->nombre}</td>
-                      <td>{$producto->cantidad}
-                          {switch $producto->unidad}
+                      <td>{$ingrediente->producto->nombre}</td>
+                      <td>{$ingrediente->cantidad}
+                          {switch $ingrediente->producto->unidad}
                               {case num}
                               Unidades
                               {case gr}
@@ -36,7 +36,7 @@
                               {case ml}
                               Mililitros
                           {/switch}</td>
-                      <td><a n:href="Platos:borrarProducto $producto->id" class="btn btn-xs btn-danger del">Borrar</a></td>
+                      <td><a n:href="Platos:borrarProducto $ingrediente->id" class="btn btn-xs btn-danger del">Borrar</a></td>
                     </tr>
                   {/foreach}
                 {else}

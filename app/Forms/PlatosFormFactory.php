@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Forms;
 
+use App\Model\Orm\Plato;
 use Nette;
 use Nette\Application\UI\Form;
 
@@ -29,10 +30,10 @@ final class PlatosFormFactory
         return $form;
     }
 
-    public function createEdit(array $plato){
+    public function createEdit(Plato $plato){
 
         $form = $this->create();
-        $form->setDefaults($plato);
+        $form->setDefaults($plato->toArray());
 
         return $form;
 

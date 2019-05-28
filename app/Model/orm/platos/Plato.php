@@ -11,7 +11,6 @@ use Nextras\Orm\Relationships\ManyHasMany;
  * @property int                       $id             {primary}
  * @property string                    $nombre
  * @property float                     $precio
- * @property boolean                   $disponible
  * @property ManyHasMany|Ingrediente[] $ingredientes   {m:m Ingrediente::$platos , isMain=true}
  */
 class Plato extends Entity {
