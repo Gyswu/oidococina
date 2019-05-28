@@ -27,7 +27,15 @@
                   {foreach $productos as $producto}
                     <tr>
                       <td>{$producto->nombre}</td>
-                      <td>{$producto->cantidad}</td>
+                      <td>{$producto->cantidad}
+                          {switch $producto->unidad}
+                              {case num}
+                              Unidades
+                              {case gr}
+                              Gramos
+                              {case ml}
+                              Mililitros
+                          {/switch}</td>
                       <td><a n:href="Platos:borrarProducto $producto->id" class="btn btn-xs btn-danger del">Borrar</a></td>
                     </tr>
                   {/foreach}

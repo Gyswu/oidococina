@@ -51,7 +51,7 @@ class PlatosModel extends BaseModel
     public function getProductos(array $plato)
     {
       //dd($plato);
-      return $this->getDb()->query("SELECT p.* FROM Productos p
+      return $this->getDb()->query("SELECT p.id, p.nombre, pp.cantidad, p.unidad  FROM Productos p
       join PlatosProductos pp ON p.id = pp.producto AND
       pp.plato = ?",$plato["id"]);
     }
