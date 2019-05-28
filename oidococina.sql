@@ -11,11 +11,29 @@
  Target Server Version : 100137
  File Encoding         : 65001
 
- Date: 24/05/2019 19:40:22
+ Date: 28/05/2019 20:04:22
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for Ingredientes
+-- ----------------------------
+DROP TABLE IF EXISTS `Ingredientes`;
+CREATE TABLE `Ingredientes`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `producto_id` int(11) NOT NULL,
+  `cantidad` int(5) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `product_id`(`producto_id`) USING BTREE,
+  CONSTRAINT `Ingredientes_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `Productos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of Ingredientes
+-- ----------------------------
+INSERT INTO `Ingredientes` VALUES (1, 1, 5);
 
 -- ----------------------------
 -- Table structure for MesaPedidos
@@ -82,12 +100,13 @@ CREATE TABLE `Platos`  (
   `disponible` int(1) NULL DEFAULT 1,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `nombre`(`nombre`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of Platos
 -- ----------------------------
-INSERT INTO `Platos` VALUES (1, 'Judías con chorizo', 22.00, NULL);
+INSERT INTO `Platos` VALUES (1, 'Judías con chorizo', 23.00, NULL);
+INSERT INTO `Platos` VALUES (2, 'Callos a la madrileña', 150.00, NULL);
 
 -- ----------------------------
 -- Table structure for PlatosProductos
@@ -116,6 +135,11 @@ CREATE TABLE `Productos`  (
   `cantidad` int(11) NULL DEFAULT NULL,
   `unidad` enum('num','ml','gr') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of Productos
+-- ----------------------------
+INSERT INTO `Productos` VALUES (1, 'Judías', 'conservas', 250, 'num');
 
 SET FOREIGN_KEY_CHECKS = 1;
