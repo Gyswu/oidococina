@@ -13,6 +13,25 @@ class ComposerStaticInitcaabacc4c29ac751cfa2bec62d901d23
         'a1d067aa2e53d6b47171c03cfc0ea5be' => __DIR__ . '/..' . '/nette/safe-stream/src/loader.php',
     );
 
+    public static $prefixLengthsPsr4 = array (
+        'N' => 
+        array (
+            'Nextras\\Orm\\' => 12,
+            'Nextras\\Dbal\\' => 13,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Nextras\\Orm\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nextras/orm/src',
+        ),
+        'Nextras\\Dbal\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nextras/dbal/src',
+        ),
+    );
+
     public static $classMap = array (
         'App\\Booting' => __DIR__ . '/../..' . '/app/Booting.php',
         'Latte\\CompileException' => __DIR__ . '/..' . '/latte/latte/src/Latte/exceptions.php',
@@ -327,6 +346,10 @@ class ComposerStaticInitcaabacc4c29ac751cfa2bec62d901d23
         'Nette\\Security\\User' => __DIR__ . '/..' . '/nette/security/src/Security/User.php',
         'Nette\\SmartObject' => __DIR__ . '/..' . '/nette/utils/src/Utils/SmartObject.php',
         'Nette\\StaticClass' => __DIR__ . '/..' . '/nette/utils/src/Utils/StaticClass.php',
+        'Nette\\Tokenizer\\Exception' => __DIR__ . '/..' . '/nette/tokenizer/src/Tokenizer/Exception.php',
+        'Nette\\Tokenizer\\Stream' => __DIR__ . '/..' . '/nette/tokenizer/src/Tokenizer/Stream.php',
+        'Nette\\Tokenizer\\Token' => __DIR__ . '/..' . '/nette/tokenizer/src/Tokenizer/Token.php',
+        'Nette\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/nette/tokenizer/src/Tokenizer/Tokenizer.php',
         'Nette\\UnexpectedValueException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\ArrayHash' => __DIR__ . '/..' . '/nette/utils/src/Utils/ArrayHash.php',
         'Nette\\Utils\\ArrayList' => __DIR__ . '/..' . '/nette/utils/src/Utils/ArrayList.php',
@@ -349,8 +372,33 @@ class ComposerStaticInitcaabacc4c29ac751cfa2bec62d901d23
         'Nette\\Utils\\Reflection' => __DIR__ . '/..' . '/nette/utils/src/Utils/Reflection.php',
         'Nette\\Utils\\RegexpException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Strings' => __DIR__ . '/..' . '/nette/utils/src/Utils/Strings.php',
+        'Nette\\Utils\\TokenIterator' => __DIR__ . '/..' . '/nette/tokenizer/src/Utils/TokenIterator.php',
+        'Nette\\Utils\\Tokenizer' => __DIR__ . '/..' . '/nette/tokenizer/src/Utils/Tokenizer.php',
+        'Nette\\Utils\\TokenizerException' => __DIR__ . '/..' . '/nette/tokenizer/src/Utils/TokenizerException.php',
         'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',
+        'Nextras\\Dbal\\ConnectionException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\ConstraintViolationException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\DriverException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\ForeignKeyConstraintViolationException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\IOException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\InvalidArgumentException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\InvalidStateException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\NotImplementedException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\NotNullConstraintViolationException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\NotSupportedException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\QueryException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Dbal\\UniqueConstraintViolationException' => __DIR__ . '/..' . '/nextras/dbal/src/exceptions.php',
+        'Nextras\\Orm\\IOException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
+        'Nextras\\Orm\\InvalidArgumentException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
+        'Nextras\\Orm\\InvalidModifierDefinitionException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
+        'Nextras\\Orm\\InvalidStateException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
+        'Nextras\\Orm\\LogicException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
+        'Nextras\\Orm\\MemberAccessException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
+        'Nextras\\Orm\\NotImplementedException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
+        'Nextras\\Orm\\NotSupportedException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
+        'Nextras\\Orm\\NullValueException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
+        'Nextras\\Orm\\RuntimeException' => __DIR__ . '/..' . '/nextras/orm/src/exceptions.php',
         'Tester\\Assert' => __DIR__ . '/..' . '/nette/tester/src/Framework/Assert.php',
         'Tester\\AssertException' => __DIR__ . '/..' . '/nette/tester/src/Framework/AssertException.php',
         'Tester\\CodeCoverage\\Collector' => __DIR__ . '/..' . '/nette/tester/src/CodeCoverage/Collector.php',
@@ -404,6 +452,8 @@ class ComposerStaticInitcaabacc4c29ac751cfa2bec62d901d23
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcaabacc4c29ac751cfa2bec62d901d23::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcaabacc4c29ac751cfa2bec62d901d23::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInitcaabacc4c29ac751cfa2bec62d901d23::$classMap;
 
         }, null, ClassLoader::class);

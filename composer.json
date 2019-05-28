@@ -32,7 +32,8 @@
 		"latte/latte": "^2.5",
 		"tracy/tracy": "^2.6",
 		"dg/adminer-custom": "^1.8",
-		"tomaj/nette-bootstrap-form": "^2.0"
+		"tomaj/nette-bootstrap-form": "^2.0",
+		"nextras/orm": "^3.1"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0"

@@ -24,18 +24,18 @@ final class UserManager implements Nette\Security\IAuthenticator
 		COLUMN_ROLE = 'role';
 
 
-	/** @var Nette\Database\Context */
+	/** @var Nette\Database\Context @inject */
 	private $database;
 
 	/** @var Passwords */
 	private $passwords;
 
 
-	public function __construct(Nette\Database\Context $database, Passwords $passwords)
-	{
-		$this->database = $database;
-		$this->passwords = $passwords;
-	}
+//	public function __construct(Nette\Database\Context $database, Passwords $passwords)
+//	{
+//		$this->database = $database;
+//		$this->passwords = $passwords;
+//	}
 
 
 	/**

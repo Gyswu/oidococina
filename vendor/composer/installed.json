@@ -1326,6 +1326,63 @@
         ]
     },
     {
+        "name": "nette/tokenizer",
+        "version": "v3.0.0",
+        "version_normalized": "3.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nette/tokenizer.git",
+            "reference": "6d0965ac60333dab53f2588977c2067b4d5ad245"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nette/tokenizer/zipball/6d0965ac60333dab53f2588977c2067b4d5ad245",
+            "reference": "6d0965ac60333dab53f2588977c2067b4d5ad245",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.1"
+        },
+        "conflict": {
+            "nette/nette": "<2.2"
+        },
+        "require-dev": {
+            "nette/tester": "~2.0",
+            "tracy/tracy": "^2.3"
+        },
+        "time": "2019-02-06T00:22:59+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-3-Clause",
+            "GPL-2.0",
+            "GPL-3.0"
+        ],
+        "authors": [
+            {
+                "name": "David Grudl",
+                "homepage": "https://davidgrudl.com"
+            },
+            {
+                "name": "Nette Community",
+                "homepage": "https://nette.org/contributors"
+            }
+        ],
+        "description": "Nette Tokenizer",
+        "homepage": "https://nette.org"
+    },
+    {
         "name": "nette/utils",
         "version": "v3.0.1",
         "version_normalized": "3.0.1.0",
@@ -1401,6 +1458,137 @@
             "utf-8",
             "utility",
             "validation"
+        ]
+    },
+    {
+        "name": "nextras/dbal",
+        "version": "v3.1.0",
+        "version_normalized": "3.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nextras/dbal.git",
+            "reference": "1da35388a665e94d2bc552482d541f2923fafa5a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nextras/dbal/zipball/1da35388a665e94d2bc552482d541f2923fafa5a",
+            "reference": "1da35388a665e94d2bc552482d541f2923fafa5a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.1"
+        },
+        "require-dev": {
+            "mockery/mockery": "~1.2",
+            "nette/caching": "~2.5 || ~3.0@rc",
+            "nette/di": "~2.4 >=2.4.10 || ~3.0@beta",
+            "nette/finder": "~2.5 || ~3.0@rc",
+            "nette/neon": "~2.4 || ~3.0@rc",
+            "nette/tester": "~2.1",
+            "nette/utils": "~2.5 || ~3.0@rc",
+            "phpstan/phpstan-shim": "0.11.1",
+            "tracy/tracy": "~2.4 || ~3.0@dev"
+        },
+        "time": "2019-02-11T08:58:28+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Nextras\\Dbal\\": "src/"
+            },
+            "classmap": [
+                "src/exceptions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nextras Project",
+                "homepage": "https://github.com/nextras/dbal/graphs/contributors"
+            }
+        ],
+        "description": "Nextras database abstraction layer",
+        "homepage": "https://github.com/nextras/dbal",
+        "keywords": [
+            "database",
+            "dbal",
+            "nextras"
+        ]
+    },
+    {
+        "name": "nextras/orm",
+        "version": "v3.1.0",
+        "version_normalized": "3.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nextras/orm.git",
+            "reference": "f1aae3318765ded805bbc1b859cf4d8e0b5ea676"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nextras/orm/zipball/f1aae3318765ded805bbc1b859cf4d8e0b5ea676",
+            "reference": "f1aae3318765ded805bbc1b859cf4d8e0b5ea676",
+            "shasum": ""
+        },
+        "require": {
+            "nette/caching": "~2.5 || ~3.0@rc",
+            "nette/tokenizer": "~2.3 || ~3.0@rc",
+            "nette/utils": "~2.5 || ~3.0@rc",
+            "nextras/dbal": "~3.0 || ~3.1@dev",
+            "php": ">=7.1"
+        },
+        "require-dev": {
+            "marc-mabe/php-enum": "~3.0",
+            "mockery/mockery": "~1.2",
+            "nette/bootstrap": "~2.4 || ~3.0@rc",
+            "nette/di": "~2.4 >=2.4.10 || ~3.0@beta",
+            "nette/finder": "~2.4 || ~3.0@rc",
+            "nette/neon": "~2.4 || ~3.0@rc",
+            "nette/tester": "~2.1",
+            "phpstan/phpstan-nette": "0.11",
+            "phpstan/phpstan-shim": "0.11.1",
+            "tracy/tracy": "~2.3"
+        },
+        "time": "2019-02-04T12:15:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.1-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Nextras\\Orm\\": "src/"
+            },
+            "classmap": [
+                "src/exceptions.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nextras Project",
+                "homepage": "https://github.com/nextras/orm/graphs/contributors"
+            }
+        ],
+        "description": "Nextras Orm framework",
+        "homepage": "https://github.com/nextras/orm",
+        "keywords": [
+            "database",
+            "nextras",
+            "orm"
         ]
     },
     {

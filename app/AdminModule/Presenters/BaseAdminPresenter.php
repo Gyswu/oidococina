@@ -25,14 +25,14 @@ class BaseAdminPresenter extends \App\Presenters\BasePresenter
 //        }
     }
 
-
-    public function injectModels(
-      MesasModel $mesasModel, PlatosModel $platosModel, ProductosModel $productosModel
-    ){
-     $this->mesasModel = $mesasModel;
-     $this->platosModel = $platosModel;
-     $this->productosModel = $productosModel;
-    }
+//
+//    public function injectModels(
+//      MesasModel $mesasModel, PlatosModel $platosModel, ProductosModel $productosModel
+//    ){
+//     $this->mesasModel = $mesasModel;
+//     $this->platosModel = $platosModel;
+//     $this->productosModel = $productosModel;
+//    }
 
     /**
      * @return mixed

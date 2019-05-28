@@ -1,0 +1,6 @@
+dbal:
+    driver: mysqli
+    host: 127.0.0.1
+    database: oidococina
+    username: root
+    password: root
