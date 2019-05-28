@@ -55,6 +55,8 @@ class PlatosModel extends BaseModel
       join PlatosProductos pp ON p.id = pp.producto AND
       pp.plato = ?",$plato["id"]);
     }
+
+
     public function newPlatoProducto(array $newPlatoProducto){
       return $this->getDb()->table('PlatosProductos')->insert($newPlatoProducto);
     }
