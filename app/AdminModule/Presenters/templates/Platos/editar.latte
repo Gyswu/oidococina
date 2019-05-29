@@ -36,7 +36,8 @@
                               {case ml}
                               Mililitros
                           {/switch}</td>
-                      <td><a n:href="Platos:borrarProducto $ingrediente->id" class="btn btn-xs btn-danger del">Borrar</a></td>
+                      <td><a n:href="Platos:borrarIngrediente $ingrediente->id" class="btn btn-xs
+                       btn-danger del">Borrar</a></td>
                     </tr>
                   {/foreach}
                 {else}
@@ -50,13 +51,9 @@
         </div>
         <div class="row">
           <div class="col">
-              {control masPlatosProductosForm}
+              {control masIngredientesForm}
           </div>
         </div>
     </div>
 
 {/block}
-
-
-
-Mesas(ocupada)->Listado de platos(añadir)(Añadir con variacion)/estado productos mesa(estado)

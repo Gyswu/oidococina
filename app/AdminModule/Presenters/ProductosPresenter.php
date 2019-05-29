@@ -112,7 +112,7 @@ class ProductosPresenter extends BaseAdminPresenter
     {
         try {
             if (!$producto = $this->orm->productos->findById($id)) {
-                throw new \Exception("producto no encontrado");
+                $this->flashMessage("producto no encontrado", "Danger");
             };
             $this->flashMessage("Producto eliminado", "success");
         } catch (\Exception $e) {

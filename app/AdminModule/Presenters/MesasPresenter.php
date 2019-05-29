@@ -94,8 +94,8 @@ class MesasPresenter extends BaseAdminPresenter
     public function actionBorrar($id)
     {
         try {
-            if (!$plato = $this->getMesasModel()->findById($id)) {
-                throw new \Exception("mesa no encontrada");
+            if (!$plato = $this->orm->mesas->findById($id)) {
+                $this->flashMessage("La mesa no existe", "danger");
             };
             $this->orm->mesas->remove($id);
             $this->flashMessage("Mesa eliminado", "success");
