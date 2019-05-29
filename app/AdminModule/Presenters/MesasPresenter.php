@@ -50,7 +50,7 @@ class MesasPresenter extends BaseAdminPresenter
             $mesaNueva = $this->orm->mesas->persistAndFlush($mesa);
             $this->flashMessage('La mesa ha sido añadido a la base de datos', 'success');
         } catch (\Exception $e) {
-            $this->flashMessage($e->getMessage(), 'danger');
+            $this->flashMessage("Error: ".$e->getMessage(), 'danger');
         }
 
         $this->redirect('this');

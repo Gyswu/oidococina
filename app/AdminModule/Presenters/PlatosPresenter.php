@@ -56,7 +56,7 @@ class PlatosPresenter extends BaseAdminPresenter
             $this->orm->persistAndFlush($plato);
             $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
         } catch (\Exception $e) {
-            $this->flashMessage($e->getMessage(), 'danger');
+            $this->flashMessage("Error: ".$e->getMessage(), 'danger');
         }
 
         $this->redirect('this');
@@ -133,7 +133,7 @@ class PlatosPresenter extends BaseAdminPresenter
             $this->orm->persistAndFlush($this->platoEditado);
             $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
         } catch (\Exception $e) {
-            $this->flashMessage($e->getMessage(), 'danger');
+            $this->flashMessage("Error: ".$e->getMessage(), 'danger');
         }
 
         $this->redirect('this');

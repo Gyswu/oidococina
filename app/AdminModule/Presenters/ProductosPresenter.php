@@ -61,7 +61,7 @@ class ProductosPresenter extends BaseAdminPresenter
             $this->orm->persistAndFlush($producto);
             $this->flashMessage('El producto ha sido añadido a la base de datos', 'success');
         } catch (\Exception $e) {
-            $this->flashMessage($e->getMessage(), 'danger');
+            $this->flashMessage("Error: ".$e->getMessage(), 'danger');
         }
 
         $this->redirect('this');
