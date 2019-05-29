@@ -1,5 +1,6 @@
 app/config/local.neon
 .idea
+.idea/
 
 # Created by https://www.gitignore.io/api/intellij
 
