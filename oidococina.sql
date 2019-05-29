@@ -1,8 +1,8 @@
--- MySQL dump 10.15  Distrib 10.0.24-MariaDB, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.16  Distrib 10.1.38-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: oidococina
 -- ------------------------------------------------------
--- Server version	10.0.24-MariaDB-7
+-- Server version	10.1.38-MariaDB-0ubuntu0.18.04.2
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Ingredientes`
+--
+
+DROP TABLE IF EXISTS `Ingredientes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Ingredientes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `producto_id` int(11) NOT NULL,
+  `cantidad` int(5) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `product_id` (`producto_id`) USING BTREE,
+  CONSTRAINT `Ingredientes_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `Productos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Ingredientes`
+--
+
+LOCK TABLES `Ingredientes` WRITE;
+/*!40000 ALTER TABLE `Ingredientes` DISABLE KEYS */;
+INSERT INTO `Ingredientes` VALUES (33,1,45),(34,1,76),(35,2,67);
+/*!40000 ALTER TABLE `Ingredientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Menus`
 --
 
@@ -27,7 +54,7 @@ CREATE TABLE `Menus` (
   `nombre` varchar(256) NOT NULL,
   `precio` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,65 +63,35 @@ CREATE TABLE `Menus` (
 
 LOCK TABLES `Menus` WRITE;
 /*!40000 ALTER TABLE `Menus` DISABLE KEYS */;
+INSERT INTO `Menus` VALUES (1,'Menu del dia',10);
 /*!40000 ALTER TABLE `Menus` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `MenusPlatos`
+-- Table structure for table `Menus_x_Platos`
 --
 
-DROP TABLE IF EXISTS `MenusPlatos`;
+DROP TABLE IF EXISTS `Menus_x_Platos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `MenusPlatos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `menu` int(11) NOT NULL,
-  `plato` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `plato` (`plato`),
-  KEY `menu` (`menu`),
-  CONSTRAINT `MenusPlatos_ibfk_3` FOREIGN KEY (`plato`) REFERENCES `Platos` (`id`),
-  CONSTRAINT `MenusPlatos_ibfk_4` FOREIGN KEY (`menu`) REFERENCES `Menus` (`id`)
+CREATE TABLE `Menus_x_Platos` (
+  `menu_id` int(11) NOT NULL,
+  `plato_id` int(11) NOT NULL,
+  PRIMARY KEY (`plato_id`,`menu_id`),
+  KEY `Menus_x_Platos_Menus_id_fk` (`menu_id`),
+  CONSTRAINT `Menus_x_Platos_Menus_id_fk` FOREIGN KEY (`menu_id`) REFERENCES `Menus` (`id`),
+  CONSTRAINT `Menus_x_Platos_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `MenusPlatos`
+-- Dumping data for table `Menus_x_Platos`
 --
 
-LOCK TABLES `MenusPlatos` WRITE;
-/*!40000 ALTER TABLE `MenusPlatos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `MenusPlatos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `MesaPedidos`
---
-
-DROP TABLE IF EXISTS `MesaPedidos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `MesaPedidos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mesa` int(11) DEFAULT NULL,
-  `pedido` int(11) DEFAULT NULL,
-  `creado` datetime DEFAULT NULL,
-  `actualizado` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `mesa` (`mesa`) USING BTREE,
-  KEY `pedido` (`pedido`) USING BTREE,
-  CONSTRAINT `MesaPedidos_ibfk_1` FOREIGN KEY (`mesa`) REFERENCES `Mesas` (`id`),
-  CONSTRAINT `MesaPedidos_ibfk_2` FOREIGN KEY (`pedido`) REFERENCES `Pedidos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `MesaPedidos`
---
-
-LOCK TABLES `MesaPedidos` WRITE;
-/*!40000 ALTER TABLE `MesaPedidos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `MesaPedidos` ENABLE KEYS */;
+LOCK TABLES `Menus_x_Platos` WRITE;
+/*!40000 ALTER TABLE `Menus_x_Platos` DISABLE KEYS */;
+INSERT INTO `Menus_x_Platos` VALUES (1,1);
+/*!40000 ALTER TABLE `Menus_x_Platos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -108,7 +105,7 @@ CREATE TABLE `Mesas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,36 +114,8 @@ CREATE TABLE `Mesas` (
 
 LOCK TABLES `Mesas` WRITE;
 /*!40000 ALTER TABLE `Mesas` DISABLE KEYS */;
+INSERT INTO `Mesas` VALUES (4,'Interior 1'),(5,'Interior 2'),(6,'Interior 3');
 /*!40000 ALTER TABLE `Mesas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `PedidoVariaciones`
---
-
-DROP TABLE IF EXISTS `PedidoVariaciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `PedidoVariaciones` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pedido` int(11) DEFAULT NULL,
-  `producto` int(11) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `pedido` (`pedido`) USING BTREE,
-  KEY `producto` (`producto`) USING BTREE,
-  CONSTRAINT `PedidoVariaciones_ibfk_1` FOREIGN KEY (`pedido`) REFERENCES `Pedidos` (`id`),
-  CONSTRAINT `PedidoVariaciones_ibfk_2` FOREIGN KEY (`producto`) REFERENCES `Productos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `PedidoVariaciones`
---
-
-LOCK TABLES `PedidoVariaciones` WRITE;
-/*!40000 ALTER TABLE `PedidoVariaciones` DISABLE KEYS */;
-/*!40000 ALTER TABLE `PedidoVariaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -158,9 +127,14 @@ DROP TABLE IF EXISTS `Pedidos`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Pedidos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `plato` varchar(255) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
+  `mesa_id` int(11) NOT NULL,
+  `plato_id` int(11) NOT NULL,
+  `estado` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `Pedidos_Mesas_id_fk` (`mesa_id`),
+  KEY `Pedidos_Platos_id_fk` (`plato_id`),
+  CONSTRAINT `Pedidos_Mesas_id_fk` FOREIGN KEY (`mesa_id`) REFERENCES `Mesas` (`id`),
+  CONSTRAINT `Pedidos_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -187,7 +161,7 @@ CREATE TABLE `Platos` (
   `disponible` int(1) DEFAULT '1',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `nombre` (`nombre`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,38 +170,35 @@ CREATE TABLE `Platos` (
 
 LOCK TABLES `Platos` WRITE;
 /*!40000 ALTER TABLE `Platos` DISABLE KEYS */;
-INSERT INTO `Platos` VALUES (1,'Judías con chorizo',22.00,NULL);
+INSERT INTO `Platos` VALUES (1,'Judías con chorizo',23.00,NULL),(2,'Callos a la madrileña',150.00,NULL),(3,'Tortilla',2.50,1);
 /*!40000 ALTER TABLE `Platos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `PlatosProductos`
+-- Table structure for table `Platos_x_Ingredientes`
 --
 
-DROP TABLE IF EXISTS `PlatosProductos`;
+DROP TABLE IF EXISTS `Platos_x_Ingredientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `PlatosProductos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `plato` int(11) NOT NULL,
-  `producto` int(11) NOT NULL,
-  `cantidad` int(3) DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  KEY `producto` (`producto`) USING BTREE,
-  KEY `plato` (`plato`) USING BTREE,
-  CONSTRAINT `PlatosProductos_ibfk_1` FOREIGN KEY (`producto`) REFERENCES `Productos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `PlatosProductos_ibfk_2` FOREIGN KEY (`plato`) REFERENCES `Platos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+CREATE TABLE `Platos_x_Ingredientes` (
+  `plato_id` int(11) NOT NULL,
+  `ingrediente_id` int(11) NOT NULL,
+  PRIMARY KEY (`plato_id`,`ingrediente_id`),
+  KEY `Platos_x_Ingredientes_Ingredientes_id_fk` (`ingrediente_id`),
+  CONSTRAINT `Platos_x_Ingredientes_Ingredientes_id_fk` FOREIGN KEY (`ingrediente_id`) REFERENCES `Ingredientes` (`id`),
+  CONSTRAINT `Platos_x_Ingredientes_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `PlatosProductos`
+-- Dumping data for table `Platos_x_Ingredientes`
 --
 
-LOCK TABLES `PlatosProductos` WRITE;
-/*!40000 ALTER TABLE `PlatosProductos` DISABLE KEYS */;
-INSERT INTO `PlatosProductos` VALUES (1,1,1,50);
-/*!40000 ALTER TABLE `PlatosProductos` ENABLE KEYS */;
+LOCK TABLES `Platos_x_Ingredientes` WRITE;
+/*!40000 ALTER TABLE `Platos_x_Ingredientes` DISABLE KEYS */;
+INSERT INTO `Platos_x_Ingredientes` VALUES (1,33),(1,34),(1,35);
+/*!40000 ALTER TABLE `Platos_x_Ingredientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -241,10 +212,10 @@ CREATE TABLE `Productos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   `categoria` varchar(255) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
   `unidad` enum('num','ml','gr') DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -253,7 +224,7 @@ CREATE TABLE `Productos` (
 
 LOCK TABLES `Productos` WRITE;
 /*!40000 ALTER TABLE `Productos` DISABLE KEYS */;
-INSERT INTO `Productos` VALUES (1,'Judias','',10000,'gr'),(2,'Patatas','',50000,'gr');
+INSERT INTO `Productos` VALUES (1,'Judías','conservas',250,'num'),(2,'huevo','frescos',10,'num'),(3,'das','ca',500,'num');
 /*!40000 ALTER TABLE `Productos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -266,4 +237,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-28 17:44:35
+-- Dump completed on 2019-05-30  0:29:32
