@@ -1,0 +1,49 @@
+{block content}                            <a n:href="Mesas:pedir $mesa->id" class="btn btn-xs
+                            btn-primary">Pedir</a>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Listado de mesas</h2>
+            </div>
+        </div>
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $mesas as $mesa}
+                    <tr>
+                        <td>
+                            {$mesa->nombre}
+                        </td>
+                        <td>
+                            {if $mesa->estado}
+                                Ocupada
+                            {else}
+                                Libre
+                            {/if}
+                        </td>
+                        <td>
+                            <a n:href="Mesas:pedir $mesa->id" class="btn btn-xs
+                            btn-primary">Pedir</a>
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{/block}

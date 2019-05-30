@@ -13,6 +13,7 @@ use Nextras\Orm\Relationships\ManyHasMany;
  * @property float                     $precio
  * @property ManyHasMany|Ingrediente[] $ingredientes   {m:m Ingrediente::$platos , isMain=true}
  * @property ManyHasMany|Menu[]        $menus          {m:m Menu::$platos}
+ * @property ManyHasMany|Pedido[]      $pedido         {m:m Pedido::$plato}
  */
 class Plato extends Entity {
 

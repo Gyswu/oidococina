@@ -17,6 +17,7 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Opciones</th>
+                    <th>Estado</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,6 +28,14 @@
                         </td>
                         <td>
                             {$mesa->nombre}
+                        </td>
+                        <td>
+                            {switch->estado}
+                                {case 0}
+                                Vacia
+                                {case 1}
+                                Ocupada
+                            {/switch}
                         </td>
                         <td align="center">
                             <a n:href="Mesas:editar $mesa->id"
