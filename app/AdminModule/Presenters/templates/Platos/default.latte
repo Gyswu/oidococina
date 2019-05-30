@@ -14,34 +14,35 @@
                 {if $platos}
                 <thead class="thead-dark">
                 <tr>
-                    {foreach reset($platos) as $columna => $valor}
-                        <th>{$columna}</th>
-                    {/foreach}
-                    <th></th>
+
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                    {foreach $platos as $plato}
-                        <tr>
-                            <td>
-                                {$plato->id}
-                            </td>
-                            <td>
-                                {$plato->nombre}
-                            </td>
-                            <td>
-                                {$plato->precio}€
-                            </td>
-                            <td align="center">
-                                <a n:href="Platos:editar $plato->id" class="btn btn-xs btn-primary">Editar</a>
-                                <a n:href="Platos:borrar $plato->id" class="btn btn-xs btn-danger del">Borrar</a>
-                            </td>
-                        </tr>
-                    {/foreach}
-                {else}
+                {foreach $platos as $plato}
                     <tr>
-                        <td> No hay ningún plato disponible</td>
+                        <td>
+                            {$plato->id}
+                        </td>
+                        <td>
+                            {$plato->nombre}
+                        </td>
+                        <td>
+                            {$plato->precio}€
+                        </td>
+                        <td align="center">
+                            <a n:href="Platos:editar $plato->id" class="btn btn-xs btn-primary">Editar</a>
+                            <a n:href="Platos:borrar $plato->id" class="btn btn-xs btn-danger del">Borrar</a>
+                        </td>
                     </tr>
+                {/foreach}
+                {else}
+                <tr>
+                    <td> No hay ningún plato disponible</td>
+                </tr>
                 {/if}
                 </tbody>
             </table>

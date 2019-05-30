@@ -3,16 +3,14 @@
 namespace App\Model\Orm;
 
 use Nextras\Orm\Entity\Entity;
-use Nextras\Orm\Relationships\ManyHasMany;
 
 /**
- * Plato
+ * Mesa
  *
- * @property int $id             {primary}
+ * @property int    $id             {primary}
  * @property string $nombre
  */
-class Mesa extends Entity
-{
+class Mesa extends Entity {
 
 //    public function getterComments()
 //    {

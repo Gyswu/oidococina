@@ -14,47 +14,51 @@
                 {if $productos}
                 <thead class="thead-dark">
                 <tr>
-                    {foreach reset($productos) as $columna => $valor}
-                        <th>{$columna}</th>
-                    {/foreach}
-                    <th></th>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Categoria</th>
+                    <th>Stock</th>
+                    <th>Unidad</th>
+                    <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                    {foreach $productos as $producto}
-                        <tr>
-                            <td>
-                                {$producto->id}
-                            </td>
-                            <td>
-                                {$producto->nombre}
-                            </td>
-                            <td>
-                                {$producto->categoria}
-                            </td>
-                            <td>
-                                {$producto->stock}
-                            </td>
-                            <td>
-                              {switch $producto->unidad}
-                                {case num}
-                                  Unidades
-                                {case gr}
-                                  Gramos
-                                {case ml}
-                                  Mililitros
-                              {/switch}
-                            </td>
-                            <td align="center">
-                                <a n:href="Productos:editar $producto->id" class="btn btn-xs btn-primary">Editar</a>
-                                <a n:href="Productos:borrar $producto->id" class="btn btn-xs btn-danger del">Borrar</a>
-                            </td>
-                        </tr>
-                    {/foreach}
-                {else}
+                {foreach $productos as $producto}
                     <tr>
-                        <td> No hay ningun producto existente</td>
+                        <td>
+                            {$producto->id}
+                        </td>
+                        <td>
+                            {$producto->nombre}
+                        </td>
+                        <td>
+                            {$producto->categoria}
+                        </td>
+                        <td>
+                            {$producto->stock}
+                        </td>
+                        <td>
+                            {switch $producto->unidad}
+                                {case num}
+                                Unidades
+                                {case gr}
+                                Gramos
+                                {case ml}
+                                Mililitros
+                            {/switch}
+                        </td>
+                        <td align="center">
+                            <a n:href="Productos:editar $producto->id"
+                                    class="btn btn-xs btn-primary">Editar</a>
+                            <a n:href="Productos:borrar $producto->id"
+                                    class="btn btn-xs btn-danger del">Borrar</a>
+                        </td>
                     </tr>
+                {/foreach}
+                {else}
+                <tr>
+                    <td> No hay ningun producto existente</td>
+                </tr>
                 {/if}
                 </tbody>
             </table>

@@ -40,7 +40,6 @@ class PlatosPresenter extends BaseAdminPresenter {
             $plato = new Plato();
             $plato->nombre = $values->nombre;
             $plato->precio = $values->precio;
-//            $platoNuevo = $this->getPlatosModel()->newPlato($plato);
             $this->orm->persistAndFlush($plato);
             $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
         } catch( \Exception $e ) {
@@ -54,7 +53,7 @@ class PlatosPresenter extends BaseAdminPresenter {
         $this->platoEditado = $plato;
         //
         $this->template->item = $plato;
-        $this->template->ingredientes = $plato->ingredientes; //$this->getPlatosModel()->getProductos($plato->toArray());
+        $this->template->ingredientes = $plato->ingredientes;
     }
     
     public function createComponentEditarPlatoForm() {
@@ -70,6 +69,7 @@ class PlatosPresenter extends BaseAdminPresenter {
         try {
             $plato = $this->platoEditado;
             $plato->nombre = $values->nombre;
+            $plato->precio = $values->precio;
             $this->orm->persistAndFlush($plato);
             $this->flashMessage("Producto editado correctamente", "success");
         } catch( \Exception $e ) {
@@ -79,7 +79,6 @@ class PlatosPresenter extends BaseAdminPresenter {
     }
     
     public function createComponentMasIngredientesForm() {
-        $plato = $this->platoEditado->id;
         $form = ( new FormFactory() )->create();
         $form->addSelect('ingrediente', 'Ingrediente', $this->orm->productos->findAll()->fetchPairs('id', 'nombre'));
         $form->addText('cantidad', 'Cantidad')
@@ -114,10 +113,10 @@ class PlatosPresenter extends BaseAdminPresenter {
     
     public function actionBorrar( $id ) {
         try {
-            if( !$plato = $this->orm->platos->findById($id) ) {
+            if( !$plato = $this->orm->platos->getById($id) ) {
                 $this->flashMessage("Plato no encontrado", "danger");
             };
-            $plato->delete();
+            $this->orm->platos->removeAndFlush($plato);
             $this->flashMessage("Plato eliminado", "success");
         } catch( \Exception $e ) {
             $this->flashMessage("Error al eliminar plato, ¿Es una id válida?: " . $e->getMessage(), 'danger');
@@ -127,7 +126,7 @@ class PlatosPresenter extends BaseAdminPresenter {
     
     public function actionBorrarIngrediente( $id ) {
         try {
-            if( !$ingrediente = $this->orm->ingredientes->findById($id) ) {
+            if( !$ingrediente = $this->orm->ingredientes->getById($id) ) {
                 $this->flashMessage("Ingrediente no encontrado", "danger");
             };
             $this->orm->removeAndFlush($ingrediente);

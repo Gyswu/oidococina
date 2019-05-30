@@ -11,6 +11,7 @@ use Nextras\Orm\Model\Model;
  * @property-read ProductosRepository    $productos
  * @property-read IngredientesRepository $ingredientes
  * @property-read MesasRepository        $mesas
+ * @property-read MenusRepository        $menus
  */
 class Orm extends Model {
 

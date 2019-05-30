@@ -7,52 +7,52 @@
             </div>
         </div>
         <div class="row">
-          <div class="col">
-            <a n:href="Platos:default" class="btn btn-primary">Volver</a>
-          </div>
+            <div class="col">
+                <a n:href="Platos:default" class="btn btn-primary">Volver</a>
+            </div>
         </div>
         <div class="row">
-          <div class="col">
+            <div class="col">
 
-            <table class="table">
-              {if $ingredientes}
-                <thead class="thead-dark">
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Cantidad</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {foreach $ingredientes as $ingrediente}
+                <table class="table">
+                    {if $ingredientes}
+                    <thead class="thead-dark">
                     <tr>
-                      <td>{$ingrediente->producto->nombre}</td>
-                      <td>{$ingrediente->cantidad}
-                          {switch $ingrediente->producto->unidad}
-                              {case num}
-                              Unidades
-                              {case gr}
-                              Gramos
-                              {case ml}
-                              Mililitros
-                          {/switch}</td>
-                      <td><a n:href="Platos:borrarIngrediente $ingrediente->id" class="btn btn-xs
-                       btn-danger del">Borrar</a></td>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Opciones</th>
                     </tr>
-                  {/foreach}
-                {else}
-                  <tr>
-                    <td>Este plato no tiene productos asignados</td>
-                  </tr>
-                {/if}
-                </tbody>
-            </table>
-          </div>
+                    </thead>
+                    <tbody>
+                    {foreach $ingredientes as $ingrediente}
+                        <tr>
+                            <td>{$ingrediente->producto->nombre}</td>
+                            <td>{$ingrediente->cantidad}
+                                {switch $ingrediente->producto->unidad}
+                                    {case num}
+                                    Unidades
+                                    {case gr}
+                                    Gramos
+                                    {case ml}
+                                    Mililitros
+                                {/switch}</td>
+                            <td><a n:href="Platos:borrarIngrediente $ingrediente->id" class="btn btn-xs
+                       btn-danger del">Borrar</a></td>
+                        </tr>
+                    {/foreach}
+                    {else}
+                    <tr>
+                        <td>Este plato no tiene productos asignados</td>
+                    </tr>
+                    {/if}
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="row">
-          <div class="col">
-              {control masIngredientesForm}
-          </div>
+            <div class="col">
+                {control masIngredientesForm}
+            </div>
         </div>
     </div>
 

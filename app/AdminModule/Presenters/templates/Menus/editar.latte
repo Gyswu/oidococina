@@ -1,0 +1,50 @@
+{block content}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Editar Menu</h2>
+                {control editarMenuForm}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <a n:href="Platos:default" class="btn btn-primary">Volver</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+
+                <table class="table">
+                    {if $platos}
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach $platos as $plato}
+                        <tr>
+                            <td>{$plato->nombre}</td>
+                            <td><a n:href="Menus:borrarPlato $plato->id" class="btn btn-xs
+                       btn-danger del">Borrar</a></td>
+                        </tr>
+                    {/foreach}
+                    {else}
+                    <tr>
+                        <td>Este menu no tiene productos asignados</td>
+                    </tr>
+                    {/if}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {control masPlatosForm}
+            </div>
+        </div>
+    </div>
+
+{/block}

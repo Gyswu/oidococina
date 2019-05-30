@@ -70,10 +70,10 @@ class MesasPresenter extends BaseAdminPresenter {
     
     public function actionBorrar( $id ) {
         try {
-            if( !$plato = $this->orm->mesas->findById($id) ) {
+            if( !$mesa = $this->orm->mesas->getById($id) ) {
                 $this->flashMessage("La mesa no existe", "danger");
             };
-            $this->orm->mesas->remove($id);
+            $this->orm->mesas->removeAndFlush($mesa);
             $this->flashMessage("Mesa eliminado", "success");
         } catch( \Exception $e ) {
             $this->flashMessage("Error al eliminar la mesa, ¿Es una id válida?: " . $e->getMessage(), 'danger');

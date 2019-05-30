@@ -14,31 +14,31 @@
                 {if $mesas}
                 <thead class="thead-dark">
                 <tr>
-                    {foreach reset($mesas) as $columna => $valor}
-                        <th>{$columna}</th>
-                    {/foreach}
-                    <th></th>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                    {foreach $mesas as $mesa}
-                        <tr>
-                            <td>
-                                {$mesa->id}
-                            </td>
-                            <td>
-                                {$mesa->nombre}
-                            </td>
-                            <td align="center">
-                                <a n:href="Mesas:editar $mesa->id" class="btn btn-xs btn-primary">Editar</a>
-                                <a n:href="Mesas:borrar $mesa->id" class="btn btn-xs btn-danger del">Borrar</a>
-                            </td>
-                        </tr>
-                    {/foreach}
-                {else}
+                {foreach $mesas as $mesa}
                     <tr>
-                        <td> No hay ninguna mesa existente</td>
+                        <td>
+                            {$mesa->id}
+                        </td>
+                        <td>
+                            {$mesa->nombre}
+                        </td>
+                        <td align="center">
+                            <a n:href="Mesas:editar $mesa->id"
+                                    class="btn btn-xs btn-primary">Editar</a>
+                            <a n:href="Mesas:borrar $mesa->id" class="btn btn-xs btn-danger del">Borrar</a>
+                        </td>
                     </tr>
+                {/foreach}
+                {else}
+                <tr>
+                    <td> No hay ninguna mesa existente</td>
+                </tr>
                 {/if}
                 </tbody>
             </table>
