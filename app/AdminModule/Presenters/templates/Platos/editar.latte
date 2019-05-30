@@ -36,7 +36,8 @@
                                     {case ml}
                                     Mililitros
                                 {/switch}</td>
-                            <td><a n:href="Platos:borrarIngrediente $ingrediente->id" class="btn btn-xs
+                            <td><a n:href="Platos:borrarIngrediente $ingrediente->id, $plato->id"
+                                        class="btn btn-xs
                        btn-danger del">Borrar</a></td>
                         </tr>
                     {/foreach}

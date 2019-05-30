@@ -53,6 +53,7 @@ class MenusPresenter extends BaseAdminPresenter {
         //
         $this->template->item = $menu;
         $this->template->platos = $menu->platos;
+        $this->template->mesa = $menu;
     }
     
     public function createComponentEditarMenuForm() {
@@ -115,12 +116,15 @@ class MenusPresenter extends BaseAdminPresenter {
         $this->redirect('default');
     }
     
-    public function actionBorrarPlato( $id ) {
+    public function actionBorrarPlato( $id, $idMenu ) {
         try {
             if( !$plato = $this->orm->platos->getById($id) ) {
                 $this->flashMessage("Ingrediente no encontrado", "danger");
             };
-            $this->orm->removeAndFlush($plato);
+            $plato = $this->orm->platos->getById($id);
+            $menu = $this->orm->menus->getById($idMenu);
+            $menu->platos->remove($plato->id);
+            $this->orm->persistAndFlush($plato);
             $this->flashMessage("Producto eliminado", "success");
         } catch( \Exception $e ) {
             $this->flashMessage("Error al eliminar producto, ¿Es una id válida?: " . $e->getMessage(), 'danger');

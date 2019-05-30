@@ -54,6 +54,7 @@ class PlatosPresenter extends BaseAdminPresenter {
         //
         $this->template->item = $plato;
         $this->template->ingredientes = $plato->ingredientes;
+        $this->template->plato = $plato;
     }
     
     public function createComponentEditarPlatoForm() {
@@ -124,12 +125,16 @@ class PlatosPresenter extends BaseAdminPresenter {
         $this->redirect('default');
     }
     
-    public function actionBorrarIngrediente( $id ) {
+    public function actionBorrarIngrediente( $id, $idPlato ) {
         try {
+            
             if( !$ingrediente = $this->orm->ingredientes->getById($id) ) {
                 $this->flashMessage("Ingrediente no encontrado", "danger");
             };
-            $this->orm->removeAndFlush($ingrediente);
+            $ingrediente = $this->orm->ingredientes->getById($id);
+            $plato = $this->orm->platos->getById($idPlato);
+            $plato->ingredientes->remove($ingrediente->id);
+            $this->orm->persistAndFlush($ingrediente);
             $this->flashMessage("Producto eliminado", "success");
         } catch( \Exception $e ) {
             $this->flashMessage("Error al eliminar producto, ¿Es una id válida?: " . $e->getMessage(), 'danger');
