@@ -29,7 +29,7 @@ CREATE TABLE `Ingredientes` (
   PRIMARY KEY (`id`) USING BTREE,
   KEY `product_id` (`producto_id`) USING BTREE,
   CONSTRAINT `Ingredientes_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `Productos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `Ingredientes` (
 
 LOCK TABLES `Ingredientes` WRITE;
 /*!40000 ALTER TABLE `Ingredientes` DISABLE KEYS */;
-INSERT INTO `Ingredientes` VALUES (33,1,45),(34,1,76),(35,2,67);
+INSERT INTO `Ingredientes` VALUES (33,1,45),(34,1,76),(35,2,67),(36,2,5);
 /*!40000 ALTER TABLE `Ingredientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `Menus_x_Platos` (
 
 LOCK TABLES `Menus_x_Platos` WRITE;
 /*!40000 ALTER TABLE `Menus_x_Platos` DISABLE KEYS */;
-INSERT INTO `Menus_x_Platos` VALUES (1,1);
+INSERT INTO `Menus_x_Platos` VALUES (1,1),(1,2);
 /*!40000 ALTER TABLE `Menus_x_Platos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,6 +104,7 @@ DROP TABLE IF EXISTS `Mesas`;
 CREATE TABLE `Mesas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
+  `estado` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -114,7 +115,7 @@ CREATE TABLE `Mesas` (
 
 LOCK TABLES `Mesas` WRITE;
 /*!40000 ALTER TABLE `Mesas` DISABLE KEYS */;
-INSERT INTO `Mesas` VALUES (4,'Interior 1'),(5,'Interior 2'),(6,'Interior 3');
+INSERT INTO `Mesas` VALUES (5,'Interior 2',1),(6,'Interior 3',0);
 /*!40000 ALTER TABLE `Mesas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -128,14 +129,11 @@ DROP TABLE IF EXISTS `Pedidos`;
 CREATE TABLE `Pedidos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesa_id` int(11) NOT NULL,
-  `plato_id` int(11) NOT NULL,
   `estado` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `Pedidos_Mesas_id_fk` (`mesa_id`),
-  KEY `Pedidos_Platos_id_fk` (`plato_id`),
-  CONSTRAINT `Pedidos_Mesas_id_fk` FOREIGN KEY (`mesa_id`) REFERENCES `Mesas` (`id`),
-  CONSTRAINT `Pedidos_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+  CONSTRAINT `Pedidos_Mesas_id_fk` FOREIGN KEY (`mesa_id`) REFERENCES `Mesas` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -144,7 +142,35 @@ CREATE TABLE `Pedidos` (
 
 LOCK TABLES `Pedidos` WRITE;
 /*!40000 ALTER TABLE `Pedidos` DISABLE KEYS */;
+INSERT INTO `Pedidos` VALUES (1,5,NULL);
 /*!40000 ALTER TABLE `Pedidos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Pedidos_x_platos`
+--
+
+DROP TABLE IF EXISTS `Pedidos_x_platos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Pedidos_x_platos` (
+  `pedido_id` int(11) NOT NULL,
+  `plato_id` int(11) NOT NULL,
+  PRIMARY KEY (`pedido_id`,`plato_id`),
+  KEY `Pedidos_x_platos_Platos_id_fk` (`plato_id`),
+  CONSTRAINT `Pedidos_x_platos_Pedidos_id_fk` FOREIGN KEY (`pedido_id`) REFERENCES `Pedidos` (`id`),
+  CONSTRAINT `Pedidos_x_platos_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Pedidos_x_platos`
+--
+
+LOCK TABLES `Pedidos_x_platos` WRITE;
+/*!40000 ALTER TABLE `Pedidos_x_platos` DISABLE KEYS */;
+INSERT INTO `Pedidos_x_platos` VALUES (1,1);
+/*!40000 ALTER TABLE `Pedidos_x_platos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -197,7 +223,6 @@ CREATE TABLE `Platos_x_Ingredientes` (
 
 LOCK TABLES `Platos_x_Ingredientes` WRITE;
 /*!40000 ALTER TABLE `Platos_x_Ingredientes` DISABLE KEYS */;
-INSERT INTO `Platos_x_Ingredientes` VALUES (1,33),(1,34),(1,35);
 /*!40000 ALTER TABLE `Platos_x_Ingredientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-30  0:29:32
+-- Dump completed on 2019-05-31 23:34:29

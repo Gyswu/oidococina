@@ -8,36 +8,8 @@ final class HomepagePresenter extends BasePresenter {
     public function renderDefault() {
 
 
-//        $plato = $this->orm->platos->getById(1);
-//
-//        $ingrediente = new Ingrediente();
-//        $ingrediente->cantidad = 10;
-//        $ingrediente->producto= 3;
-//
-//        $ingredienteCreado = $this->orm->persist($ingrediente);
-//
-//        $plato->ingredientes->add($ingredienteCreado);
-//
-//        dd($this->orm->persistAndFlush($plato));
-//
-//        $ingrediente = $this->orm->ingredientes->getById(1)->fetchPairs("id", "nombre");
-//
-//        d($ingrediente->cantidad);
-//
-//        foreach($ingrediente->platos as $plato){
-//            d($plato->nombre);
-//        }
-//
-//
-//        dd('cut');
-//        $producto = $this->orm->productos->getById(1);
-//        d($producto);
-//
-//        dd($ingrediente);
-//        foreach ($this->orm->platos->getById(1)->productos as $producto) {
-//            foreach ($producto->platos as $plato) {
-//                $plato->nombre = 'Judías escozías';
-//                $this->orm->persistAndFlush($plato);
+//        Lo que intento es que Mesas pedir que se muestre si la mesa tiene algo pedido y tal. En teoria en la base de datos añadido uno a mano pero me da error al
+//        pasarle las entidades y demás, en si no se hacer la consulta o como seria, y llegaria a decir que he hecho algo mal en la base de datos o en el orm como tal.
 //
 //            }
 //        }
