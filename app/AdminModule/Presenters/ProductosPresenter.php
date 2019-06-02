@@ -18,20 +18,7 @@ class ProductosPresenter extends BaseAdminPresenter {
     
     public function createComponentMasProductosForm() {
         
-        $form = ( new FormFactory() )->create();
-        $form->addText('nombre', 'Nombre del producto')
-             ->setRequired();
-        $form->addText('categoria', 'Categoria del producto');
-        $form->addText('cantidad', 'Cantidad')
-             ->addRule(Form::INTEGER, 'Ha de ser un numero entero');
-        $form->addSelect('unidad', 'Unidad', [
-            'num' => 'Unidades',
-            'ml'  => 'Mililitros',
-            'gr'  => 'Gramos',
-        ]);
-        $form['unidad']->setDefaultValue('num');
-        $form->addSubmit('send', 'Añadir')
-             ->setHtmlAttribute("class", 'btn btn-success');
+        $form = ( new ProductosFormFactory() )->create();
         $form->onSuccess[] = [ $this, 'onSuccessMasProductos' ];//convención con la variable onSuccess y el nombre del formulario
         
         return $form;
@@ -43,7 +30,7 @@ class ProductosPresenter extends BaseAdminPresenter {
             $producto = new Producto();
             $producto->nombre = $values->nombre;
             $producto->categoria = $values->categoria;
-            $producto->stock = $values->cantidad;
+            $producto->stock = $values->stock;
             $producto->unidad = $values->unidad;
             $this->orm->persistAndFlush($producto);
             $this->flashMessage('El producto ha sido añadido a la base de datos', 'success');
@@ -73,7 +60,7 @@ class ProductosPresenter extends BaseAdminPresenter {
             $producto = $this->productoEditado;
             $producto->nombre = $values->nombre;
             $producto->categoria = $values->categoria;
-            $producto->stock = $values->cantidad;
+            $producto->stock = isset($values->stock) ? $values->cantidad : 0;
             $producto->unidad = $values->unidad;
             $this->orm->persistAndFlush($producto);
             $this->flashMessage("Producto editado correctamente", "success");
