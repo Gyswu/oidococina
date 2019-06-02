@@ -60,12 +60,12 @@ class ProductosPresenter extends BaseAdminPresenter {
             $producto = $this->productoEditado;
             $producto->nombre = $values->nombre;
             $producto->categoria = $values->categoria;
-            $producto->stock = isset($values->stock) ? $values->cantidad : 0;
+            $producto->stock = !empty($values->stock) ? (int)$values->stock : 0;
             $producto->unidad = $values->unidad;
             $this->orm->persistAndFlush($producto);
             $this->flashMessage("Producto editado correctamente", "success");
         } catch( \Exception $e ) {
-            $this->flashMessage("Error al editar: $e", 'danger');
+            $this->flashMessage("Error al editar: ".$e->getMessage(), 'danger');
         }
         $this->redirect("this");
     }
