@@ -54,7 +54,7 @@ class ProductosPresenter extends BaseAdminPresenter {
     }
     
     public function actionEditar( $id ) {
-        $producto = $this->orm->platos->getById($id);
+        $producto = $this->orm->productos->getById($id);
         $this->productoEditado = $producto;
         $this->template->item = $producto;
     }
@@ -78,7 +78,7 @@ class ProductosPresenter extends BaseAdminPresenter {
             $this->orm->persistAndFlush($producto);
             $this->flashMessage("Producto editado correctamente", "success");
         } catch( \Exception $e ) {
-            $this->flashMessage("Error al editar", 'danger');
+            $this->flashMessage("Error al editar: $e", 'danger');
         }
         $this->redirect("this");
     }
