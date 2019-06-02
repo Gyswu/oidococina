@@ -18,11 +18,7 @@ class MesasPresenter extends BaseAdminPresenter {
     
     public function createComponentMasMesasForm() {
         
-        $form = ( new FormFactory() )->create();
-        $form->addText('nombre', 'Nombre de la mesa')
-             ->setRequired();
-        $form->addSubmit('send', 'Añadir')
-             ->setHtmlAttribute("class", 'btn btn-success');
+        $form = ( new MesasFormFactory() )->create();
         $form->onSuccess[] = [ $this, 'onSuccessMasMesas' ];//convención con la variable onSuccess y el nombre del formulario
         
         return $form;
@@ -34,7 +30,7 @@ class MesasPresenter extends BaseAdminPresenter {
         $mesa->nombre = $values->nombre;
         try {
             $mesaNueva = $this->orm->mesas->persistAndFlush($mesa);
-            $this->flashMessage('La mesa ha sido añadido a la base de datos', 'success');
+            $this->flashMessage('Mesa guardada correctamente', 'success');
         } catch( \Exception $e ) {
             $this->flashMessage("Error: " . $e->getMessage(), 'danger');
         }

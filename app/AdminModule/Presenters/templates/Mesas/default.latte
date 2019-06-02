@@ -30,12 +30,11 @@
                             {$mesa->nombre}
                         </td>
                         <td>
-                            {switch->estado}
-                                {case 0}
-                                Vacia
-                                {case 1}
+                            {if $mesa->estado}
                                 Ocupada
-                            {/switch}
+                            {else}
+                                Vacia
+                            {/if}
                         </td>
                         <td align="center">
                             <a n:href="Mesas:editar $mesa->id"
