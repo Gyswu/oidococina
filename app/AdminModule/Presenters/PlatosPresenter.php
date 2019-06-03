@@ -4,6 +4,7 @@ namespace App\AdminModule\Presenters;
 
 use App\Forms\FormFactory;
 use App\Forms\PlatosFormFactory;
+use App\Model\Orm\Categoria;
 use App\Model\Orm\Ingrediente;
 use App\Model\Orm\Plato;
 use Nette\Application\UI\Form;
@@ -12,6 +13,8 @@ class PlatosPresenter extends BaseAdminPresenter {
     
     /** @var $platoEditado Plato */
     private $platoEditado;
+    /** @var $categorias Categoria */
+    private $categorias;
     
     public function renderDefault(): void {
         $this->template->platos = $this->orm->platos->findAll();
@@ -26,6 +29,7 @@ class PlatosPresenter extends BaseAdminPresenter {
              ->setRequired()
              ->addRule(Form::FLOAT, 'Debe ser un numero')
              ->setHtmlAttribute("step", '.01');
+        $form->addSelect('category', 'Categoria', $this->orm->categorias->findAll()->fetchPairs('id', 'nombre'));
         $form->addSubmit('send', 'Añadir')
              ->setHtmlAttribute("class", 'btn btn-success');
         $form->onSuccess[] = [ $this, 'onSuccessMasPlatos' ];
@@ -40,7 +44,11 @@ class PlatosPresenter extends BaseAdminPresenter {
             $plato = new Plato();
             $plato->nombre = $values->nombre;
             $plato->precio = $values->precio;
-            $this->orm->persistAndFlush($plato);
+            $categoria = new Categoria();
+            $cat = $values->category;
+            $categoria = $this->orm->categorias->getById($cat);
+            $categoria->platos->add($plato);
+            $this->orm->persistAndFlush($categoria);
             $this->flashMessage('El plato ha sido añadido a la base de datos', 'success');
         } catch( \Exception $e ) {
             $this->flashMessage("Error: " . $e->getMessage(), 'danger');
@@ -59,7 +67,9 @@ class PlatosPresenter extends BaseAdminPresenter {
     
     public function createComponentEditarPlatoForm() {
         
-        $form = ( new PlatosFormFactory() )->createEdit($this->platoEditado);
+        $masCategorias = new Categoria();
+        $masCategorias = $this->orm->categorias->findAll()->fetchPairs('id', 'nombre');
+        $form = ( new PlatosFormFactory() )->createEdit($this->platoEditado, $masCategorias);
         $form->onSuccess[] = [ $this, 'onSuccessEditarPlato' ];//convención con la variable onSuccess y el nombre del formulario
         
         return $form;
@@ -71,7 +81,11 @@ class PlatosPresenter extends BaseAdminPresenter {
             $plato = $this->platoEditado;
             $plato->nombre = $values->nombre;
             $plato->precio = $values->precio;
-            $this->orm->persistAndFlush($plato);
+            $cat = $values->category;
+            $categoria = new Categoria();
+            $categoria = $this->orm->categorias->getById($cat);
+            $categoria->platos->add($plato);
+            $this->orm->persistAndFlush($categoria);
             $this->flashMessage("Producto editado correctamente", "success");
         } catch( \Exception $e ) {
             $this->flashMessage("Error al editar", 'danger');

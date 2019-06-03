@@ -18,6 +18,7 @@
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Precio</th>
+                    <th>Categoria</th>
                     <th>Opciones</th>
                 </tr>
                 </thead>
@@ -32,6 +33,9 @@
                         </td>
                         <td>
                             {$plato->precio}€
+                        </td>
+                        <td>
+                            {$plato->categoria->nombre}
                         </td>
                         <td align="center">
                             <a n:href="Platos:editar $plato->id" class="btn btn-xs btn-primary">Editar</a>

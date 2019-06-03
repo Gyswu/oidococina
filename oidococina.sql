@@ -169,7 +169,7 @@ CREATE TABLE `Pedidos_x_platos` (
 
 LOCK TABLES `Pedidos_x_platos` WRITE;
 /*!40000 ALTER TABLE `Pedidos_x_platos` DISABLE KEYS */;
-INSERT INTO `Pedidos_x_platos` VALUES (1,1);
+INSERT INTO Pedidos_x_Platos VALUES (1,1);
 /*!40000 ALTER TABLE `Pedidos_x_platos` ENABLE KEYS */;
 UNLOCK TABLES;
 

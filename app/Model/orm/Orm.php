@@ -13,6 +13,7 @@ use Nextras\Orm\Model\Model;
  * @property-read MesasRepository        $mesas
  * @property-read MenusRepository        $menus
  * @property-read PedidosRepository      $pedidos
+ * @property-read CategoriasRepository   $categorias
  */
 class Orm extends Model {
 

@@ -8,12 +8,13 @@ use Nextras\Orm\Relationships\ManyHasMany;
 /**
  * Plato
  *
- * @property int                       $id             {primary}
+ * @property int                       $id              {primary}
  * @property string                    $nombre
  * @property float                     $precio
- * @property ManyHasMany|Ingrediente[] $ingredientes   {m:m Ingrediente::$platos , isMain=true}
- * @property ManyHasMany|Menu[]        $menus          {m:m Menu::$platos}
- * @property ManyHasMany|Pedido[]      $pedido         {m:m Pedido::$plato}
+ * @property ManyHasMany|Ingrediente[] $ingredientes    {m:m Ingrediente::$platos , isMain=true}
+ * @property ManyHasMany|Menu[]        $menus           {m:m Menu::$platos}
+ * @property ManyHasMany|Pedido[]      $pedidos         {m:m Pedido::$platos}
+ * @property Categoria                 $categoria       {m:1 Categoria::$platos}
  */
 class Plato extends Entity {
 
@@ -22,6 +23,3 @@ class Plato extends Entity {
 //        return $this->allComments->get()->findBy(['deletedAt' => NULL]);
 //    }
 }
-
-// get devuelve uno
-// Find devuelve varias
