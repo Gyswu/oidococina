@@ -17,18 +17,15 @@ final class MesasPresenter extends BasePresenter {
     }
     
     public function actionPedirPlato( $plato_id, $mesa_id ) {
-        try {
-            $pedido = new Pedido();
-            $plato = $this->orm->platos->getById($plato_id);
-            $mesa = $this->orm->mesas->getById($mesa_id);
-            $pedido->platos->add($plato);
-            $pedido->estado = '0';
-            $mesa->pedidos->add($pedido);
-            $this->orm->persistAndFlush($mesa);
-            $this->redirect('default');
-        } catch( \Exception $e ) {
-            $this->flashMessage("Error al realizar el pedido, Esta disponible el plato?: " . $e->getMessage(), 'danger');
-        }
+        
+        $pedido = new Pedido();
+        $plato = $this->orm->platos->getById($plato_id);
+        $mesa = $this->orm->mesas->getById($mesa_id);
+        $pedido->platos->add($plato);
+        $pedido->estado = '0';
+        $mesa->pedidos->add($pedido);
+        $this->orm->persistAndFlush($mesa);
+        $this->redirect('default');
     }
     
     public function actionPedir( $id ) {
@@ -49,10 +46,7 @@ final class MesasPresenter extends BasePresenter {
     
     public function actionCancelar( $pedido_id, $mesa_id, $plato_id ) {
         try {
-            $mesa = $this->orm->mesas->getById($mesa_id);
-            foreach( $mesa->pedidos as $pedido ) {
-                d($otro = $pedido->id);
-            }
+            
             dd($this->orm->mesas->getById($mesa_id));
             $pedido = $this->orm->pedidos->getById($pedido_id);
             $this->orm->pedidos->removeAndFlush($pedido);

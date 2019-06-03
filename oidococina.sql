@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Categorias`
+--
+
+DROP TABLE IF EXISTS `Categorias`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Categorias` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Categorias`
+--
+
+LOCK TABLES `Categorias` WRITE;
+/*!40000 ALTER TABLE `Categorias` DISABLE KEYS */;
+INSERT INTO `Categorias` VALUES (1,'Primer'),(2,'Segundo'),(3,'Tercero'),(4,'Postre');
+/*!40000 ALTER TABLE `Categorias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Ingredientes`
 --
 
@@ -147,30 +171,30 @@ INSERT INTO `Pedidos` VALUES (1,5,NULL);
 UNLOCK TABLES;
 
 --
--- Table structure for table `Pedidos_x_platos`
+-- Table structure for table `Pedidos_x_Platos`
 --
 
-DROP TABLE IF EXISTS `Pedidos_x_platos`;
+DROP TABLE IF EXISTS `Pedidos_x_Platos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Pedidos_x_platos` (
+CREATE TABLE `Pedidos_x_Platos` (
   `pedido_id` int(11) NOT NULL,
   `plato_id` int(11) NOT NULL,
   PRIMARY KEY (`pedido_id`,`plato_id`),
-  KEY `Pedidos_x_platos_Platos_id_fk` (`plato_id`),
-  CONSTRAINT `Pedidos_x_platos_Pedidos_id_fk` FOREIGN KEY (`pedido_id`) REFERENCES `Pedidos` (`id`),
-  CONSTRAINT `Pedidos_x_platos_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
+  KEY `Pedidos_x_Platos_Platos_id_fk` (`plato_id`),
+  CONSTRAINT `Pedidos_x_Platos_Pedidos_id_fk` FOREIGN KEY (`pedido_id`) REFERENCES `Pedidos` (`id`),
+  CONSTRAINT `Pedidos_x_Platos_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Pedidos_x_platos`
+-- Dumping data for table `Pedidos_x_Platos`
 --
 
-LOCK TABLES `Pedidos_x_platos` WRITE;
-/*!40000 ALTER TABLE `Pedidos_x_platos` DISABLE KEYS */;
-INSERT INTO Pedidos_x_Platos VALUES (1,1);
-/*!40000 ALTER TABLE `Pedidos_x_platos` ENABLE KEYS */;
+LOCK TABLES `Pedidos_x_Platos` WRITE;
+/*!40000 ALTER TABLE `Pedidos_x_Platos` DISABLE KEYS */;
+INSERT INTO `Pedidos_x_Platos` VALUES (4,6),(5,3),(7,3),(8,3),(9,6),(10,4),(11,4),(12,2),(13,4),(14,4),(15,2);
+/*!40000 ALTER TABLE `Pedidos_x_Platos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -185,9 +209,12 @@ CREATE TABLE `Platos` (
   `nombre` varchar(50) DEFAULT NULL,
   `precio` float(6,2) DEFAULT NULL,
   `disponible` int(1) DEFAULT '1',
+  `categoria_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `nombre` (`nombre`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+  UNIQUE KEY `nombre` (`nombre`) USING BTREE,
+  KEY `Platos_Categorias_id_fk` (`categoria_id`),
+  CONSTRAINT `Platos_Categorias_id_fk` FOREIGN KEY (`categoria_id`) REFERENCES `Categorias` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,7 +223,7 @@ CREATE TABLE `Platos` (
 
 LOCK TABLES `Platos` WRITE;
 /*!40000 ALTER TABLE `Platos` DISABLE KEYS */;
-INSERT INTO `Platos` VALUES (1,'Judías con chorizo',23.00,NULL),(2,'Callos a la madrileña',150.00,NULL),(3,'Tortilla',2.50,1);
+INSERT INTO `Platos` VALUES (1,'Judías con chorizo',23.00,NULL,2),(2,'Callos a la madrileña',150.00,NULL,1),(3,'Tortilla',2.50,1,2),(4,'Lentejas con Nutella',15.00,1,1),(6,'Cianuro',0.50,1,3);
 /*!40000 ALTER TABLE `Platos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,4 +289,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-31 23:34:29
+-- Dump completed on 2019-06-03 23:49:42
