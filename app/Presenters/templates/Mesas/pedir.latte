@@ -21,23 +21,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                {foreach $pedidos as $pedido }
-                    <tr>
-                        <td>
-                            {$pedido->nombre} ---
-                            {$pedido->id}
-                        </td>
-                        <td>
-                            {*                            {$pedido->estado}*}
-                        </td>
-                        <td>
-                            <a n:href="Mesas:cancelar $pedido->id, $mesa->id,
+                {dd($pedidos)}
+                {if $pedidos}
+                    {foreach $pedidos as $pedido }
+                        <tr>
+                            <td>
+                                {$pedido->nombre} ---
+                                {$pedido->id}
+                            </td>
+                            <td>
+                                {*                            {$pedido->estado}*}
+                            </td>
+                            <td>
+                                <a n:href="Mesas:cancelar $pedido->id, $mesa->id,
 $pedido->pedidos"
-                                    class="btn btn-xs
+                                        class="btn btn-xs
                             btn-danger">Cancelar</a>
-                        </td>
-                    </tr>
-                {/foreach}
+                            </td>
+                        </tr>
+                    {/foreach}
+                {/if}
                 </tbody>
             </table>
         </div>

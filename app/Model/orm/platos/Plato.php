@@ -2,6 +2,7 @@
 
 namespace App\Model\Orm;
 
+use Nextras\Dbal\Utils\DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
 use Nextras\Orm\Relationships\ManyHasMany;
 
@@ -15,6 +16,8 @@ use Nextras\Orm\Relationships\ManyHasMany;
  * @property ManyHasMany|Menu[]        $menus           {m:m Menu::$platos}
  * @property ManyHasMany|Pedido[]      $pedidos         {m:m Pedido::$platos}
  * @property Categoria                 $categoria       {m:1 Categoria::$platos}
+ * @property DateTimeImmutable         $createdAt       {default now}
+ * @property DateTimeImmutable         $updatedAt       {default now}
  */
 class Plato extends Entity {
 

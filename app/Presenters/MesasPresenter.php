@@ -9,13 +9,30 @@ use Nextras\Orm\Collection\ICollection;
 
 final class MesasPresenter extends BasePresenter {
     
-    /** @var $mesaEditada Mesa */
-    private $mesaEditada;
+    /** @var $mesa Mesa */
+    private $mesa;
     
     public function renderDefault() {
         $this->template->mesas = $this->orm->mesas->findAll();
     }
     
+    public function actionVer( $id ) {
+        $this->mesa = $this->orm->mesas->getById($id);
+    }
+    
+    public function renderVer( $id ) {
+        $this->template->mesa = $this->mesa;
+        $this->template->pedidos = $this->mesa->pedidos;
+    }
+    
+    
+    
+    
+    ########################################
+    ########################################
+    ########################################
+    ########################################
+    ########################################
     public function actionPedirPlato( $plato_id, $mesa_id ) {
         
         $pedido = new Pedido();
@@ -38,15 +55,20 @@ final class MesasPresenter extends BasePresenter {
             $plato = $this->orm->platos->getById($platopedido);
             $pedidos->append($plato);
         }
+        dd($mesa->pedidos);
         $this->template->pedidosState = $mesa->pedidos;
         $this->template->pedidos = $pedidos;
         $this->template->platos = $this->orm->platos->findAll()->orderBy('categoria', ICollection::ASC);
         $this->template->categorias = $this->orm->categorias->findAll();
     }
     
-    public function actionCancelar( $pedido_id, $mesa_id, $plato_id ) {
+    /**
+     * aquí solo necesitas el plato y el pedido, una vez tienes el pedido puedes pedido->mesa->id
+     */
+    public function actionCancelar( $pedido_id, $mesa_id, $plato_id ) { //OJO no mezcles camelCase con snake_case, snake solo para base de datos, y yo tengo la costumbre de poner siempre ID en mayúscula cuando es de alguna cosa como productoID, pero
+        // solo si no es algo que viene de algún form o lo que sea que has creado tú, eso ya depende de gustos, para mí se distingue mejor que productoId
         try {
-            
+            //if pedido estado permite cancelar, ojo aquí
             dd($this->orm->mesas->getById($mesa_id));
             $pedido = $this->orm->pedidos->getById($pedido_id);
             $this->orm->pedidos->removeAndFlush($pedido);

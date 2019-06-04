@@ -2,7 +2,9 @@
 
 namespace App\Model\Orm;
 
+use Nextras\Dbal\Utils\DateTimeImmutable;
 use Nextras\Orm\Entity\Entity;
+use Nextras\Orm\Relationships\ManyHasMany;
 
 /**
  * Menu
@@ -11,6 +13,8 @@ use Nextras\Orm\Entity\Entity;
  * @property string              $nombre
  * @property float               $precio
  * @property ManyHasMany|Plato[] $platos         {m:m Plato::$menus , isMain=true}
+ * @property DateTimeImmutable   $createdAt      {default now}
+ * @property DateTimeImmutable   $updatedAt      {default now}
  */
 class Menu extends Entity {
 

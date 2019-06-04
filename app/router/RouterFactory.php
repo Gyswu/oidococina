@@ -21,7 +21,7 @@ final class RouterFactory
             'action' => 'default',
             'module' => 'Admin'
         ]);
-        $router->addRoute('<presenter>/<action>', 'Homepage:default');
+        $router->addRoute('<presenter>/<action>[/<id>]', 'Homepage:default');
 
 
         return $router;

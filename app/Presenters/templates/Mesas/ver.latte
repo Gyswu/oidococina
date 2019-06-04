@@ -1,0 +1,95 @@
+{block content}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Mesa {$mesa->nombre}</h2>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Hora
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $pedidos as $pedido }
+                    <tr>
+                        <td>
+                            {$pedido->id}
+                        </td>
+                        <td>
+                            {$pedido->updatedAt}
+                        </td>
+                        <td>
+                            <a n:href="Pedidos:ver $pedido->id" class="btn btn-primary">Ver</a>
+                            {*<a n:href="Mesas:cancelar $pedido->id, $mesa->id,*}
+                            {*$pedido->pedidos"*}
+                            {*class="btn btn-xs*}
+                            {*btn-danger">Cancelar</a>*}
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <button data-toggle="collapse" data-target="#platos">Ver todos los productos ya pedidos
+            </button>
+        </div>
+        <div class="row">
+            <div class="collapse" id="platos">
+                <table class="table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Precio
+                        </th>
+                        <th>
+                            Categoria
+                        </th>
+                        <th>
+                            Acciones
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {*                    {foreach $categorias as $categoria}*}
+                    {foreach $pedidos as $pedido }
+                        {foreach $pedido->platos as $plato }
+                            <tr>
+                                {*                            {if $plato->categoria = $categoria->id}*}
+                                <td>
+                                    {$plato->nombre}
+                                </td>
+                                <td>
+                                    {$plato->precio}€
+                                </td>
+                                <td>
+                                    {*{$plato->categoria->nombre}*}
+                                </td>
+                                <td>
+                                    <a n:href="Mesas:pedirPlato $plato->id, $mesa->id" class="btn btn-xs
+                            btn-primary">Pedir</a>
+                                </td>
+                            </tr>
+                            {*                            {/if}*}
+                        {/foreach}
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{/block}

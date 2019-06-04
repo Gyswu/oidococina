@@ -21,12 +21,6 @@ services:
 	- App\Forms\SignInFormFactory
 	- App\Forms\SignUpFormFactory
 	router: App\Router\RouterFactory::createRouter
-#	- App\Model\Database\ProductosModel
-#	- App\Model\Database\PlatosModel
-#	- App\Model\Database\MesasModel
-#	- App\Model\Database\BaseModel
-#	- App\Model\Database\PedidosModel
-#	- App\Model\Database\PlatosProductosModel
 
 extensions:
     dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
