@@ -48,14 +48,13 @@ final class MesasPresenter extends BasePresenter {
     public function actionPedir( $id ) {
         
         $pedidos = new \ArrayObject();
-        $mesa = $this->orm->mesas->getById($id);
+        $mesa = $this->orm->mesas->getById($id)->orderBy('id', ICollection::ASC);
         $this->template->mesa = $mesa;
         foreach( $mesa->pedidos as $pedido ) {
             $platopedido = $pedido->platos->getRawValue();
             $plato = $this->orm->platos->getById($platopedido);
             $pedidos->append($plato);
         }
-        dd($mesa->pedidos);
         $this->template->pedidosState = $mesa->pedidos;
         $this->template->pedidos = $pedidos;
         $this->template->platos = $this->orm->platos->findAll()->orderBy('categoria', ICollection::ASC);
@@ -65,8 +64,7 @@ final class MesasPresenter extends BasePresenter {
     /**
      * aquí solo necesitas el plato y el pedido, una vez tienes el pedido puedes pedido->mesa->id
      */
-    public function actionCancelar( $pedido_id, $mesa_id, $plato_id ) { //OJO no mezcles camelCase con snake_case, snake solo para base de datos, y yo tengo la costumbre de poner siempre ID en mayúscula cuando es de alguna cosa como productoID, pero
-        // solo si no es algo que viene de algún form o lo que sea que has creado tú, eso ya depende de gustos, para mí se distingue mejor que productoId
+    public function actionCancelar( $pedido_id, $mesa_id, $plato_id ) {
         try {
             //if pedido estado permite cancelar, ojo aquí
             dd($this->orm->mesas->getById($mesa_id));
@@ -77,5 +75,9 @@ final class MesasPresenter extends BasePresenter {
             $this->flashMessage("Error al eliminar el pedido, Estas seguro de que existe?: " . $e->getMessage(), 'danger');
             $this->redirect('default');
         }
+    }
+    
+    public function actionCancelarPedido( $pedido_id, $mesa_id ) {
+    
     }
 }

@@ -9,14 +9,14 @@ final class HomepagePresenter extends BasePresenter {
         
         
         //para ver los pedidos de una mesa ya lo he arreglado, pero eso muestra todos
-        $arrayobj = new \ArrayObject();
-        $mesa = $this->orm->mesas->getById(5);
-        foreach( $mesa->pedidos as $pedido ) {
-            $platopedido = $pedido->platos->getRawValue();
-            $plato = $this->orm->platos->getById($platopedido);
-            $arrayobj->append($plato);
-        }
-        d($arrayobj);
+//        $arrayobj = new \ArrayObject();
+//        $mesa = $this->orm->mesas->getById(5);
+//        foreach( $mesa->pedidos as $pedido ) {
+//            $platopedido = $pedido->platos->getRawValue();
+//            $plato = $this->orm->platos->getById($platopedido);
+//            $arrayobj->append($plato);
+//        }
+//        d($arrayobj);
         //
         //para encontrar los pedidos de una mesa dependiendo de algo
         $mesaId = 5;
@@ -27,9 +27,9 @@ final class HomepagePresenter extends BasePresenter {
         $tienePedidos = count($pedidos) > 0 ? 'sí' : 'no';
         d($tienePedidos);
         //https://nextras.org/dbal/docs/3.1/query-builder
-        foreach( $pedidos as $pedido ) {
-            d($pedido->id);
-        }
+//        foreach( $pedidos as $pedido ) {
+//            d($pedido->id);
+//        }
 //        dd('cut');
 //        Lo que intento es que Mesas pedir que se muestre si la mesa tiene algo pedido y tal. En teoria en la base de datos añadido uno a mano pero me da error al
 //        pasarle las entidades y demás, en si no se hacer la consulta o como seria, y llegaria a decir que he hecho algo mal en la base de datos o en el orm como tal.

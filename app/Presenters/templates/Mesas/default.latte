@@ -28,11 +28,18 @@
                             {$mesa->nombre}
                         </td>
                         <td>
-                            {if $mesa->estado}
-                                Ocupada
-                            {else}
+                            {switch $mesa->estado}
+                                {case 0}
                                 Libre
-                            {/if}
+                                {case 1}
+                                Esperando pedido
+                                {case 2}
+                                Recibido y pendiente de pago
+                                {case 3}
+                                Pagado
+                                {default}
+                                Not working
+                            {/switch}
                         </td>
                         <td>
                             <a n:href="Pedidos:comanda mesaID => $mesa->id" class="btn btn-xs

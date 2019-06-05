@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h2>Pedido {$pedido->id} de la <a n:href="Mesas:ver $pedido->mesa->id">mesa
+                <h2>Pedido {$pedido->id} de la <a n:href="Mesas:ver $pedido->mesa->id">Mesa
                         {$pedido->mesa->nombre}</a></h2>
             </div>
         </div>
@@ -31,7 +31,8 @@
                     </td>
                     <td>
                         {*if pedido estado no servido permitir cancelar*}
-                        <a n:href="Pedidos:ver $pedido->id" class="btn btn-danger">Cancelar</a>
+                        <a n:href="Pedidos:cancelarComanda $pedido->id" class="btn
+                        btn-danger">Cancelar</a>
                     </td>
                 </tr>
                 </tbody>
@@ -65,12 +66,8 @@
                         <td>
                             {$plato->precio}€
                         </td>
-                        <td></td>
                         <td>
-                            <a n:href="Pedidos:ver $pedido->id" class="btn btn-success">Pedir de
-                                nuevo</a>
-                            {*<a n:href="Mesas:pedirPlato $plato->id, $mesa->id" class="btn btn-xs*}
-                            {*btn-primary">Pedir de nuevo</a>*}
+                            {$plato->categoria->nombre}
                         </td>
                     </tr>
                 {/foreach}

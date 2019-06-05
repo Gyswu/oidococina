@@ -16,6 +16,9 @@
                         Hora
                     </th>
                     <th>
+                        Estado
+                    </th>
+                    <th>
                         Acciones
                     </th>
                 </tr>
@@ -28,6 +31,9 @@
                         </td>
                         <td>
                             {$pedido->updatedAt}
+                        </td>
+                        <td>
+                            {$pedido->estado}
                         </td>
                         <td>
                             <a n:href="Pedidos:ver $pedido->id" class="btn btn-primary">Ver</a>
