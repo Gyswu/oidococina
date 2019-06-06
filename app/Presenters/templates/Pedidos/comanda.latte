@@ -1,9 +1,26 @@
 {block content}
     <div class="container">
         <div class="row">
-            <div class="col">
-                <h2>Comanda {$pedido->id} de la <a n:href="Mesas:ver $pedido->mesa->id">mesa
+            <div class="col col-lg-6">
+                <h2>Comanda {$pedido->id} de la <a n:href="Mesas:ver $pedido->mesa->id">Mesa
                         {$pedido->mesa->nombre}</a></h2>
+            </div>
+            <div class="col col-lg-6">
+                {if $pedido->estado == 0}
+                    Mesa Libre
+                    <a n:href="Pedidos:reservar $pedido->id, $pedido->mesa->id" class="btn
+                    btn-primary">Ocupar</a>
+                {/if}
+                {if $pedido->estado == 1}
+                    Mesa ocuapada
+                    <a href="" class="btn btn-warning">Pedido Realizado</a>
+                {/if}
+                {if $pedido->estado == 2}
+                    <a href="" class="btn btn-success">Pedido Servido</a>
+                {/if}
+                {if $pedido->estado == 3}
+                    <a href="" class="btn btn-danger">Cuenta</a>
+                {/if}
             </div>
         </div>
         <div class="row">
@@ -35,6 +52,7 @@
                         </td>
                         <td>
                             {$plato->categoria->nombre}
+
                         </td>
                         <td>
                             <a n:href="Pedidos:ver $pedido->id" class="btn btn-success">Pedir de

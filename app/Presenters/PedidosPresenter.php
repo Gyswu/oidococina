@@ -59,6 +59,9 @@ final class PedidosPresenter extends BasePresenter {
         $this->template->platos = $this->orm->platos->findAll()->orderBy('categoria', ICollection::ASC);
     }
     
+    /*
+     * Cancelacion de comandas y pedidos NO TOCAR
+     */
     public function actionCancelarComanda( $id ) {
         if( !$comanda = $this->orm->pedidos->getById($id) ) {
             $this->flashMessage("Ha habido un error", 'warning');
@@ -101,4 +104,37 @@ final class PedidosPresenter extends BasePresenter {
         $this->template->pedido = $this->pedido;
     }
     
+    /*
+     * Cambio de estao de pedidos y mesas
+     *
+     * Estados de la mesa:
+     *
+     * 0            Libre
+     * 1            Ocupada y Realizando Pedido
+     * 2            Esperando Pedido
+     * 3            Servida
+     *
+     * Estados de los pedidos
+     *
+     * 0            Esperando para realizar el pedido
+     * 1            Pedido realizado y esperando
+     * 2            Pedido Servido
+     * 3            Pagado
+     *
+     * Cabe la posibilidad de que esto cambie
+     */
+    public function actionReservar( $pedidoID, $mesaID ) {
+        if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
+            $pedido->estado = 1;
+            $this->orm->pedidos->persistAndFlush($pedido);
+            $mesa = $this->orm->mesas->getById($mesaID);
+            $mesa->estado = 1;
+            $this->orm->mesas->persistAndFlush($mesa);
+            $this->flashMessage('Se ha asignado la mesa con exito', 'success');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        } else {
+            $this->flashMessage('Ha habido un error', 'danger');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        }
+    }
 }
