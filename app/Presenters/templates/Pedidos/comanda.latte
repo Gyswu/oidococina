@@ -6,20 +6,27 @@
                         {$pedido->mesa->nombre}</a></h2>
             </div>
             <div class="col col-lg-6">
-                {if $pedido->estado == 0}
-                    Mesa Libre
+                {if $pedido->mesa->estado == 0}
+                    Mesa Libre<br>
                     <a n:href="Pedidos:reservar $pedido->id, $pedido->mesa->id" class="btn
                     btn-primary">Ocupar</a>
                 {/if}
-                {if $pedido->estado == 1}
-                    Mesa ocuapada
-                    <a href="" class="btn btn-warning">Pedido Realizado</a>
+                {if $pedido->mesa->estado == 1}
+                    Mesa ocuapada - Esperando pedido<br>
+                    <a n:href="Pedidos:yaPedido $pedido->id, $pedido->mesa->id" class="btn
+                    btn-warning">Realizar Pedido</a>
                 {/if}
-                {if $pedido->estado == 2}
-                    <a href="" class="btn btn-success">Pedido Servido</a>
+                {if $pedido->mesa->estado == 2 && $pedido->estado == 1}
+                    Esperando que los cocineros preparen el pedido
                 {/if}
-                {if $pedido->estado == 3}
-                    <a href="" class="btn btn-danger">Cuenta</a>
+                {if $pedido->mesa->estado == 2 && $pedido->estado == 2}
+                    Esperando preparado y pendiente de servicio<br>
+                    <a n:href="Pedidos:servido $pedido->id, $pedido->mesa->id" class="btn
+                    btn-success">Pedido Servido</a>
+                {/if}
+                {if $pedido->mesa->estado == 3}
+                    <a n:href="Pedidos:pagado $pedido->id, $pedido->mesa->id" class="btn
+                    btn-danger">Pagado</a>
                 {/if}
             </div>
         </div>

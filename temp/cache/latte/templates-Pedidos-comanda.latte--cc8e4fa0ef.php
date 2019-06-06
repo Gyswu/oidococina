@@ -27,7 +27,7 @@ class Templatecc8e4fa0ef extends Latte\Runtime\Template
 	{
 		extract($this->params);
 		if (!$this->getReferringTemplate() || $this->getReferenceType() === "extends") {
-			if (isset($this->params['plato'])) trigger_error('Variable $plato overwritten in foreach on line 45, 92');
+			if (isset($this->params['plato'])) trigger_error('Variable $plato overwritten in foreach on line 52, 99');
 		}
 		Nette\Bridges\ApplicationLatte\UIRuntime::initialize($this, $this->parentName, $this->blocks);
 		
@@ -47,27 +47,36 @@ class Templatecc8e4fa0ef extends Latte\Runtime\Template
             </div>
             <div class="col col-lg-6">
 <?php
-		if ($pedido->estado == 0) {
+		if ($pedido->mesa->estado == 0) {
 ?>
-                    Mesa Libre
+                    Mesa Libre<br>
                     <a class="btn
                     btn-primary" href="<?php echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link("Pedidos:reservar", [$pedido->id, $pedido->mesa->id])) ?>">Ocupar</a>
 <?php
 		}
-		if ($pedido->estado == 1) {
+		if ($pedido->mesa->estado == 1) {
 ?>
-                    Mesa ocuapada
-                    <a href="" class="btn btn-warning">Pedido Realizado</a>
+                    Mesa ocuapada - Esperando pedido<br>
+                    <a class="btn
+                    btn-warning" href="<?php echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link("Pedidos:yaPedido", [$pedido->id, $pedido->mesa->id])) ?>">Realizar Pedido</a>
 <?php
 		}
-		if ($pedido->estado == 2) {
+		if ($pedido->mesa->estado == 2 && $pedido->estado == 1) {
 ?>
-                    <a href="" class="btn btn-success">Pedido Servido</a>
+                    Esperando que los cocineros preparen el pedido
 <?php
 		}
-		if ($pedido->estado == 3) {
+		if ($pedido->mesa->estado == 2 && $pedido->estado == 2) {
 ?>
-                    <a href="" class="btn btn-danger">Cuenta</a>
+                    Esperando preparado y pendiente de servicio<br>
+                    <a class="btn
+                    btn-success" href="<?php echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link("Pedidos:servido", [$pedido->id, $pedido->mesa->id])) ?>">Pedido Servido</a>
+<?php
+		}
+		if ($pedido->mesa->estado == 3) {
+?>
+                    <a class="btn
+                    btn-danger" href="<?php echo LR\Filters::escapeHtmlAttr($this->global->uiControl->link("Pedidos:pagado", [$pedido->id, $pedido->mesa->id])) ?>">Pagado</a>
 <?php
 		}
 ?>
@@ -98,14 +107,14 @@ class Templatecc8e4fa0ef extends Latte\Runtime\Template
 ?>
                     <tr>
                         <td>
-                            <?php echo LR\Filters::escapeHtmlText($plato->nombre) /* line 48 */ ?>
+                            <?php echo LR\Filters::escapeHtmlText($plato->nombre) /* line 55 */ ?>
 
                         </td>
                         <td>
-                            <?php echo LR\Filters::escapeHtmlText($plato->precio) /* line 51 */ ?>€
+                            <?php echo LR\Filters::escapeHtmlText($plato->precio) /* line 58 */ ?>€
                         </td>
                         <td>
-                            <?php echo LR\Filters::escapeHtmlText($plato->categoria->nombre) /* line 54 */ ?>
+                            <?php echo LR\Filters::escapeHtmlText($plato->categoria->nombre) /* line 61 */ ?>
 
 
                         </td>
@@ -152,14 +161,14 @@ class Templatecc8e4fa0ef extends Latte\Runtime\Template
 ?>
                     <tr>
                         <td>
-                            <?php echo LR\Filters::escapeHtmlText($plato->nombre) /* line 95 */ ?>
+                            <?php echo LR\Filters::escapeHtmlText($plato->nombre) /* line 102 */ ?>
 
                         </td>
                         <td>
-                            <?php echo LR\Filters::escapeHtmlText($plato->precio) /* line 98 */ ?>€
+                            <?php echo LR\Filters::escapeHtmlText($plato->precio) /* line 105 */ ?>€
                         </td>
                         <td>
-                            <?php echo LR\Filters::escapeHtmlText($plato->categoria->nombre) /* line 101 */ ?>
+                            <?php echo LR\Filters::escapeHtmlText($plato->categoria->nombre) /* line 108 */ ?>
 
                         </td>
                         <td>

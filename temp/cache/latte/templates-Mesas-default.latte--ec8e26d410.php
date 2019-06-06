@@ -82,17 +82,17 @@ class Templateec8e26d410 extends Latte\Runtime\Template
 			}
 			elseif (end($this->global->switch) === (1)) {
 ?>
-                                Esperando pedido
+                                Ocupada
 <?php
 			}
 			elseif (end($this->global->switch) === (2)) {
 ?>
-                                Recibido y pendiente de pago
+                                Esperando Pedido
 <?php
 			}
 			elseif (end($this->global->switch) === (3)) {
 ?>
-                                Pagado
+                                Servida
 <?php
 			}
 			else {

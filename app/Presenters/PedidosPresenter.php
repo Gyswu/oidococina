@@ -44,9 +44,11 @@ final class PedidosPresenter extends BasePresenter {
         foreach( $pedidos as $pedido ) {
             $id = $pedido->id;
         }
-        //Buscando un metodo más facil
-        //si la hay, entonces a buscar el pedido si se está editando, o crear uno nuevo
-        if( $pedido = $this->orm->pedidos->getById($id) ) {
+        /*
+         * Comprueba si el ultimo pedido de la mesa ya esta pagado, si no lo esta muestra el ultimo pedido. Si lo esta crea uno nuevo.
+         */
+        if( !$pedido = $this->orm->pedidos->getById($id)->estado == 4 ) {
+            $pedido = $this->orm->pedidos->getById($id);
             $this->pedido = $pedido;
         } else {
             $pedido = new Pedido();
@@ -109,23 +111,36 @@ final class PedidosPresenter extends BasePresenter {
      *
      * Estados de la mesa:
      *
-     * 0            Libre
-     * 1            Ocupada y Realizando Pedido
-     * 2            Esperando Pedido
-     * 3            Servida
+     * 0            Libre                                   <----           Accion pagado
+     * 1            Ocupada y Realizando Pedido             <----           Accion reservar
+     * 2            Esperando Pedido                        <----           Accion yaPedido
+     * 3            Servida                                 <----           Accion servido
      *
      * Estados de los pedidos
      *
-     * 0            Esperando para realizar el pedido
-     * 1            Pedido realizado y esperando
-     * 2            Pedido Servido
-     * 3            Pagado
+     * 0            Esperando para realizar el pedido       <----            Accion reservar
+     *                                                                                      Pedido = 0
+     *                                                                                      Mesa   = 1
+     * 1            Pedido realizado y esperando            <----            Accion yaPedido
+     *                                                                                      Pedido = 1
+     *                                                                                      Mesa   = 2
+     * 2            Pedido Preparado     Solo cocina        <----            Accion preparado
+     *                                                                                      Pedido = 2
+     *                                                                                      Mesa   = 2
+     * 3            Pedido servido                          <----            Accion servido
+     *                                                                                      Pedido = 3
+     *                                                                                      Mesa   = 3
+     * 4            Pagado                                  <----            Accion pagado
+     *                                                                                      Pedido = 4
+     *                                                                                      Mesa   = 0
+     *
+     * Una vez el pedido esta pagado, la accion asigna el estado de la mesa a 0 (Libre)
      *
      * Cabe la posibilidad de que esto cambie
      */
     public function actionReservar( $pedidoID, $mesaID ) {
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
-            $pedido->estado = 1;
+            $pedido->estado = 0;
             $this->orm->pedidos->persistAndFlush($pedido);
             $mesa = $this->orm->mesas->getById($mesaID);
             $mesa->estado = 1;
@@ -137,4 +152,71 @@ final class PedidosPresenter extends BasePresenter {
             $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
         }
     }
+    
+    public function actionYaPedido( $pedidoID, $mesaID ) {
+        if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
+            $pedido->estado = 1;
+            $this->orm->pedidos->persistAndFlush($pedido);
+            $mesa = $this->orm->mesas->getById($mesaID);
+            $mesa->estado = 2;
+            $this->orm->mesas->persistAndFlush($mesa);
+            $this->flashMessage('El estado del pedido se ha cambiado con exito', 'success');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        } else {
+            $this->flashMessage('Ha habido un error', 'danger');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        }
+    }
+    
+    public function actionPreparado( $pedidoID, $mesaID ) {   //Esta accion es solo para los cocineros
+        if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
+            $pedido->estado = 2;
+            $this->orm->pedidos->persistAndFlush($pedido);
+            $this->flashMessage('El estado del pedido se ha cambiado con exito', 'success');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        } else {
+            $this->flashMessage('Ha habido un error', 'danger');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        }
+    }
+    
+    public function actionServido( $pedidoID, $mesaID ) {
+        if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
+            $pedido->estado = 3;
+            $this->orm->pedidos->persistAndFlush($pedido);
+            $mesa = $this->orm->mesas->getById($mesaID);
+            $mesa->estado = 3;
+            $this->orm->mesas->persistAndFlush($mesa);
+            $this->flashMessage('El pedido se ha asignado con exito', 'success');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        } else {
+            $this->flashMessage('Ha habido un error', 'danger');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        }
+    }
+    
+    public function actionPagado( $pedidoID, $mesaID ) {
+        if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
+            $pedido->estado = 4;
+            $this->orm->pedidos->persistAndFlush($pedido);
+            $mesa = $this->orm->mesas->getById($mesaID);
+            $mesa->estado = 0;
+            $this->orm->mesas->persistAndFlush($mesa);
+            $this->flashMessage('El pedido se ha asignado con exito', 'success');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        } else {
+            $this->flashMessage('Ha habido un error', 'danger');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        }
+    }
+    
+    /*
+     * MI GRAN DUDA
+     *
+     * Mi gran duda actualmente es como hacemos el tema de las cantidades de los platos en los pedidos.
+     * Nada más, por lo demás te he dejado arriba un poco las acciones de actualizacion de los estados
+     * de los pedidos que las he estado tocando y redactando en un comentario.
+     *
+     * PD: Miralo tu lo del get by
+     */
 }
