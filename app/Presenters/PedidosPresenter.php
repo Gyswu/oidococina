@@ -40,7 +40,7 @@ final class PedidosPresenter extends BasePresenter {
             $this->redirect("Mesas:default");
         }
         //CARGA DEL ULTIMO PEDIO DE LA MESA
-        $pedidos = $mesa->pedidos;
+        //$pedidos = $mesa->pedidos;
         foreach( $pedidos as $pedido ) {
             $id = $pedido->id;
         }
@@ -217,6 +217,6 @@ final class PedidosPresenter extends BasePresenter {
      * Nada más, por lo demás te he dejado arriba un poco las acciones de actualizacion de los estados
      * de los pedidos que las he estado tocando y redactando en un comentario.
      *
-     * PD: Miralo tu lo del get by
+     * Si puede ser tambien la posiblidad de marcar cuando un plato de un pedido esta listo, no digo solo 1 pero si todos.
      */
 }
