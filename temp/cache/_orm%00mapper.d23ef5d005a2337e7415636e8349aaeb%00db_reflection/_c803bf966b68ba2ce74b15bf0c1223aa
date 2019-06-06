@@ -1,1 +1,0 @@
-000068a:2:{s:4:"time";s:21:"0.94528400 1559818210";s:10:"serialized";b:1;}a:1:{s:7:"mesa_id";a:4:{s:4:"name";s:19:"Pedidos_Mesas_id_fk";s:6:"column";s:7:"mesa_id";s:9:"ref_table";s:5:"Mesas";s:10:"ref_column";s:2:"id";}}

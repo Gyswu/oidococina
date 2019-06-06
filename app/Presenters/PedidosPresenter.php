@@ -40,7 +40,7 @@ final class PedidosPresenter extends BasePresenter {
             $this->redirect("Mesas:default");
         }
         //CARGA DEL ULTIMO PEDIO DE LA MESA
-        $pedidos = $mesa->pedidos;
+        $pedidos = $this->orm->pedidos->findBy([ 'mesa' => $mesaID ])->orderBy('id', ICollection::DESC)->limitBy(2);
         foreach( $pedidos as $pedido ) {
             $id = $pedido->id;
         }
