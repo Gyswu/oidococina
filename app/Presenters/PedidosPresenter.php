@@ -40,7 +40,7 @@ final class PedidosPresenter extends BasePresenter {
             $this->redirect("Mesas:default");
         }
         //CARGA DEL ULTIMO PEDIO DE LA MESA
-        //$pedidos = $mesa->pedidos;
+        $pedidos = $mesa->pedidos;
         foreach( $pedidos as $pedido ) {
             $id = $pedido->id;
         }
