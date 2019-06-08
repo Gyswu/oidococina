@@ -70,6 +70,7 @@ final class PedidosPresenter extends BasePresenter {
             $pedidoPlato->pedido = $this->pedido;
             $pedidoPlato->plato = $plato;
             $this->orm->persistAndFlush($pedidoPlato);
+            $this->flashMessage('Plato añadido', 'success');
         }
         //
         $this->template->pedido = $this->pedido;

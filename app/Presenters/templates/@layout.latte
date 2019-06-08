@@ -58,6 +58,10 @@
             $(".del").click(function () {
                 confirm('¿Seguro que lo quieres borrar?')
             });
+
+            $(".alert").fadeTo(2000, 500).slideUp(500, function(){
+                $(".alert").slideUp(500);
+            });
         });
     </script>
 {/block}

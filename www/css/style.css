@@ -19,3 +19,14 @@ a[href^="#error:"] {
 form .required label {
 	font-weight: bold;
 }
+
+.alert {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	width: 33vw;
+	z-index: 999999;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
