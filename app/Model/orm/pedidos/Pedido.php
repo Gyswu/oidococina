@@ -18,4 +18,12 @@ use Nextras\Orm\Relationships\ManyHasMany;
  */
 class Pedido extends Entity {
     
+    public const ESTADOS = [
+        'reservar'  => 0,
+        'yaPedido'  => 1,
+        'preparado' => 2,
+        'servido'   => 3,
+        'pagado'    => 4,
+    ];
+    
 }

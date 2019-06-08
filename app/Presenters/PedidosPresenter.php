@@ -9,7 +9,7 @@ use Nextras\Orm\Collection\ICollection;
 final class PedidosPresenter extends BasePresenter {
     
     /** @var $pedido Pedido */
-    private $pedido;
+    private $pedido = null;
     
     public function renderDefault() {
         $this->template->pedidos = $this->orm->pedidos->findAll();
@@ -33,24 +33,18 @@ final class PedidosPresenter extends BasePresenter {
      * @throws \Nette\Application\AbortException
      */
     public function actionComanda( $id, $mesaID ) {
-        
         //Lo primero revisar si hay mesa
         if( !$mesa = $this->orm->mesas->getById($mesaID) ) {
             $this->flashMessage("Elige una mesa antes de añadirle un nuevo pedido", 'warning');
             $this->redirect("Mesas:default");
         }
-        //CARGA DEL ULTIMO PEDIO DE LA MESA
-        $pedidos = $this->orm->pedidos->findBy([ 'mesa' => $mesaID ])->orderBy('id', ICollection::DESC)->limitBy(1);
-        foreach( $pedidos as $pedido ) {
-            $id = $pedido->id;
-        }
+        //
+        //Carga el último pedido de la mesa
+        $this->pedido = $mesa->getLastPedido();
         /*
          * Comprueba si el ultimo pedido de la mesa ya esta pagado, si no lo esta muestra el ultimo pedido. Si lo esta crea uno nuevo.
          */
-        if( !$pedido = $this->orm->pedidos->getById($id)->estado == 4 ) {
-            $pedido = $this->orm->pedidos->getById($id);
-            $this->pedido = $pedido;
-        } else {
+        if( !$this->pedido || $this->pedido->estado == Pedido::ESTADOS['pagado'] ) {
             $pedido = new Pedido();
             $pedido->mesa = $this->orm->mesas->getById($mesa->id);
             $this->pedido = $this->orm->persistAndFlush($pedido);
@@ -59,6 +53,23 @@ final class PedidosPresenter extends BasePresenter {
         //
         $this->template->mesa = $mesa;
         $this->template->platos = $this->orm->platos->findAll()->orderBy('categoria', ICollection::ASC);
+    }
+    
+    /**
+     * Vamos a mostrar la lista de platos, y a ir añadiendo al pedido
+     *
+     * @param $id
+     * @param $mesaID
+     */
+    public function renderComanda( $platoID ) {
+        
+        if( $platoID ) {
+            $plato = $this->orm->platos->getById($platoID);
+            $this->pedido->platos->add($plato);
+            $this->pedido = $this->orm->persistAndFlush($this->pedido);
+        }
+        //
+        $this->template->pedido = $this->pedido;
     }
     
     /*
@@ -87,23 +98,6 @@ final class PedidosPresenter extends BasePresenter {
             $this->flashMessage("El pedido ha sido eliminado con exito", 'success');
         }
         $this->redirect("Pedidos:Comanda", [ 'id' => $this->pedido->id, 'mesaID' => $mesaID ]);
-    }
-    
-    /**
-     * Vamos a mostrar la lista de platos, y a ir añadiendo al pedido
-     *
-     * @param $id
-     * @param $mesaID
-     */
-    public function renderComanda( $platoID ) {
-        
-        if( $platoID ) {
-            $plato = $this->orm->platos->getById($platoID);
-            $this->pedido->platos->add($plato);
-            $this->pedido = $this->orm->persistAndFlush($this->pedido);
-        }
-        //
-        $this->template->pedido = $this->pedido;
     }
     
     /*
