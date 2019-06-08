@@ -5,11 +5,11 @@ namespace App\Model\Orm;
 use Nextras\Orm\Repository\Repository;
 
 /**
- * @method Producto|NULL getById( $id )
+ * @method Usuario|NULL getById( $id )
  */
-class ProductosRepository extends Repository {
+class UsuariosRepository extends Repository {
     
     static function getEntityClassNames(): array {
-        return [ Producto::class ];
+        return [ Usuario::class ];
     }
 }

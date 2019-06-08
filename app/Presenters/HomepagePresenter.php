@@ -19,13 +19,13 @@ final class HomepagePresenter extends BasePresenter {
 //        d($arrayobj);
         //
         //para encontrar los pedidos de una mesa dependiendo de algo
-        $mesaId = 5;
-        $mesa = $this->orm->mesas->getById($mesaId); // $this->orm->mesas->getBy(['nombre' => 'interior 1']);
+//        $mesaId = 5;
+//        $mesa = $this->orm->mesas->getById($mesaId); // $this->orm->mesas->getBy(['nombre' => 'interior 1']);
         //los pedidos se buscan de forma independiente sabiendo la id de la mesa. Si solo sabes el nombre, la encuentras y sacas la id.
-        $pedidos = $this->orm->pedidos->findBy([ 'mesa' => $mesaId, 'estado' => null ]);
+//        $pedidos = $this->orm->pedidos->findBy([ 'mesa' => $mesaId, 'estado' => null ]);
         //
-        $tienePedidos = count($pedidos) > 0 ? 'sí' : 'no';
-        d($tienePedidos);
+//        $tienePedidos = count($pedidos) > 0 ? 'sí' : 'no';
+//        d($tienePedidos);
         //https://nextras.org/dbal/docs/3.1/query-builder
 //        foreach( $pedidos as $pedido ) {
 //            d($pedido->id);
