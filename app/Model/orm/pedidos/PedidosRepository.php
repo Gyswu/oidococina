@@ -25,7 +25,7 @@ class PedidosRepository extends Repository {
     }
     
     public function findPendientesCocina(){
-        return $this->findBy(['estado' => Pedido::ESTADOS['yaPedido']]);
+        return $this->findBy(['estado' => Pedido::ESTADOS['yaPedido']])->orderBy('createdAt',ICollection::ASC);
     }
     
     static function getEntityClassNames(): array {

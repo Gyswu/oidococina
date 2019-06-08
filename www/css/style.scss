@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #3484D2;
+}
+
+a[href^="#error:"] {
+  background: red;
+  color: white;
+}
+
+form .required label {
+  font-weight: bold;
+}
+
+.alert {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 33vw;
+  z-index: 999999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#cocina {
+  overflow-x: scroll;
+
+  .row {
+
+    display: inline-flex;
+    flex-wrap: nowrap;
+
+    .card {
+      border: 0;
+      width: 450px;
+      margin-right: 20px;
+
+      .card-body {
+        position: relative;
+        padding-bottom: 50px;
+      .card-title {
+        span {
+          float: right;
+        }
+      }
+        ul {
+          padding: 0;
+
+          li {
+
+          }
+        }
+
+        .btn {
+          position: absolute;
+          bottom: 5px;
+          left: 200px;
+        }
+      }
+    }
+  }
+}

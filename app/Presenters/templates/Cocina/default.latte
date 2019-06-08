@@ -1,17 +1,23 @@
 {block content}
+    <a n:href="cargarPendientes!" class="ajax btn btn-primary" id="cargar-nuevos">Cargar más
+        pedidos</a>
 
-{snippet ultimosPedidos}
-    <div id="cocina" class="container-fluid">
-        <div class="row">
-            {foreach $pedidos as $pedido}
-                {include ticket $pedido}
-            {/foreach}
-        </div>
-    </div>
-{/snippet}
-
-<a n:href="cargarPendientes!" class="ajax btn btn-primary" id="cargar-nuevos">Cargar pedidos
-    pendientes</a>
+    {snippet ultimosPedidos}
+        {if count($pedidos) < 1}
+            <h1>Todo tranquilo por aquí</h1>
+        {else}
+            <div id="cocina" class="container-fluid">
+                <div class="row">
+                    <h1><b>{count($pedidos)}</b> pedidos pendientes</h1>
+                </div>
+                <div class="row">
+                    {foreach $pedidos as $pedido}
+                        {include ticket $pedido}
+                    {/foreach}
+                </div>
+            </div>
+        {/if}
+    {/snippet}
 
 {/block}
 

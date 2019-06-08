@@ -1,3 +1,19 @@
 {define ticket $pedido}
-    {$pedido->mesa->id}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Mesa {$pedido->mesa->nombre}
+                <span>{$pedido->createdAt->format("H:i")}</span></h5>
+
+            <ul class="list-group">
+                {foreach $pedido->pedidoPlatos as $pedidoPlato}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {$pedidoPlato->plato->nombre}
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                {/foreach}
+            </ul>
+
+            <a href="#" class="btn btn-success">Terminado!</a>
+        </div>
+    </div>
 {/define}
