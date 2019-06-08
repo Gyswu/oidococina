@@ -7,20 +7,20 @@
             </div>
             <div class="col col-lg-6">
                 {if $pedido->mesa->estado == 0}
-                    Mesa Libre<br>
+                    <h3>Mesa Libre</h3><br>
                     <a n:href="Pedidos:reservar $pedido->id, $pedido->mesa->id" class="btn
                     btn-primary">Ocupar</a>
                 {/if}
                 {if $pedido->mesa->estado == 1}
-                    Mesa ocuapada - Esperando pedido<br>
+                    <h3>Mesa ocuapada - Esperando pedido</h3><br>
                     <a n:href="Pedidos:yaPedido $pedido->id, $pedido->mesa->id" class="btn
                     btn-warning">Realizar Pedido</a>
                 {/if}
                 {if $pedido->mesa->estado == 2 && $pedido->estado == 1}
-                    Esperando que los cocineros preparen el pedido
+                    <h3>Esperando que los cocineros preparen el pedido</h3>
                 {/if}
                 {if $pedido->mesa->estado == 2 && $pedido->estado == 2}
-                    Esperando preparado y pendiente de servicio<br>
+                    <h3>Esperando preparado y pendiente de servicio</h3><br>
                     <a n:href="Pedidos:servido $pedido->id, $pedido->mesa->id" class="btn
                     btn-success">Pedido Servido</a>
                 {/if}
@@ -97,6 +97,7 @@ $pedido->mesa->id, $pedidoPlato->id"
                 </thead>
                 <tbody>
                 {foreach $platos as $plato }
+
                     <tr>
                         <td>
                             {$plato->nombre}
@@ -108,14 +109,15 @@ $pedido->mesa->id, $pedidoPlato->id"
                             {$plato->categoria->nombre}
                         </td>
                         <td>
-                            <a n:href="Pedidos:comanda $pedido->id, 'mesaID' => $mesa->id,
-'platoID' => $plato->id" class="btn
-                            btn-success">Añadir</a>
-
-                            {*<a n:href="Mesas:pedirPlato $plato->id, $mesa->id" class="btn btn-xs*}
-                            {*btn-primary">Pedir de nuevo</a>*}
+                            {if $plato->disponible == 1}
+                                <a n:href="Pedidos:comanda $pedido->id, 'mesaID' => $mesa->id,
+'platoID' => $plato->id" class="btn btn-success">Añadir</a>
+                            {else}
+                                <a href="" class="btn btn-danger disabled">Plato no disponible</a>
+                            {/if}
                         </td>
                     </tr>
+
                 {/foreach}
                 </tbody>
             </table>

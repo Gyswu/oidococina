@@ -92,13 +92,13 @@ final class PedidosPresenter extends BasePresenter {
         $this->redirect("Mesas:default");
     }
     
-    public function actionCancelarPlato($id, $mesaID, $pedidoPlatoID) {
+    public function actionCancelarPlato( $id, $mesaID, $pedidoPlatoID ) {
         try {
             $pedidoPlato = $this->orm->pedidoPlatos->getById($pedidoPlatoID);
             $this->orm->pedidoPlatos->removeAndFlush($pedidoPlato);
             $this->flashMessage("Plato cancelado", 'success');
-        }catch(\Exception $e){
-            $this->flashMessage("Error al cancelar el plato".$e->getMessage(), 'warning');
+        } catch( \Exception $e ) {
+            $this->flashMessage("Error al cancelar el plato" . $e->getMessage(), 'warning');
         }
         $this->redirect("Pedidos:Comanda", [ 'id' => $id, 'mesaID' => $mesaID ]);
     }
@@ -157,18 +157,6 @@ final class PedidosPresenter extends BasePresenter {
             $mesa = $this->orm->mesas->getById($mesaID);
             $mesa->estado = 2;
             $this->orm->mesas->persistAndFlush($mesa);
-            $this->flashMessage('El estado del pedido se ha cambiado con exito', 'success');
-            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
-        } else {
-            $this->flashMessage('Ha habido un error', 'danger');
-            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
-        }
-    }
-    
-    public function actionPreparado( $pedidoID, $mesaID ) {   //Esta accion es solo para los cocineros
-        if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
-            $pedido->estado = 2;
-            $this->orm->pedidos->persistAndFlush($pedido);
             $this->flashMessage('El estado del pedido se ha cambiado con exito', 'success');
             $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
         } else {

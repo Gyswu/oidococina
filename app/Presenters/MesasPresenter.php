@@ -76,8 +76,4 @@ final class MesasPresenter extends BasePresenter {
             $this->redirect('default');
         }
     }
-    
-    public function actionCancelarPedido( $pedido_id, $mesa_id ) {
-    
-    }
 }
