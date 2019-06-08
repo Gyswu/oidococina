@@ -11,7 +11,7 @@
  Target Server Version : 100137
  File Encoding         : 65001
 
- Date: 08/06/2019 11:28:47
+ Date: 08/06/2019 21:19:46
 */
 
 SET NAMES utf8mb4;
@@ -114,7 +114,7 @@ CREATE TABLE `Mesas`  (
 -- Records of Mesas
 -- ----------------------------
 INSERT INTO `Mesas` VALUES (5, 'Interior 2', 1, '2019-06-04 15:53:26', '2019-06-04 15:53:26');
-INSERT INTO `Mesas` VALUES (6, 'Interior 3', 0, '2019-06-04 15:53:26', '2019-06-04 15:53:26');
+INSERT INTO `Mesas` VALUES (6, 'Interior 3', 2, '2019-06-04 15:53:26', '2019-06-08 17:56:32');
 
 -- ----------------------------
 -- Table structure for PedidoPlatos
@@ -131,18 +131,21 @@ CREATE TABLE `PedidoPlatos`  (
   INDEX `plato`(`plato`) USING BTREE,
   CONSTRAINT `PedidoPlatos_ibfk_1` FOREIGN KEY (`pedido`) REFERENCES `Pedidos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `PedidoPlatos_ibfk_2` FOREIGN KEY (`plato`) REFERENCES `Platos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of PedidoPlatos
 -- ----------------------------
 INSERT INTO `PedidoPlatos` VALUES (1, 1, 4, '2019-06-08 11:12:09', '2019-06-08 11:12:09');
-INSERT INTO `PedidoPlatos` VALUES (2, 166, 3, '2019-06-08 11:12:14', '2019-06-08 11:12:14');
-INSERT INTO `PedidoPlatos` VALUES (5, 166, 6, '2019-06-08 11:22:53', '2019-06-08 11:22:53');
-INSERT INTO `PedidoPlatos` VALUES (6, 166, 6, '2019-06-08 11:22:55', '2019-06-08 11:22:55');
-INSERT INTO `PedidoPlatos` VALUES (7, 166, 6, '2019-06-08 11:26:44', '2019-06-08 11:26:44');
-INSERT INTO `PedidoPlatos` VALUES (8, 166, 4, '2019-06-08 11:26:46', '2019-06-08 11:26:46');
-INSERT INTO `PedidoPlatos` VALUES (9, 166, 1, '2019-06-08 11:26:47', '2019-06-08 11:26:47');
+INSERT INTO `PedidoPlatos` VALUES (2, 165, 3, '2019-06-08 11:12:14', '2019-06-08 17:47:22');
+INSERT INTO `PedidoPlatos` VALUES (5, 165, 6, '2019-06-08 11:22:53', '2019-06-08 17:47:25');
+INSERT INTO `PedidoPlatos` VALUES (6, 165, 6, '2019-06-08 11:22:55', '2019-06-08 17:47:26');
+INSERT INTO `PedidoPlatos` VALUES (7, 165, 6, '2019-06-08 11:26:44', '2019-06-08 17:47:26');
+INSERT INTO `PedidoPlatos` VALUES (12, 165, 4, '2019-06-08 11:45:56', '2019-06-08 17:47:27');
+INSERT INTO `PedidoPlatos` VALUES (14, 166, 4, '2019-06-08 11:47:23', '2019-06-08 11:47:23');
+INSERT INTO `PedidoPlatos` VALUES (15, 166, 2, '2019-06-08 11:47:28', '2019-06-08 11:47:28');
+INSERT INTO `PedidoPlatos` VALUES (16, 166, 2, '2019-06-08 16:26:52', '2019-06-08 16:26:52');
+INSERT INTO `PedidoPlatos` VALUES (17, 166, 2, '2019-06-08 16:45:47', '2019-06-08 16:45:47');
 
 -- ----------------------------
 -- Table structure for Pedidos
@@ -162,9 +165,9 @@ CREATE TABLE `Pedidos`  (
 -- ----------------------------
 -- Records of Pedidos
 -- ----------------------------
-INSERT INTO `Pedidos` VALUES (1, 6, 0, '2019-06-08 10:46:51', '2019-06-08 10:46:51');
-INSERT INTO `Pedidos` VALUES (165, 5, 0, '2019-06-06 00:23:17', '2019-06-06 00:23:17');
-INSERT INTO `Pedidos` VALUES (166, 6, 0, '2019-06-08 09:44:42', '2019-06-08 09:44:42');
+INSERT INTO `Pedidos` VALUES (1, 6, 1, '2019-06-08 10:46:51', '2019-06-08 17:45:27');
+INSERT INTO `Pedidos` VALUES (165, 5, 1, '2019-06-06 00:23:17', '2019-06-08 17:45:29');
+INSERT INTO `Pedidos` VALUES (166, 6, 1, '2019-06-08 09:44:42', '2019-06-08 17:56:32');
 
 -- ----------------------------
 -- Table structure for Platos
@@ -227,5 +230,23 @@ CREATE TABLE `Productos`  (
 INSERT INTO `Productos` VALUES (1, 'Judías', 'conservas', 250, 'num', '2019-06-04 15:53:46', '2019-06-04 15:53:46');
 INSERT INTO `Productos` VALUES (2, 'huevo', 'frescos', 10, 'num', '2019-06-04 15:53:46', '2019-06-04 15:53:46');
 INSERT INTO `Productos` VALUES (3, 'das', 'ca', 500, 'num', '2019-06-04 15:53:46', '2019-06-04 15:53:46');
+
+-- ----------------------------
+-- Table structure for Usuarios
+-- ----------------------------
+DROP TABLE IF EXISTS `Usuarios`;
+CREATE TABLE `Usuarios`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `pin` int(6) NULL DEFAULT NULL,
+  `rol` enum('camarero','maitre','cocinero','gerente','admin') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of Usuarios
+-- ----------------------------
+INSERT INTO `Usuarios` VALUES (1, 'Pepito', 1111, 'camarero');
+INSERT INTO `Usuarios` VALUES (2, 'Guarrito', 2222, 'cocinero');
 
 SET FOREIGN_KEY_CHECKS = 1;
