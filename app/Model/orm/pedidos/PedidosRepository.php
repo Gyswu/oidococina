@@ -24,6 +24,10 @@ class PedidosRepository extends Repository {
         return $result;
     }
     
+    public function findPendientesCocina(){
+        return $this->findBy(['estado' => Pedido::ESTADOS['yaPedido']]);
+    }
+    
     static function getEntityClassNames(): array {
         return [ Pedido::class ];
     }

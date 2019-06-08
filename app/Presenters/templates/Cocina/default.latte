@@ -1,0 +1,29 @@
+{block content}
+
+{snippet ultimosPedidos}
+    <div id="cocina" class="container-fluid">
+        <div class="row">
+            {foreach $pedidos as $pedido}
+                {include ticket $pedido}
+            {/foreach}
+        </div>
+    </div>
+{/snippet}
+
+<a n:href="cargarPendientes!" class="ajax btn btn-primary" id="cargar-nuevos">Cargar pedidos
+    pendientes</a>
+
+{/block}
+
+
+{block mas_scripts}
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                $.nette.ajax({
+                    url: {link cargarPendientes!}
+                });
+            }, 2000);
+        })
+    </script>
+{/block}
