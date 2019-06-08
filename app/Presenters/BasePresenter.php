@@ -15,7 +15,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public $orm;
     
     protected function startup() {
-        if(!$this->user->isLoggedIn() && $this->presenter->getName() !== 'Sign'){
+        if( !$this->user->isLoggedIn() && !in_array($this->presenter->getName(), [ 'Sign', 'Admin:Sign' ]) ) {
             $this->flashMessage('Debes iniciar sesión primero');
             $this->redirect('Sign:in');
         }
