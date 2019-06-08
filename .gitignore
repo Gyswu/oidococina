@@ -1,7 +1,7 @@
 app/config/local.neon
 .idea
 .idea/
-
+temp/
 # Created by https://www.gitignore.io/api/intellij
 
 ### Intellij ###

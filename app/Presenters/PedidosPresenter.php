@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 namespace App\Presenters;
 
 use App\Model\Orm\Pedido;
+use App\Model\Orm\PedidoPlato;
 use Nextras\Orm\Collection\ICollection;
 
 final class PedidosPresenter extends BasePresenter {
@@ -65,8 +66,10 @@ final class PedidosPresenter extends BasePresenter {
         
         if( $platoID ) {
             $plato = $this->orm->platos->getById($platoID);
-            $this->pedido->platos->add($plato);
-            $this->pedido = $this->orm->persistAndFlush($this->pedido);
+            $pedidoPlato = new PedidoPlato();
+            $pedidoPlato->pedido = $this->pedido;
+            $pedidoPlato->plato = $plato;
+            $this->orm->persistAndFlush($pedidoPlato);
         }
         //
         $this->template->pedido = $this->pedido;
@@ -88,16 +91,15 @@ final class PedidosPresenter extends BasePresenter {
         $this->redirect("Mesas:default");
     }
     
-    public function actionCancelarPlato( $platoID, $pedidoID, $mesaID ) {
-        $plato = $this->orm->platos->getById($platoID);
-        $this->pedido = $this->orm->pedidos->getById($pedidoID);
-        if( !$this->pedido->platos->remove($plato) ) {
-            $this->flashMessage("Error al eliminar el pedido", 'warning');
-        } else {
-            $this->orm->persistAndFlush($this->pedido);
-            $this->flashMessage("El pedido ha sido eliminado con exito", 'success');
+    public function actionCancelarPlato($id, $mesaID, $pedidoPlatoID) {
+        try {
+            $pedidoPlato = $this->orm->pedidoPlatos->getById($pedidoPlatoID);
+            $this->orm->pedidoPlatos->removeAndFlush($pedidoPlato);
+            $this->flashMessage("Plato cancelado", 'success');
+        }catch(\Exception $e){
+            $this->flashMessage("Error al cancelar el plato".$e->getMessage(), 'warning');
         }
-        $this->redirect("Pedidos:Comanda", [ 'id' => $this->pedido->id, 'mesaID' => $mesaID ]);
+        $this->redirect("Pedidos:Comanda", [ 'id' => $id, 'mesaID' => $mesaID ]);
     }
     
     /*

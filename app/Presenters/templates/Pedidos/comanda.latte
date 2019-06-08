@@ -49,23 +49,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                {foreach $pedido->platos as $plato }
+                {foreach $pedido->pedidoPlatos as $pedidoPlato }
                     <tr>
                         <td>
-                            {$plato->nombre}
+                            {$pedidoPlato->plato->nombre}
                         </td>
                         <td>
-                            {$plato->precio}€
+                            {$pedidoPlato->plato->precio}€
                         </td>
                         <td>
-                            {$plato->categoria->nombre}
+                            {$pedidoPlato->plato->categoria->nombre}
 
                         </td>
                         <td>
                             <a n:href="Pedidos:ver $pedido->id" class="btn btn-success">Pedir de
                                 nuevo</a>
-                            <a n:href="Pedidos:cancelarPlato $plato->id, $pedido->id,
-$pedido->mesa->id"
+                            <a n:href="Pedidos:cancelarPlato $pedido->id,
+$pedido->mesa->id, $pedidoPlato->id"
                                     class="btn
                             btn-danger">Cancelar</a>
                             {*<a n:href="Mesas:pedirPlato $plato->id, $mesa->id" class="btn btn-xs*}
