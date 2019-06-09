@@ -13,7 +13,7 @@ use Nextras\Orm\Relationships\OneHasMany;
  * @property int                       $id                      {primary}
  * @property string                    $nombre
  * @property float                     $precio
- * @property int                       $disponible              {default 0}
+ * @property int                       $disponible              {default 1}
  * @property ManyHasMany|Ingrediente[] $ingredientes            {m:m Ingrediente::$platos , isMain=true}
  * @property ManyHasMany|Menu[]        $menus                   {m:m Menu::$platos}
  * @property Categoria                 $categoria               {m:1 Categoria::$platos}

@@ -20,6 +20,7 @@
                     <th>Precio</th>
                     <th>Categoria</th>
                     <th>Opciones</th>
+                    <th>Disponibilidad</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,8 +39,18 @@
                             {$plato->categoria->nombre}
                         </td>
                         <td align="center">
-                            <a n:href="Platos:editar $plato->id" class="btn btn-xs btn-primary">Editar</a>
+                            <a n:href="Platos:editar $plato->id"
+                                    class="btn btn-xs btn-primary">Editar</a>
                             <a n:href="Platos:borrar $plato->id" class="btn btn-xs btn-danger del">Borrar</a>
+                        </td>
+                        <td>
+                            {if $plato->disponible == 1}
+                                <a n:href="Platos:deshabilitar $plato->id" class="btn btn-xs
+                                btn-success">Disponible</a>
+                            {else}
+                                <a n:href="Platos:habilitar $plato->id" class="btn btn-xs btn-danger
+                        ">No Disponible</a>
+                            {/if}
                         </td>
                     </tr>
                 {/foreach}

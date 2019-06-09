@@ -3,6 +3,7 @@ declare( strict_types = 1 );
 
 namespace App\Presenters;
 
+use App\Model\Orm\Mesa;
 use App\Model\Orm\Pedido;
 use App\Model\Orm\PedidoPlato;
 use App\Model\Roles;
@@ -13,8 +14,11 @@ final class TpvPresenter extends BasePresenter {
     /** @var $pedido Pedido */
     private $pedido = null;
     
+    /** @var $mesa Mesa */
+    private $mesa;
+    
     public function actionDefault() {
-        $this->puedeAcceder(Roles::SECCION_TPV, Roles::PERMISO_VER);
+        $this->puedeAcceder(Roles::SECCION_TPV);
     }
     
     public function renderDefault() {
@@ -22,11 +26,21 @@ final class TpvPresenter extends BasePresenter {
     }
     
     public function actionVer( $id ) {
-        $this->puedeAcceder(Roles::SECCION_TPV, Roles::PERMISO_VER);
-        $this->pedido = $this->orm->pedidos->getById($id);
+        $this->puedeAcceder(Roles::SECCION_TPV);
+        $this->mesa = $this->orm->mesas->getById($id);
     }
     
     public function renderVer( $id ) {
+        $this->template->mesa = $this->mesa;
+        $this->template->pedidos = $this->mesa->pedidos;
+    }
+    
+    public function actionVerComanda( $id ) {
+        $this->puedeAcceder(Roles::SECCION_TPV);
+        $this->pedido = $this->orm->pedidos->getById($id);
+    }
+    
+    public function renderVerComanda( $id ) {
         
         $this->template->pedido = $this->pedido;
     }
@@ -40,7 +54,7 @@ final class TpvPresenter extends BasePresenter {
      * @throws \Nette\Application\AbortException
      */
     public function actionComanda( $id, $mesaID ) {
-        $this->puedeAcceder(Roles::SECCION_TPV, Roles::PERMISO_PEDIDO_CREAR);
+        $this->puedeAcceder(Roles::SECCION_TPV);
         //Lo primero revisar si hay mesa
         if( !$mesa = $this->orm->mesas->getById($mesaID) ) {
             $this->flashMessage("Elige una mesa antes de añadirle un nuevo pedido", 'warning');
@@ -84,7 +98,7 @@ final class TpvPresenter extends BasePresenter {
     }
     
     public function actionReservar( $pedidoID, $mesaID ) {
-        $this->puedeAcceder(Roles::SECCION_TPV, Roles::PERMISO_PEDIDO_CREAR);
+        $this->puedeAcceder(Roles::SECCION_TPV);
         //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 0;
@@ -101,7 +115,7 @@ final class TpvPresenter extends BasePresenter {
     }
     
     public function actionYaPedido( $pedidoID, $mesaID ) {
-        $this->puedeAcceder(Roles::SECCION_TPV, Roles::PERMISO_PEDIDO_CREAR);
+        $this->puedeAcceder(Roles::SECCION_TPV);
         //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 1;
@@ -118,7 +132,7 @@ final class TpvPresenter extends BasePresenter {
     }
     
     public function actionServido( $pedidoID, $mesaID ) {
-        $this->puedeAcceder(Roles::SECCION_TPV, Roles::PERMISO_PEDIDO_CREAR);
+        $this->puedeAcceder(Roles::SECCION_TPV);
         //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 3;
@@ -135,7 +149,7 @@ final class TpvPresenter extends BasePresenter {
     }
     
     public function actionPagado( $pedidoID, $mesaID ) {
-        $this->puedeAcceder(Roles::SECCION_TPV, Roles::PERMISO_PEDIDO_COBRAR);
+        $this->puedeAcceder(Roles::SECCION_TPV);
         //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 4;

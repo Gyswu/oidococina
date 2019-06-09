@@ -39,19 +39,6 @@ class Roles implements IAuthorizator {
         return $roles;
     }
     
-    public function isAllowed( $role, $resource, $privilege) : bool {
-        if( $role === 'superadmin' ) {
-            return true;
-        }
-        //
-        $acl = self::getPermisos();
-        if( !$privilege && isset($acl[ $role ][ $resource ]) ) {
-            return true;
-        }
-        
-        return isset($acl[ $role ][ $resource ]) && in_array($privilege, $acl[ $role ][ $resource ]);
-    }
-    
     private static function getPermisos() {
         
         if( !self::$permissions ) {
@@ -70,13 +57,13 @@ class Roles implements IAuthorizator {
                     self::SECCION_COCINA => [],
                 ],
                 'tpv'        => [
-                    self::SECCION_TPV => [ self::PERMISO_PEDIDO_COBRAR, self::PERMISO_VER ],
+                    self::SECCION_TPV => [],
                 ],
-                'cocinero'     => [
-                    self::SECCION_COCINA => [ self::PERMISO_PEDIDO_LISTO, self::PERMISO_VER ],
+                'cocinero'   => [
+                    self::SECCION_COCINA => [],
                 ],
                 'camarero'   => [
-                    self::SECCION_MESAS => [ self::PERMISO_PEDIDO_CREAR, self::PERMISO_VER ],
+                    self::SECCION_MESAS => [],
                 ],
                 'guest'      => [
                     self::SECCION_LOGIN => [],
@@ -86,6 +73,19 @@ class Roles implements IAuthorizator {
         }
         
         return self::$permissions;
+    }
+    
+    public function isAllowed( $role, $resource, $privilege ): bool {
+        if( $role === 'superadmin' ) {
+            return true;
+        }
+        //
+        $acl = self::getPermisos();
+        if( !$privilege && isset($acl[ $role ][ $resource ]) ) {
+            return true;
+        }
+        
+        return isset($acl[ $role ][ $resource ]) && in_array($privilege, $acl[ $role ][ $resource ]);
     }
     
 }

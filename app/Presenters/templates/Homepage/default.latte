@@ -1,5 +1,3 @@
-{* This is the welcome page, you can delete it *}
-
 {block content}
     <div class="container">
         <div class="row">
@@ -10,44 +8,45 @@
                 <h2>Estado actual de las mesas</h2>
             </div>
         </div>
-        <div>
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th>
-                        Nombre
-                    </th>
-                    <th>
-                        Estado
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {foreach $mesas as $mesa}
+        <div class="row">
+            <div class="col col-lg-10">
+                <table class="table">
+                    <thead class="thead-dark">
                     <tr>
-                        <td>
-                            {$mesa->nombre}
-                        </td>
-                        <td>
-                            {switch $mesa->estado}
-                                {case 0}
-                                Libre
-                                {case 1}
-                                Ocupada
-                                {case 2}
-                                Esperando Pedido
-                                {case 3}
-                                Servida
-                                {default}
-                                Not working
-                            {/switch}
-                        </td>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Estado
+                        </th>
                     </tr>
-                {/foreach}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {foreach $mesas as $mesa}
+                        <tr>
+                            <td>
+                                {$mesa->nombre}
+                            </td>
+                            <td>
+                                {switch $mesa->estado}
+                                    {case 0}
+                                    Libre
+                                    {case 1}
+                                    Ocupada
+                                    {case 2}
+                                    Esperando Pedido
+                                    {case 3}
+                                    Servida
+                                    {default}
+                                    Not working
+                                {/switch}
+                            </td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
         </div>
-
     </div>
 
 {/block}

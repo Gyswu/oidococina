@@ -26,7 +26,7 @@ final class PedidosPresenter extends BasePresenter {
         $this->pedido = $this->orm->pedidos->getById($id);
     }
     
-    public function renderVer( $id ) {
+    public function renderVer() {
         
         $this->template->pedido = $this->pedido;
     }
@@ -142,6 +142,10 @@ final class PedidosPresenter extends BasePresenter {
      *                                                                                      Pedido = 4
      *                                                                                      Mesa   = 0
      *
+     * 5            Cancelada                               <----            Accion Cancelar
+     *                                                                                      Pedido = 5
+     *                                                                                      Mesa = 0
+     *
      * Una vez el pedido esta pagado, la accion asigna el estado de la mesa a 0 (Libre)
      *
      * Cabe la posibilidad de que esto cambie
@@ -207,6 +211,25 @@ final class PedidosPresenter extends BasePresenter {
             $mesa->estado = 0;
             $this->orm->mesas->persistAndFlush($mesa);
             $this->flashMessage('El pedido se ha asignado con exito', 'success');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        } else {
+            $this->flashMessage('Ha habido un error', 'danger');
+            $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
+        }
+    }
+    
+    public function actionCancelar( $pedidoID ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        //
+        $mesaID = null;
+        if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
+            $pedido->estado = 5;
+            $mesaID = $pedido->mesa->id;
+            $this->orm->pedidos->persistAndFlush($pedido);
+            $mesa = $this->orm->mesas->getById($mesaID);
+            $mesa->estado = 0;
+            $this->orm->mesas->persistAndFlush($mesa);
+            $this->flashMessage('Se ha cancelado con exito', 'success');
             $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
         } else {
             $this->flashMessage('Ha habido un error', 'danger');

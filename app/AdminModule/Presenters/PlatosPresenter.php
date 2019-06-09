@@ -156,4 +156,35 @@ class PlatosPresenter extends BaseAdminPresenter {
         $this->redirect('default');
     }
     
+    /*
+     * Habilitacion o deshabilitacion de disponibilidad de platos
+     *
+     * Estado
+     *
+     *      1 -> Disponible
+     *      0 -> No Disponible
+     */
+    public function actionHabilitar( $platoID ) {
+        $plato = $this->orm->platos->getById($platoID);
+        $plato->disponible = 1;
+        if( $this->orm->platos->persistAndFlush($plato) ) {
+            
+            $this->flashMessage("Plato habilitado", "success");
+        } else {
+            $this->flashMessage("Error al habilitar", 'danger');
+        }
+        $this->redirect('default');
+    }
+    
+    public function actionDeshabilitar( $platoID ) {
+        $plato = $this->orm->platos->getById($platoID);
+        $plato->disponible = 0;
+        if( $this->orm->platos->persistAndFlush($plato) ) {
+            
+            $this->flashMessage("Plato deshabilitado", "success");
+        } else {
+            $this->flashMessage("Error al deshabilitar", 'danger');
+        }
+        $this->redirect('default');
+    }
 }

@@ -1,8 +1,49 @@
-{* This is the welcome page, you can delete it *}
-
 {block content}
-	<div class="container">
-		<h1 n:block="tittle">Bueno ya voy mejor a administrar</h1>
-	</div>
-
+    <div class="container">
+        <h1 n:block="tittle">Bueno ya voy mejor a administrar</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Estado actual de las mesas</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-col-lg-10">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $mesas as $mesa}
+                    <tr>
+                        <td>
+                            {$mesa->nombre}
+                        </td>
+                        <td>
+                            {switch $mesa->estado}
+                                {case 0}
+                                Libre
+                                {case 1}
+                                Ocupada
+                                {case 2}
+                                Esperando Pedido
+                                {case 3}
+                                Servida
+                                {default}
+                                Not working
+                            {/switch}
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {/block}
