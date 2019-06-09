@@ -4,11 +4,16 @@ declare( strict_types = 1 );
 namespace App\Presenters;
 
 use App\Model\Orm\Pedido;
+use App\Model\Roles;
 
 final class CocinaPresenter extends BasePresenter {
     
     /** @var $pedidos Pedido[] */
     private $pedidos = null;
+    
+    public function actionDefault() {
+        $this->puedeAcceder(Roles::SECCION_COCINA, Roles::PERMISO_VER);
+    }
     
     public function renderDefault() {
         if( $this->pedidos === null ) {
@@ -25,6 +30,8 @@ final class CocinaPresenter extends BasePresenter {
     }
     
     public function actionPreparado( $pedidoID, $mesaID ) {   //Esta accion es solo para los cocineros
+        $this->puedeAcceder(Roles::SECCION_COCINA, Roles::PERMISO_PEDIDO_LISTO);
+        //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 2;
             $this->orm->pedidos->persistAndFlush($pedido);

@@ -30,14 +30,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" n:href="Mesas:default">Mesas<span
-                                class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" n:href="Cocina:default">Cocina<span
-                                class="sr-only">(current)</span></a>
-                </li>
+
+                {foreach $menu as $datos}
+                    {if $datos['mostrar']}
+                        <li class="nav-item">
+                            <a class="nav-link" n:href="$datos['nhref']">{$datos['nombre']}<span
+                                        class="sr-only">(current)</span></a>
+                        </li>
+                    {/if}
+                {/foreach}
+                {*<li class="nav-item">*}
+                    {*<a class="nav-link" n:href="Mesas:default">Mesas<span*}
+                                {*class="sr-only">(current)</span></a>*}
+                {*</li>*}
+                {*<li class="nav-item">*}
+                    {*<a class="nav-link" n:href="Cocina:default">Cocina<span*}
+                                {*class="sr-only">(current)</span></a>*}
+                {*</li>*}
             </ul>
         </div>
         <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">

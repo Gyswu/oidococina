@@ -5,6 +5,7 @@ namespace App\Presenters;
 
 use App\Model\Orm\Pedido;
 use App\Model\Orm\PedidoPlato;
+use App\Model\Roles;
 use Nextras\Orm\Collection\ICollection;
 
 final class PedidosPresenter extends BasePresenter {
@@ -12,11 +13,15 @@ final class PedidosPresenter extends BasePresenter {
     /** @var $pedido Pedido */
     private $pedido = null;
     
+    public function actionDefault(){
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_VER);
+    }
     public function renderDefault() {
         $this->template->pedidos = $this->orm->pedidos->findAll();
     }
     
     public function actionVer( $id ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_VER);
         $this->pedido = $this->orm->pedidos->getById($id);
     }
     
@@ -34,6 +39,7 @@ final class PedidosPresenter extends BasePresenter {
      * @throws \Nette\Application\AbortException
      */
     public function actionComanda( $id, $mesaID ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
         //Lo primero revisar si hay mesa
         if( !$mesa = $this->orm->mesas->getById($mesaID) ) {
             $this->flashMessage("Elige una mesa antes de añadirle un nuevo pedido", 'warning');
@@ -80,6 +86,8 @@ final class PedidosPresenter extends BasePresenter {
      * Cancelacion de comandas y pedidos NO TOCAR
      */
     public function actionCancelarComanda( $id ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        //
         if( !$comanda = $this->orm->pedidos->getById($id) ) {
             $this->flashMessage("Ha habido un error", 'warning');
             $this->redirect("Mesas:default");
@@ -93,6 +101,8 @@ final class PedidosPresenter extends BasePresenter {
     }
     
     public function actionCancelarPlato( $id, $mesaID, $pedidoPlatoID ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        //
         try {
             $pedidoPlato = $this->orm->pedidoPlatos->getById($pedidoPlatoID);
             $this->orm->pedidoPlatos->removeAndFlush($pedidoPlato);
@@ -136,6 +146,8 @@ final class PedidosPresenter extends BasePresenter {
      * Cabe la posibilidad de que esto cambie
      */
     public function actionReservar( $pedidoID, $mesaID ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 0;
             $this->orm->pedidos->persistAndFlush($pedido);
@@ -151,6 +163,8 @@ final class PedidosPresenter extends BasePresenter {
     }
     
     public function actionYaPedido( $pedidoID, $mesaID ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 1;
             $this->orm->pedidos->persistAndFlush($pedido);
@@ -166,6 +180,8 @@ final class PedidosPresenter extends BasePresenter {
     }
     
     public function actionServido( $pedidoID, $mesaID ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 3;
             $this->orm->pedidos->persistAndFlush($pedido);
@@ -181,6 +197,8 @@ final class PedidosPresenter extends BasePresenter {
     }
     
     public function actionPagado( $pedidoID, $mesaID ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_COBRAR);
+        //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 4;
             $this->orm->pedidos->persistAndFlush($pedido);

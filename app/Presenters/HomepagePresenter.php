@@ -3,13 +3,21 @@ declare( strict_types = 1 );
 
 namespace App\Presenters;
 
+use App\Model\Roles;
+
 final class HomepagePresenter extends BasePresenter {
+    
+    public function actionDefault(){
+    
+    }
     
     public function renderDefault() {
         $this->template->mesas = $this->orm->mesas->findAll();
+        
     }
     /*
-     * Me pregunto si se puede definir que dependiendo del rol un empleado pueda ver una opcion o no.
+     * Me pregunto si se puede definir que dependiendo del rol
+     * un empleado pueda ver una opcion o no.
      *
      * Es decir:
      *

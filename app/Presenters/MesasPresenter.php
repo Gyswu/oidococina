@@ -5,6 +5,7 @@ namespace App\Presenters;
 
 use App\Model\Orm\Mesa;
 use App\Model\Orm\Pedido;
+use App\Model\Roles;
 use Nextras\Orm\Collection\ICollection;
 
 final class MesasPresenter extends BasePresenter {
@@ -12,11 +13,16 @@ final class MesasPresenter extends BasePresenter {
     /** @var $mesa Mesa */
     private $mesa;
     
+    public function actionDefault(){
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_VER);
+    }
+    
     public function renderDefault() {
         $this->template->mesas = $this->orm->mesas->findAll();
     }
     
     public function actionVer( $id ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_VER);
         $this->mesa = $this->orm->mesas->getById($id);
     }
     
@@ -34,7 +40,8 @@ final class MesasPresenter extends BasePresenter {
     ########################################
     ########################################
     public function actionPedirPlato( $plato_id, $mesa_id ) {
-        
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        //
         $pedido = new Pedido();
         $plato = $this->orm->platos->getById($plato_id);
         $mesa = $this->orm->mesas->getById($mesa_id);
@@ -46,7 +53,8 @@ final class MesasPresenter extends BasePresenter {
     }
     
     public function actionPedir( $id ) {
-        
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        //
         $pedidos = new \ArrayObject();
         $mesa = $this->orm->mesas->getById($id)->orderBy('id', ICollection::ASC);
         $this->template->mesa = $mesa;
@@ -65,6 +73,8 @@ final class MesasPresenter extends BasePresenter {
      * aquí solo necesitas el plato y el pedido, una vez tienes el pedido puedes pedido->mesa->id
      */
     public function actionCancelar( $pedido_id, $mesa_id, $plato_id ) {
+        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        //
         try {
             //if pedido estado permite cancelar, ojo aquí
             dd($this->orm->mesas->getById($mesa_id));
