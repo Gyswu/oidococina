@@ -1,0 +1,57 @@
+{block content}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col col-6">
+            <h2>Añadir Usuario</h2>
+            {control masUsuariosForm}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2>Listado de Usuarios</h2>
+
+            <table class="table">
+                {if $usuariosx}
+                <thead class="thead-dark">
+                <tr>
+
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Opciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $usuariosx as $usuariox}
+                    {if $usuariox->rol == 'superadmin'}
+                    {else}
+                        <tr>
+                            <td>
+                                {$usuariox->id}
+                            </td>
+                            <td>
+                                {$usuariox->nombre}
+                            </td>
+                            <td>
+                                {$usuariox->rol}
+                            </td>
+                            <td align="center">
+
+                                <a n:href="Users:borrar $usuariox->id" class="btn btn-xs btn-danger
+                            del">Borrar</a>
+                            </td>
+                            <td>
+                        </tr>
+                    {/if}
+                {/foreach}
+                {else}
+                <tr>
+                    <td> No hay ningún usuario disponible</td>
+                </tr>
+                {/if}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {/block}

@@ -70,7 +70,7 @@ class PlatosPresenter extends BaseAdminPresenter {
         $masCategorias = new Categoria();
         $masCategorias = $this->orm->categorias->findAll()->fetchPairs('id', 'nombre');
         $form = ( new PlatosFormFactory() )->createEdit($this->platoEditado, $masCategorias);
-        $form->onSuccess[] = [ $this, 'onSuccessEditarPlato' ];//convención con la variable onSuccess y el nombre del formulario
+        $form->onSuccess[] = [ $this, 'onSuccessEditarPlato' ];
         
         return $form;
     }
