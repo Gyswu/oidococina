@@ -1,252 +1,363 @@
-/*
- Navicat Premium Data Transfer
+-- MySQL dump 10.16  Distrib 10.1.40-MariaDB, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: oidococina
+-- ------------------------------------------------------
+-- Server version	10.1.40-MariaDB-0ubuntu0.18.04.1
 
- Source Server         : localhost
- Source Server Type    : MariaDB
- Source Server Version : 100137
- Source Host           : localhost:3306
- Source Schema         : oidococina
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
- Target Server Type    : MariaDB
- Target Server Version : 100137
- File Encoding         : 65001
+--
+-- Table structure for table `Categorias`
+--
 
- Date: 08/06/2019 21:19:46
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for Categorias
--- ----------------------------
 DROP TABLE IF EXISTS `Categorias`;
-CREATE TABLE `Categorias`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Categorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `nombre` varchar(128) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of Categorias
--- ----------------------------
-INSERT INTO `Categorias` VALUES (1, 'Primer', '2019-06-04 15:53:42', '2019-06-04 15:53:42');
-INSERT INTO `Categorias` VALUES (2, 'Segundo', '2019-06-04 15:53:42', '2019-06-04 15:53:42');
-INSERT INTO `Categorias` VALUES (3, 'Tercero', '2019-06-04 15:53:42', '2019-06-04 15:53:42');
-INSERT INTO `Categorias` VALUES (4, 'Postre', '2019-06-04 15:53:42', '2019-06-04 15:53:42');
+--
+-- Dumping data for table `Categorias`
+--
 
--- ----------------------------
--- Table structure for Ingredientes
--- ----------------------------
+LOCK TABLES `Categorias` WRITE;
+/*!40000 ALTER TABLE `Categorias` DISABLE KEYS */;
+INSERT INTO `Categorias` VALUES (1,'Primer','2019-06-04 15:53:42','2019-06-04 15:53:42'),(2,'Segundo','2019-06-04 15:53:42','2019-06-04 15:53:42'),(3,'Tercero','2019-06-04 15:53:42','2019-06-04 15:53:42'),(4,'Postre','2019-06-04 15:53:42','2019-06-04 15:53:42');
+/*!40000 ALTER TABLE `Categorias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Ingredientes`
+--
+
 DROP TABLE IF EXISTS `Ingredientes`;
-CREATE TABLE `Ingredientes`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Ingredientes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `producto_id` int(11) NOT NULL,
-  `cantidad` int(5) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `cantidad` int(5) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `product_id`(`producto_id`) USING BTREE,
-  CONSTRAINT `Ingredientes_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `Productos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+  KEY `product_id` (`producto_id`) USING BTREE,
+  CONSTRAINT `Ingredientes_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `Productos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of Ingredientes
--- ----------------------------
-INSERT INTO `Ingredientes` VALUES (33, 1, 45, '2019-06-04 15:53:37', '2019-06-04 15:53:37');
-INSERT INTO `Ingredientes` VALUES (34, 1, 76, '2019-06-04 15:53:37', '2019-06-04 15:53:37');
-INSERT INTO `Ingredientes` VALUES (35, 2, 67, '2019-06-04 15:53:37', '2019-06-04 15:53:37');
-INSERT INTO `Ingredientes` VALUES (36, 2, 5, '2019-06-04 15:53:37', '2019-06-04 15:53:37');
+--
+-- Dumping data for table `Ingredientes`
+--
 
--- ----------------------------
--- Table structure for Menus
--- ----------------------------
+LOCK TABLES `Ingredientes` WRITE;
+/*!40000 ALTER TABLE `Ingredientes` DISABLE KEYS */;
+INSERT INTO `Ingredientes` VALUES (33,1,45,'2019-06-04 15:53:37','2019-06-04 15:53:37'),(34,1,76,'2019-06-04 15:53:37','2019-06-04 15:53:37'),(35,2,67,'2019-06-04 15:53:37','2019-06-04 15:53:37'),(36,2,5,'2019-06-04 15:53:37','2019-06-04 15:53:37');
+/*!40000 ALTER TABLE `Ingredientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Menus`
+--
+
 DROP TABLE IF EXISTS `Menus`;
-CREATE TABLE `Menus`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Menus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(256) NOT NULL,
   `precio` float NOT NULL,
-  `created_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of Menus
--- ----------------------------
-INSERT INTO `Menus` VALUES (1, 'Menu del dia', 10, '2019-06-04 15:53:22', '2019-06-04 15:53:22');
+--
+-- Dumping data for table `Menus`
+--
 
--- ----------------------------
--- Table structure for Menus_x_Platos
--- ----------------------------
+LOCK TABLES `Menus` WRITE;
+/*!40000 ALTER TABLE `Menus` DISABLE KEYS */;
+INSERT INTO `Menus` VALUES (1,'Menu del dia',10,'2019-06-04 15:53:22','2019-06-04 15:53:22');
+/*!40000 ALTER TABLE `Menus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Menus_x_Platos`
+--
+
 DROP TABLE IF EXISTS `Menus_x_Platos`;
-CREATE TABLE `Menus_x_Platos`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Menus_x_Platos` (
   `menu_id` int(11) NOT NULL,
   `plato_id` int(11) NOT NULL,
-  PRIMARY KEY (`plato_id`, `menu_id`) USING BTREE,
-  INDEX `Menus_x_Platos_Menus_id_fk`(`menu_id`) USING BTREE,
-  CONSTRAINT `Menus_x_Platos_Menus_id_fk` FOREIGN KEY (`menu_id`) REFERENCES `Menus` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `Menus_x_Platos_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+  PRIMARY KEY (`plato_id`,`menu_id`) USING BTREE,
+  KEY `Menus_x_Platos_Menus_id_fk` (`menu_id`) USING BTREE,
+  CONSTRAINT `Menus_x_Platos_Menus_id_fk` FOREIGN KEY (`menu_id`) REFERENCES `Menus` (`id`),
+  CONSTRAINT `Menus_x_Platos_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of Menus_x_Platos
--- ----------------------------
-INSERT INTO `Menus_x_Platos` VALUES (1, 1);
-INSERT INTO `Menus_x_Platos` VALUES (1, 2);
+--
+-- Dumping data for table `Menus_x_Platos`
+--
 
--- ----------------------------
--- Table structure for Mesas
--- ----------------------------
+LOCK TABLES `Menus_x_Platos` WRITE;
+/*!40000 ALTER TABLE `Menus_x_Platos` DISABLE KEYS */;
+INSERT INTO `Menus_x_Platos` VALUES (1,1),(1,2);
+/*!40000 ALTER TABLE `Menus_x_Platos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Mesas`
+--
+
 DROP TABLE IF EXISTS `Mesas`;
-CREATE TABLE `Mesas`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Mesas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `estado` int(2) NULL DEFAULT 0,
-  `created_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `nombre` varchar(255) DEFAULT NULL,
+  `estado` int(2) DEFAULT '0',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of Mesas
--- ----------------------------
-INSERT INTO `Mesas` VALUES (5, 'Interior 2', 1, '2019-06-04 15:53:26', '2019-06-04 15:53:26');
-INSERT INTO `Mesas` VALUES (6, 'Interior 3', 2, '2019-06-04 15:53:26', '2019-06-08 17:56:32');
+--
+-- Dumping data for table `Mesas`
+--
 
--- ----------------------------
--- Table structure for PedidoPlatos
--- ----------------------------
+LOCK TABLES `Mesas` WRITE;
+/*!40000 ALTER TABLE `Mesas` DISABLE KEYS */;
+INSERT INTO `Mesas` VALUES (5,'Interior 2',0,'2019-06-04 15:53:26','2019-06-09 15:57:24'),(6,'Interior 3',2,'2019-06-04 15:53:26','2019-06-08 17:56:32');
+/*!40000 ALTER TABLE `Mesas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `PedidoPlatos`
+--
+
 DROP TABLE IF EXISTS `PedidoPlatos`;
-CREATE TABLE `PedidoPlatos`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `PedidoPlatos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `pedido` int(11) NOT NULL,
   `plato` int(11) NOT NULL,
-  `created_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `pedido`(`pedido`, `plato`) USING BTREE,
-  INDEX `plato`(`plato`) USING BTREE,
-  CONSTRAINT `PedidoPlatos_ibfk_1` FOREIGN KEY (`pedido`) REFERENCES `Pedidos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `PedidoPlatos_ibfk_2` FOREIGN KEY (`plato`) REFERENCES `Platos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+  KEY `pedido` (`pedido`,`plato`) USING BTREE,
+  KEY `plato` (`plato`) USING BTREE,
+  CONSTRAINT `PedidoPlatos_ibfk_1` FOREIGN KEY (`pedido`) REFERENCES `Pedidos` (`id`),
+  CONSTRAINT `PedidoPlatos_ibfk_2` FOREIGN KEY (`plato`) REFERENCES `Platos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of PedidoPlatos
--- ----------------------------
-INSERT INTO `PedidoPlatos` VALUES (1, 1, 4, '2019-06-08 11:12:09', '2019-06-08 11:12:09');
-INSERT INTO `PedidoPlatos` VALUES (2, 165, 3, '2019-06-08 11:12:14', '2019-06-08 17:47:22');
-INSERT INTO `PedidoPlatos` VALUES (5, 165, 6, '2019-06-08 11:22:53', '2019-06-08 17:47:25');
-INSERT INTO `PedidoPlatos` VALUES (6, 165, 6, '2019-06-08 11:22:55', '2019-06-08 17:47:26');
-INSERT INTO `PedidoPlatos` VALUES (7, 165, 6, '2019-06-08 11:26:44', '2019-06-08 17:47:26');
-INSERT INTO `PedidoPlatos` VALUES (12, 165, 4, '2019-06-08 11:45:56', '2019-06-08 17:47:27');
-INSERT INTO `PedidoPlatos` VALUES (14, 166, 4, '2019-06-08 11:47:23', '2019-06-08 11:47:23');
-INSERT INTO `PedidoPlatos` VALUES (15, 166, 2, '2019-06-08 11:47:28', '2019-06-08 11:47:28');
-INSERT INTO `PedidoPlatos` VALUES (16, 166, 2, '2019-06-08 16:26:52', '2019-06-08 16:26:52');
-INSERT INTO `PedidoPlatos` VALUES (17, 166, 2, '2019-06-08 16:45:47', '2019-06-08 16:45:47');
+--
+-- Dumping data for table `PedidoPlatos`
+--
 
--- ----------------------------
--- Table structure for Pedidos
--- ----------------------------
+LOCK TABLES `PedidoPlatos` WRITE;
+/*!40000 ALTER TABLE `PedidoPlatos` DISABLE KEYS */;
+INSERT INTO `PedidoPlatos` VALUES (1,1,4,'2019-06-08 11:12:09','2019-06-08 11:12:09'),(2,165,3,'2019-06-08 11:12:14','2019-06-08 17:47:22'),(5,165,6,'2019-06-08 11:22:53','2019-06-08 17:47:25'),(6,165,6,'2019-06-08 11:22:55','2019-06-08 17:47:26'),(7,165,6,'2019-06-08 11:26:44','2019-06-08 17:47:26'),(12,165,4,'2019-06-08 11:45:56','2019-06-08 17:47:27'),(14,166,4,'2019-06-08 11:47:23','2019-06-08 11:47:23'),(15,166,2,'2019-06-08 11:47:28','2019-06-08 11:47:28'),(16,166,2,'2019-06-08 16:26:52','2019-06-08 16:26:52'),(17,166,2,'2019-06-08 16:45:47','2019-06-08 16:45:47');
+/*!40000 ALTER TABLE `PedidoPlatos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Pedidos`
+--
+
 DROP TABLE IF EXISTS `Pedidos`;
-CREATE TABLE `Pedidos`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Pedidos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesa_id` int(11) NOT NULL,
-  `estado` int(11) NULL DEFAULT 0,
-  `created_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `estado` int(11) DEFAULT '0',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `Pedidos_Mesas_id_fk`(`mesa_id`) USING BTREE,
-  CONSTRAINT `Pedidos_Mesas_id_fk` FOREIGN KEY (`mesa_id`) REFERENCES `Mesas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 167 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+  KEY `Pedidos_Mesas_id_fk` (`mesa_id`) USING BTREE,
+  CONSTRAINT `Pedidos_Mesas_id_fk` FOREIGN KEY (`mesa_id`) REFERENCES `Mesas` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of Pedidos
--- ----------------------------
-INSERT INTO `Pedidos` VALUES (1, 6, 1, '2019-06-08 10:46:51', '2019-06-08 17:45:27');
-INSERT INTO `Pedidos` VALUES (165, 5, 1, '2019-06-06 00:23:17', '2019-06-08 17:45:29');
-INSERT INTO `Pedidos` VALUES (166, 6, 1, '2019-06-08 09:44:42', '2019-06-08 17:56:32');
+--
+-- Dumping data for table `Pedidos`
+--
 
--- ----------------------------
--- Table structure for Platos
--- ----------------------------
+LOCK TABLES `Pedidos` WRITE;
+/*!40000 ALTER TABLE `Pedidos` DISABLE KEYS */;
+INSERT INTO `Pedidos` VALUES (1,6,2,'2019-06-08 10:46:51','2019-06-09 13:31:55'),(165,5,4,'2019-06-06 00:23:17','2019-06-09 15:57:24'),(166,6,2,'2019-06-08 09:44:42','2019-06-09 13:31:54'),(167,5,0,'2019-06-09 15:57:52','2019-06-09 15:57:52');
+/*!40000 ALTER TABLE `Pedidos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Pedidos_x_Platos`
+--
+
+DROP TABLE IF EXISTS `Pedidos_x_Platos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Pedidos_x_Platos` (
+  `pedido_id` int(11) NOT NULL,
+  `plato_id` int(11) NOT NULL,
+  PRIMARY KEY (`pedido_id`,`plato_id`) USING BTREE,
+  KEY `Pedidos_x_Platos_Platos_id_fk` (`plato_id`) USING BTREE,
+  CONSTRAINT `Pedidos_x_Platos_Pedidos_id_fk` FOREIGN KEY (`pedido_id`) REFERENCES `Pedidos` (`id`),
+  CONSTRAINT `Pedidos_x_Platos_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Pedidos_x_Platos`
+--
+
+LOCK TABLES `Pedidos_x_Platos` WRITE;
+/*!40000 ALTER TABLE `Pedidos_x_Platos` DISABLE KEYS */;
+INSERT INTO `Pedidos_x_Platos` VALUES (165,1),(165,4);
+/*!40000 ALTER TABLE `Pedidos_x_Platos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Platos`
+--
+
 DROP TABLE IF EXISTS `Platos`;
-CREATE TABLE `Platos`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Platos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `precio` float(6, 2) NULL DEFAULT NULL,
-  `disponible` int(1) NULL DEFAULT 1,
-  `categoria_id` int(11) NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `nombre` varchar(50) DEFAULT NULL,
+  `precio` float(6,2) DEFAULT NULL,
+  `disponible` int(1) DEFAULT '1',
+  `categoria_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `nombre`(`nombre`) USING BTREE,
-  INDEX `Platos_Categorias_id_fk`(`categoria_id`) USING BTREE,
-  CONSTRAINT `Platos_Categorias_id_fk` FOREIGN KEY (`categoria_id`) REFERENCES `Categorias` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+  UNIQUE KEY `nombre` (`nombre`) USING BTREE,
+  KEY `Platos_Categorias_id_fk` (`categoria_id`) USING BTREE,
+  CONSTRAINT `Platos_Categorias_id_fk` FOREIGN KEY (`categoria_id`) REFERENCES `Categorias` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of Platos
--- ----------------------------
-INSERT INTO `Platos` VALUES (1, 'Judías con chorizo', 23.00, NULL, 2, '2019-06-04 15:53:18', '2019-06-04 15:53:18');
-INSERT INTO `Platos` VALUES (2, 'Callos a la madrileña', 150.00, NULL, 1, '2019-06-04 15:53:18', '2019-06-04 15:53:18');
-INSERT INTO `Platos` VALUES (3, 'Tortilla', 2.50, 1, 2, '2019-06-04 15:53:18', '2019-06-04 15:53:18');
-INSERT INTO `Platos` VALUES (4, 'Lentejas con Nutella', 15.00, 1, 1, '2019-06-04 15:53:18', '2019-06-04 15:53:18');
-INSERT INTO `Platos` VALUES (6, 'Cianuro', 0.50, 1, 3, '2019-06-04 15:53:18', '2019-06-04 15:53:18');
+--
+-- Dumping data for table `Platos`
+--
 
--- ----------------------------
--- Table structure for Platos_x_Ingredientes
--- ----------------------------
+LOCK TABLES `Platos` WRITE;
+/*!40000 ALTER TABLE `Platos` DISABLE KEYS */;
+INSERT INTO `Platos` VALUES (1,'Judías con chorizo',23.00,1,2,'2019-06-04 15:53:18','2019-06-09 13:32:59'),(2,'Callos a la madrileña',150.00,0,1,'2019-06-04 15:53:18','2019-06-09 13:32:59'),(3,'Tortilla',2.50,1,2,'2019-06-04 15:53:18','2019-06-04 15:53:18'),(4,'Lentejas con Nutella',15.00,1,1,'2019-06-04 15:53:18','2019-06-04 15:53:18'),(6,'Cianuro',0.50,1,3,'2019-06-04 15:53:18','2019-06-04 15:53:18'),(7,'Bravas',2.50,0,1,'2019-06-09 15:35:19','2019-06-09 15:35:19');
+/*!40000 ALTER TABLE `Platos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Platos_x_Ingredientes`
+--
+
 DROP TABLE IF EXISTS `Platos_x_Ingredientes`;
-CREATE TABLE `Platos_x_Ingredientes`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Platos_x_Ingredientes` (
   `plato_id` int(11) NOT NULL,
   `ingrediente_id` int(11) NOT NULL,
-  PRIMARY KEY (`plato_id`, `ingrediente_id`) USING BTREE,
-  INDEX `Platos_x_Ingredientes_Ingredientes_id_fk`(`ingrediente_id`) USING BTREE,
-  CONSTRAINT `Platos_x_Ingredientes_Ingredientes_id_fk` FOREIGN KEY (`ingrediente_id`) REFERENCES `Ingredientes` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `Platos_x_Ingredientes_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+  PRIMARY KEY (`plato_id`,`ingrediente_id`) USING BTREE,
+  KEY `Platos_x_Ingredientes_Ingredientes_id_fk` (`ingrediente_id`) USING BTREE,
+  CONSTRAINT `Platos_x_Ingredientes_Ingredientes_id_fk` FOREIGN KEY (`ingrediente_id`) REFERENCES `Ingredientes` (`id`),
+  CONSTRAINT `Platos_x_Ingredientes_Platos_id_fk` FOREIGN KEY (`plato_id`) REFERENCES `Platos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Table structure for Productos
--- ----------------------------
+--
+-- Dumping data for table `Platos_x_Ingredientes`
+--
+
+LOCK TABLES `Platos_x_Ingredientes` WRITE;
+/*!40000 ALTER TABLE `Platos_x_Ingredientes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Platos_x_Ingredientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Productos`
+--
+
 DROP TABLE IF EXISTS `Productos`;
-CREATE TABLE `Productos`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Productos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `categoria` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `stock` int(11) NULL DEFAULT NULL,
-  `unidad` enum('num','ml','gr') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `created_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `nombre` varchar(255) DEFAULT NULL,
+  `categoria` varchar(255) DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+  `unidad` enum('num','ml','gr') DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of Productos
--- ----------------------------
-INSERT INTO `Productos` VALUES (1, 'Judías', 'conservas', 250, 'num', '2019-06-04 15:53:46', '2019-06-04 15:53:46');
-INSERT INTO `Productos` VALUES (2, 'huevo', 'frescos', 10, 'num', '2019-06-04 15:53:46', '2019-06-04 15:53:46');
-INSERT INTO `Productos` VALUES (3, 'das', 'ca', 500, 'num', '2019-06-04 15:53:46', '2019-06-04 15:53:46');
+--
+-- Dumping data for table `Productos`
+--
 
--- ----------------------------
--- Table structure for Usuarios
--- ----------------------------
+LOCK TABLES `Productos` WRITE;
+/*!40000 ALTER TABLE `Productos` DISABLE KEYS */;
+INSERT INTO `Productos` VALUES (1,'Judías','conservas',250,'num','2019-06-04 15:53:46','2019-06-04 15:53:46'),(2,'huevo','frescos',10,'num','2019-06-04 15:53:46','2019-06-04 15:53:46'),(3,'das','ca',500,'num','2019-06-04 15:53:46','2019-06-04 15:53:46');
+/*!40000 ALTER TABLE `Productos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Usuarios`
+--
+
 DROP TABLE IF EXISTS `Usuarios`;
-CREATE TABLE `Usuarios`  (
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `pin` int(6) NULL DEFAULT NULL,
-  `rol` enum('camarero','maitre','cocinero','gerente','admin') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `pin` int(6) DEFAULT NULL,
+  `rol` enum('camarero','maitre','cocinero','gerente','admin','superadmin') DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
--- ----------------------------
--- Records of Usuarios
--- ----------------------------
-INSERT INTO `Usuarios` VALUES (1, 'Pepito', 1111, 'camarero');
-INSERT INTO `Usuarios` VALUES (2, 'Guarrito', 2222, 'cocinero');
+--
+-- Dumping data for table `Usuarios`
+--
 
-SET FOREIGN_KEY_CHECKS = 1;
+LOCK TABLES `Usuarios` WRITE;
+/*!40000 ALTER TABLE `Usuarios` DISABLE KEYS */;
+INSERT INTO `Usuarios` VALUES (1,'Pepito',1111,'camarero'),(2,'Guarrito',2222,'cocinero'),(3,'Admin',1234,'superadmin'),(5,'Caja 1',1111,'maitre');
+/*!40000 ALTER TABLE `Usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-06-09 16:02:25
