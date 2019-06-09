@@ -1,0 +1,126 @@
+{block content}
+    <div class="container">
+        <div class="row">
+            <div class="col col-lg-6">
+                <h2>Comanda {$pedido->id} de la <a n:href="Mesas:ver $pedido->mesa->id">Mesa
+                        {$pedido->mesa->nombre}</a></h2>
+            </div>
+            <div class="col col-lg-6">
+                {if $pedido->mesa->estado == 0}
+                    <h3>Mesa Libre</h3><br>
+                    <a n:href="Tpv:reservar $pedido->id, $pedido->mesa->id" class="btn
+                    btn-primary">Ocupar</a>
+                {/if}
+                {if $pedido->mesa->estado == 1}
+                    <h3>Mesa ocuapada - Esperando pedido</h3><br>
+                    <a n:href="Tpv:yaPedido $pedido->id, $pedido->mesa->id" class="btn
+                    btn-warning">Realizar Pedido</a>
+                {/if}
+                {if $pedido->mesa->estado == 2 && $pedido->estado == 1}
+                    <h3>Esperando que los cocineros preparen el pedido</h3>
+                {/if}
+                {if $pedido->mesa->estado == 2 && $pedido->estado == 2}
+                    <h3>Esperando preparado y pendiente de servicio</h3><br>
+                    <a n:href="Tpv:servido $pedido->id, $pedido->mesa->id" class="btn
+                    btn-success">Pedido Servido</a>
+                {/if}
+                {if $pedido->mesa->estado == 3}
+                    <a n:href="Tpv:pagado $pedido->id, $pedido->mesa->id" class="btn
+                    btn-danger">Pagado</a>
+                {/if}
+            </div>
+        </div>
+        <div class="row">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Precio
+                    </th>
+                    <th>
+                        Categoria
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $pedido->pedidoPlatos as $pedidoPlato }
+                    <tr>
+                        <td>
+                            {$pedidoPlato->plato->nombre}
+                        </td>
+                        <td>
+                            {$pedidoPlato->plato->precio}€
+                        </td>
+                        <td>
+                            {$pedidoPlato->plato->categoria->nombre}
+
+                        </td>
+                        <td>
+                            <a n:href="Pedidos:ver $pedido->id" class="btn btn-success">Pedir de
+                                nuevo</a>
+                            <a n:href="Pedidos:cancelarPlato $pedido->id,
+$pedido->mesa->id, $pedidoPlato->id"
+                                    class="btn
+                            btn-danger">Cancelar</a>
+                            {*<a n:href="Mesas:pedirPlato $plato->id, $mesa->id" class="btn btn-xs*}
+                            {*btn-primary">Pedir de nuevo</a>*}
+                        </td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Precio
+                    </th>
+                    <th>
+                        Categoria
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {foreach $platos as $plato }
+
+                    <tr>
+                        <td>
+                            {$plato->nombre}
+                        </td>
+                        <td>
+                            {$plato->precio}€
+                        </td>
+                        <td>
+                            {$plato->categoria->nombre}
+                        </td>
+                        <td>
+                            {if $plato->disponible == 1}
+                                <a n:href="Pedidos:comanda $pedido->id, 'mesaID' => $mesa->id,
+'platoID' => $plato->id" class="btn btn-success">Añadir</a>
+                            {else}
+                                <a href="" class="btn btn-danger disabled">Plato no disponible</a>
+                            {/if}
+                        </td>
+                    </tr>
+
+                {/foreach}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{/block}

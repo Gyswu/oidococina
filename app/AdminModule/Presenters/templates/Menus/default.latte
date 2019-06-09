@@ -22,21 +22,21 @@
                 </tr>
                 </thead>
                 <tbody>
-                {foreach $menus as $menu}
+                {foreach $menus as $menux}
                     <tr>
                         <td>
-                            {$menu->id}
+                            {$menux->id}
                         </td>
                         <td>
-                            {$menu->nombre}
+                            {$menux->nombre}
                         </td>
                         <td>
-                            {$menu->precio}€
+                            {$menux->precio}€
                         </td>
                         <td align="center">
-                            <a n:href="Menus:editar $menu->id" class="btn btn-xs
+                            <a n:href="Menus:editar $menux->id" class="btn btn-xs
                             btn-primary">Editar</a>
-                            <a n:href="Menus:borrar $menu->id" class="btn btn-xs btn-danger
+                            <a n:href="Menus:borrar $menux->id" class="btn btn-xs btn-danger
                             del">Borrar</a>
                         </td>
                     </tr>

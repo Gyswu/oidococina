@@ -13,9 +13,10 @@ final class PedidosPresenter extends BasePresenter {
     /** @var $pedido Pedido */
     private $pedido = null;
     
-    public function actionDefault(){
+    public function actionDefault() {
         $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_VER);
     }
+    
     public function renderDefault() {
         $this->template->pedidos = $this->orm->pedidos->findAll();
     }
@@ -212,14 +213,4 @@ final class PedidosPresenter extends BasePresenter {
             $this->redirect("Pedidos:Comanda", [ 'id' => $pedidoID, 'mesaID' => $mesaID ]);
         }
     }
-    
-    /*
-     * MI GRAN DUDA
-     *
-     * Mi gran duda actualmente es como hacemos el tema de las cantidades de los platos en los pedidos.
-     * Nada más, por lo demás te he dejado arriba un poco las acciones de actualizacion de los estados
-     * de los pedidos que las he estado tocando y redactando en un comentario.
-     *
-     * Si puede ser tambien la posiblidad de marcar cuando un plato de un pedido esta listo, no digo solo 1 pero si todos.
-     */
 }

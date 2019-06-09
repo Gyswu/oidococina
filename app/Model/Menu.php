@@ -27,7 +27,7 @@ class Menu {
             [
                 'nombre'  => 'Administración',
                 'mostrar' => $user->isAllowed(Roles::SECCION_ADMIN),
-                'nhref'   => ':Admin:default',
+                'nhref'   => 'Admin:Homepage:default',
             ],
         ];
         
