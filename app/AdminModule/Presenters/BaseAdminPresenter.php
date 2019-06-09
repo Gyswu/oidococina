@@ -16,9 +16,9 @@ class BaseAdminPresenter extends \App\Presenters\BasePresenter
     protected $redirectLogin = true;
 
     public function startup() {
-        $this->puedeAcceder(Roles::SECCION_ADMIN);
-    
         parent::startup();
+        $this->puedeAcceder(Roles::SECCION_ADMIN);
+
 //        if($this->redirectLogin && (!$this->user->loggedIn || !$this->user->isInRole('admin')) ){
 //            $this->redirect('Sign:default');
 //        }

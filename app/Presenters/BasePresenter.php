@@ -16,12 +16,15 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public $orm;
     
     protected function startup() {
-        if( !$this->user->isLoggedIn() && !in_array($this->presenter->getName(), [ 'Sign', 'Admin:Sign' ]) ) {
+//        dd($this->getUser());
+        $this->getUser()->setAuthorizator(new \App\Model\Roles());
+        if( !$this->user->isLoggedIn() && !in_array($this->presenter->getName(), [ 'Sign' ]) ) {
             $this->flashMessage('Debes iniciar sesión primero');
-            $this->redirect('Sign:in');
+            $this->redirect(':Sign:in');
+    
         }
         parent::startup();
-        $this->getUser()->setAuthorizator(new \App\Model\Roles());
+        //
         $this->template->usuario = $this->getDbUser();
         $this->template->menu = Menu::getMenu($this->getUser());
     }
@@ -50,7 +53,10 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter {
     public function puedeAcceder( $seccion, $permiso = null ) {
         if(!$this->getUser()->isAllowed($seccion, $permiso)){
             $this->flashMessage('No puedes acceder a esta sección, el acceso ha sido reportado','danger');
-            $this->redirect("Sign:in");
+            if($this->user->isLoggedIn()){
+                $this->redirect(":Homepage:default");
+            }
+            $this->redirect(":Sign:in");
         }
         return true;
     }
