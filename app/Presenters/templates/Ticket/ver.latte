@@ -1,0 +1,96 @@
+{extends '../@blank.latte'}
+{block content}
+
+<style>
+    .ticket {
+        width: 280px;
+    }
+
+    .ticket .linea .nombre {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 180px;
+    }
+
+    .ticket .linea .cantidad {
+        width: 50px;
+        text-align: right;
+        background-color: blue;
+
+    }
+
+    .ticket .linea .precio {
+        width: 50px;
+        background-color: red;
+        text-align: right;
+    }
+</style>
+
+<table class="ticket">
+    <thead>
+    <tr>
+        <th colspan="3">header para imagen o similar</th>
+    </tr>
+    <tr>
+        <td colspan="3">Mesa {$mesa->nombre}</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="linea">
+        <td class="nombre">
+            {if strlen('Judías Judías JudíasJudíaadsfasdfadsfs') > 30}
+                {substr('Judías Judías JudíasJudíaadsfasdfadsfs',0,30)}...
+            {else}
+                Judías Judías JudíasJudíaadsfasdfadsfs
+            {/if}
+        </td>
+        <td class="cantidad">x2</td>
+        <td class="precio">190€</td>
+    </tr>
+
+    <tr class="linea">
+        <td class="nombre">Judías</td>
+        <td class="cantidad">x2</td>
+        <td class="precio">12€</td>
+    </tr>
+
+    <tr class="linea">
+        <td class="nombre">Judías</td>
+        <td class="cantidad">x2</td>
+        <td class="precio">12€</td>
+    </tr>
+
+    <tr class="linea">
+        <td class="nombre">Judías</td>
+        <td class="cantidad">x2</td>
+        <td class="precio">12€</td>
+    </tr>
+
+    <tr class="linea">
+        <td class="nombre">Judías</td>
+        <td class="cantidad">x2</td>
+        <td class="precio">12€</td>
+    </tr>
+
+    <tr class="linea">
+        <td class="nombre">Judías</td>
+        <td class="cantidad">x2</td>
+        <td class="precio">12€</td>
+    </tr>
+
+    <tr class="linea">
+        <td class="nombre">Judías</td>
+        <td class="cantidad">x2</td>
+        <td class="precio">12€</td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <td colspan="3">aquí datos del local o algo</td>
+    </tr>
+    </tfoot>
+
+</table>

@@ -33,7 +33,8 @@
 		"tracy/tracy": "^2.6",
 		"dg/adminer-custom": "^1.8",
 		"tomaj/nette-bootstrap-form": "^2.0",
-		"nextras/orm": "^3.1"
+		"nextras/orm": "^3.1",
+		"mpdf/mpdf": "^8.0"
 	},
 	"require-dev": {
 		"nette/tester": "^2.0"

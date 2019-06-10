@@ -17,6 +17,7 @@ function dd($arr, $depth = 5, $live = false){
     die();
 }
 
+define('_APPDIR', __DIR__.'/../app');
 
 
 App\Booting::boot()
