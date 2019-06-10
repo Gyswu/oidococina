@@ -152,6 +152,7 @@ final class TpvPresenter extends BasePresenter {
         $this->puedeAcceder(Roles::SECCION_TPV);
         //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
+            
             $pedido->estado = 4;
             $this->orm->pedidos->persistAndFlush($pedido);
             $mesa = $this->orm->mesas->getById($mesaID);

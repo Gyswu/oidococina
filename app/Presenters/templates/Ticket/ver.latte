@@ -2,95 +2,122 @@
 {block content}
 
 <style>
-    .ticket {
-        width: 280px;
+    body {
+        font-family: Arial;
     }
 
-    .ticket .linea .nombre {
+    .ticket {
+        width: 280px;
+
+    }
+
+    .peque {
+        font-size: 0.75em;
+        text-align: center;
+    }
+
+    .titulo {
+        font-size: 1.25em;
+    }
+
+    .ticket .nombre {
         white-space: nowrap;
         text-overflow: ellipsis;
         overflow: hidden;
         width: 180px;
     }
 
-    .ticket .linea .cantidad {
+    .ticket .precio {
         width: 50px;
         text-align: right;
-        background-color: blue;
-
     }
 
-    .ticket .linea .precio {
-        width: 50px;
-        background-color: red;
-        text-align: right;
+    p {
+        margin-bottom: 1em;
+        font-size: 0.75em;
     }
+
+
 </style>
 
 <table class="ticket">
     <thead>
     <tr>
-        <th colspan="3">header para imagen o similar</th>
+        <th colspan="3" class="titulo">COR DE CARXOFA</th>
     </tr>
     <tr>
-        <td colspan="3">Mesa {$mesa->nombre}</td>
+        <td colspan="3" class="peque">Avinguda del Marquès de Benicarló, 27 <br>12580,
+            Benicarlo <br> NIF:20919613D
+
+            <hr>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3">Pedido: {$numPedido}
+        </td>
+    </tr>
+    <tr>
+        <td class="nombre">Fecha:</td>
+        <td class="precio">{$pedido->createdAt}</td>
+    </tr>
+    <tr>
+        <td colspan="3">Mesa:
+
+            {$mesa->nombre}
+            <hr>
+        </td>
+
+    </tr>
+    <tr>
+        <td class="nombre">Plato</td>
+        <td class="precio">Precio</td>
     </tr>
     </thead>
 
     <tbody>
-    <tr class="linea">
-        <td class="nombre">
-            {if strlen('Judías Judías JudíasJudíaadsfasdfadsfs') > 30}
-                {substr('Judías Judías JudíasJudíaadsfasdfadsfs',0,30)}...
-            {else}
-                Judías Judías JudíasJudíaadsfasdfadsfs
-            {/if}
+    {foreach $pedido->pedidoPlatos as $pedidoPlato}
+        <tr>
+            <td class="nombre">{$pedidoPlato->plato->nombre}</td>
+            <td class="precio">{$pedidoPlato->plato->precio}€</td>
+        </tr>
+    {/foreach}
+    <tr>
+        <td colspan="3">
+            <hr>
         </td>
-        <td class="cantidad">x2</td>
-        <td class="precio">190€</td>
     </tr>
-
-    <tr class="linea">
-        <td class="nombre">Judías</td>
-        <td class="cantidad">x2</td>
-        <td class="precio">12€</td>
+    <tr>
+        <td>IVA 10%:</td>
+        <td class="precio">{$total * 0.10}€</td>
     </tr>
-
-    <tr class="linea">
-        <td class="nombre">Judías</td>
-        <td class="cantidad">x2</td>
-        <td class="precio">12€</td>
+    <tr>
+        <td>Total SIN IVA:</td>
+        <td class="precio">{$total * 0.90}€</td>
     </tr>
-
-    <tr class="linea">
-        <td class="nombre">Judías</td>
-        <td class="cantidad">x2</td>
-        <td class="precio">12€</td>
+    <tr>
+        <td colspan="3">
+            <hr>
+        </td>
     </tr>
-
-    <tr class="linea">
-        <td class="nombre">Judías</td>
-        <td class="cantidad">x2</td>
-        <td class="precio">12€</td>
-    </tr>
-
-    <tr class="linea">
-        <td class="nombre">Judías</td>
-        <td class="cantidad">x2</td>
-        <td class="precio">12€</td>
-    </tr>
-
-    <tr class="linea">
-        <td class="nombre">Judías</td>
-        <td class="cantidad">x2</td>
-        <td class="precio">12€</td>
+    <tr>
+        <td><b>TOTAL:</b></td>
+        <td class="precio">{$total}€</td>
     </tr>
     </tbody>
 
     <tfoot>
     <tr>
-        <td colspan="3">aquí datos del local o algo</td>
+
+        <td colspan="3">
+            <hr>
+
+        </td>
     </tr>
     </tfoot>
 
+
 </table>
+<p>Muchas gracias por su visita</p>
+<p>Visite nuestra web carxofa.es y siganos</p>
+<p>En redes sociales @rest.cordecarxofa</p>
+<p>Reserva tu mesa: 964 100 323</p>

@@ -12,7 +12,7 @@ final class CocinaPresenter extends BasePresenter {
     private $pedidos = null;
     
     public function actionDefault() {
-        $this->puedeAcceder(Roles::SECCION_COCINA, Roles::PERMISO_VER);
+        $this->puedeAcceder(Roles::SECCION_COCINA);
     }
     
     public function renderDefault() {
@@ -30,7 +30,7 @@ final class CocinaPresenter extends BasePresenter {
     }
     
     public function actionPreparado( $pedidoID, $mesaID ) {   //Esta accion es solo para los cocineros
-        $this->puedeAcceder(Roles::SECCION_COCINA, Roles::PERMISO_PEDIDO_LISTO);
+        $this->puedeAcceder(Roles::SECCION_COCINA);
         //
         if( $pedido = $this->orm->pedidos->getById($pedidoID) ) {
             $pedido->estado = 2;
