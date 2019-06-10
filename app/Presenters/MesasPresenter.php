@@ -13,8 +13,8 @@ final class MesasPresenter extends BasePresenter {
     /** @var $mesa Mesa */
     private $mesa;
     
-    public function actionDefault(){
-        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_VER);
+    public function actionDefault() {
+        $this->puedeAcceder(Roles::SECCION_MESAS);
     }
     
     public function renderDefault() {
@@ -22,7 +22,7 @@ final class MesasPresenter extends BasePresenter {
     }
     
     public function actionVer( $id ) {
-        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_VER);
+        $this->puedeAcceder(Roles::SECCION_MESAS);
         $this->mesa = $this->orm->mesas->getById($id);
     }
     
@@ -40,7 +40,7 @@ final class MesasPresenter extends BasePresenter {
     ########################################
     ########################################
     public function actionPedirPlato( $plato_id, $mesa_id ) {
-        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        $this->puedeAcceder(Roles::SECCION_MESAS);
         //
         $pedido = new Pedido();
         $plato = $this->orm->platos->getById($plato_id);
@@ -53,7 +53,7 @@ final class MesasPresenter extends BasePresenter {
     }
     
     public function actionPedir( $id ) {
-        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        $this->puedeAcceder(Roles::SECCION_MESAS);
         //
         $pedidos = new \ArrayObject();
         $mesa = $this->orm->mesas->getById($id)->orderBy('id', ICollection::ASC);
@@ -73,10 +73,9 @@ final class MesasPresenter extends BasePresenter {
      * aquí solo necesitas el plato y el pedido, una vez tienes el pedido puedes pedido->mesa->id
      */
     public function actionCancelar( $pedido_id, $mesa_id, $plato_id ) {
-        $this->puedeAcceder(Roles::SECCION_MESAS, Roles::PERMISO_PEDIDO_CREAR);
+        $this->puedeAcceder(Roles::SECCION_MESAS);
         //
         try {
-            //if pedido estado permite cancelar, ojo aquí
             dd($this->orm->mesas->getById($mesa_id));
             $pedido = $this->orm->pedidos->getById($pedido_id);
             $this->orm->pedidos->removeAndFlush($pedido);
