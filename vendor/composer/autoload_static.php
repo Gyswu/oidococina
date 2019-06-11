@@ -22,6 +22,7 @@ class ComposerStaticInitcaabacc4c29ac751cfa2bec62d901d23
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'N' => 
         array (
@@ -46,6 +47,10 @@ class ComposerStaticInitcaabacc4c29ac751cfa2bec62d901d23
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Nextras\\Orm\\' => 
         array (

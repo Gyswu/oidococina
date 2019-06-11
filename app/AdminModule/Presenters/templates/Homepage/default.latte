@@ -1,49 +1,58 @@
 {block content}
     <div class="container">
-        <h1 n:block="tittle">Bueno ya voy mejor a administrar</h1>
-    </div>
-    <div class="row">
-        <div class="col">
-            <h2>Estado actual de las mesas</h2>
+        <div class="row">
+            <h1 n:block="tittle">Bienvenido al panel de administración sistema oidococina</h1>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-col-lg-10">
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th>
-                        Nombre
-                    </th>
-                    <th>
-                        Estado
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                {foreach $mesas as $mesa}
+        <div class="row">
+            <div class="col col-lg-6">
+                <h2>Estado actual de las mesas</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-12">
+                <table class="table">
+                    <thead class="thead-dark">
                     <tr>
-                        <td>
-                            {$mesa->nombre}
-                        </td>
-                        <td>
-                            {switch $mesa->estado}
-                                {case 0}
-                                Libre
-                                {case 1}
-                                Ocupada
-                                {case 2}
-                                Esperando Pedido
-                                {case 3}
-                                Servida
-                                {default}
-                                Not working
-                            {/switch}
-                        </td>
+                        <th>
+                            Nombre
+                        </th>
+                        <th>
+                            Estado
+                        </th>
                     </tr>
-                {/foreach}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {foreach $mesas as $mesa}
+                        <tr>
+                            <td>
+                                {$mesa->nombre}
+                            </td>
+                            <td>
+                                {switch $mesa->estado}
+                                    {case 0}
+                                    Libre
+                                    {case 1}
+                                    Ocupada
+                                    {case 2}
+                                    Esperando Pedido
+                                    {case 3}
+                                    Servida
+                                    {default}
+                                    Not working
+                                {/switch}
+                            </td>
+                        </tr>
+                    {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-lg-10">
+                En caso de cualquier error o problema contactar a través del formulario de <a
+                        n:href="Support:default"> Soporte</a> o llamar al telefono 642 76 79 48
+            </div>
         </div>
     </div>
+
 {/block}
