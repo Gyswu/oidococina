@@ -18,7 +18,7 @@ class UsersPresenter extends BaseAdminPresenter {
     public function createComponentMasUsuariosForm() {
         
         $form = ( new UsersFormFactory() )->create();
-        $form->onSuccess[] = [ $this, 'onSuccessMasUsuarios' ];//convención con la variable onSuccess y el nombre del formulario
+        $form->onSuccess[] = [ $this, 'onSuccessMasUsuarios' ];
         
         return $form;
     }

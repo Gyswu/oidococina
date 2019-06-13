@@ -2,7 +2,6 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Forms\FormFactory;
 use App\Forms\ProductosFormFactory;
 use App\Model\Orm\Producto;
 use Nette\Application\UI\Form;
@@ -19,7 +18,7 @@ class ProductosPresenter extends BaseAdminPresenter {
     public function createComponentMasProductosForm() {
         
         $form = ( new ProductosFormFactory() )->create();
-        $form->onSuccess[] = [ $this, 'onSuccessMasProductos' ];//convención con la variable onSuccess y el nombre del formulario
+        $form->onSuccess[] = [ $this, 'onSuccessMasProductos' ];
         
         return $form;
     }
@@ -65,7 +64,7 @@ class ProductosPresenter extends BaseAdminPresenter {
             $this->orm->persistAndFlush($producto);
             $this->flashMessage("Producto editado correctamente", "success");
         } catch( \Exception $e ) {
-            $this->flashMessage("Error al editar: ".$e->getMessage(), 'danger');
+            $this->flashMessage("Error al editar: " . $e->getMessage(), 'danger');
         }
         $this->redirect("this");
     }

@@ -24,10 +24,6 @@
                     <a n:href="Pedidos:servido $pedido->id, $pedido->mesa->id" class="btn
                     btn-success">Pedido Servido</a>
                 {/if}
-                {if $pedido->mesa->estado == 3}
-                    <a n:href="Pedidos:pagado $pedido->id, $pedido->mesa->id" class="btn
-                    btn-danger">Pagado</a>
-                {/if}
             </div>
         </div>
         <div class="row">

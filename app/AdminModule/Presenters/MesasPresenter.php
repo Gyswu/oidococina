@@ -2,7 +2,6 @@
 
 namespace App\AdminModule\Presenters;
 
-use App\Forms\FormFactory;
 use App\Forms\MesasFormFactory;
 use App\Model\Orm\Mesa;
 use Nette\Application\UI\Form;
@@ -19,7 +18,7 @@ class MesasPresenter extends BaseAdminPresenter {
     public function createComponentMasMesasForm() {
         
         $form = ( new MesasFormFactory() )->create();
-        $form->onSuccess[] = [ $this, 'onSuccessMasMesas' ];//convención con la variable onSuccess y el nombre del formulario
+        $form->onSuccess[] = [ $this, 'onSuccessMasMesas' ];
         
         return $form;
     }
@@ -46,7 +45,7 @@ class MesasPresenter extends BaseAdminPresenter {
     public function createComponentEditarMesaForm() {
         
         $form = ( new MesasFormFactory() )->createEdit($this->mesaEditada);
-        $form->onSuccess[] = [ $this, 'onSuccessEditarMesa' ];//convención con la variable onSuccess y el nombre del formulario
+        $form->onSuccess[] = [ $this, 'onSuccessEditarMesa' ];
         
         return $form;
     }
