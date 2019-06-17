@@ -25,7 +25,7 @@ Dentro de este archivo introducir los siguientes datos sin comillas
             database: "tabla"
             username: "usuario de la base de datos"
             password: "contraseña"
-
+- Dar permisos de escritura en la carpeta /temp y los directorios incluidos dentro de esta.
 
 Development by
 ---
